@@ -8,26 +8,22 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.ui.base.BaseFragment
-import com.luigivampa92.yms.fintracker.ui.base.NavigationDrawerActivity
+import com.luigivampa92.yms.fintracker.ui.base.NavigationDrawerFragment
 
-class SettingsFragment : BaseFragment() {
+class SettingsFragment : NavigationDrawerFragment() {
 
     companion object {
         fun newInstance() = SettingsFragment()
     }
 
-    @BindView(R.id.include_toolbar)
-    protected lateinit var toolbar: Toolbar
+    override fun layoutRes() = R.layout.fragment_settings
+    override fun navigationItemRes() = R.id.navigation_item_settings
 
     private lateinit var unbinder: Unbinder
-    private lateinit var hostActivity: NavigationDrawerActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            inflater.inflate(R.layout.fragment_settings, container, false).also {
+            super.onCreateView(inflater, container, savedInstanceState).also {
                 unbinder = ButterKnife.bind(this, it)
-                hostActivity = activity as NavigationDrawerActivity
-                hostActivity.setToolbar(toolbar)
             }
 
     override fun onDestroyView() {
