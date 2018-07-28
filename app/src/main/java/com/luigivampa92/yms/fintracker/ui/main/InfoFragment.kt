@@ -1,8 +1,10 @@
 package com.luigivampa92.yms.fintracker.ui.main
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
@@ -19,6 +21,9 @@ class InfoFragment : BaseFragment() {
         fun newInstance() = InfoFragment()
     }
 
+    @BindView(R.id.include_toolbar)
+    protected lateinit var toolbar: Toolbar
+
     private lateinit var unbinder: Unbinder
     private lateinit var hostActivity: NavigationDrawerActivity
 
@@ -29,16 +34,12 @@ class InfoFragment : BaseFragment() {
             inflater.inflate(R.layout.fragment_info, container, false).also {
                 unbinder = ButterKnife.bind(this, it)
                 hostActivity = activity as NavigationDrawerActivity
+                hostActivity.setToolbar(toolbar)
             }
 
     override fun onDestroyView() {
         unbinder.unbind()
         super.onDestroyView()
-    }
-
-    @OnClick(R.id.button_navigation_menu)
-    protected fun buttonMenuClicked() {
-        hostActivity.openDrawer()
     }
 
     @OnClick(R.id.button_contact_email)

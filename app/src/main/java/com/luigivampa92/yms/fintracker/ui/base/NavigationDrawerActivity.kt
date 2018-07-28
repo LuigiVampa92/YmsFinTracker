@@ -5,6 +5,8 @@ import android.support.annotation.IdRes
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -22,6 +24,8 @@ abstract class NavigationDrawerActivity : NestedFragmentActivity() {
     lateinit var drawer: DrawerLayout
     @BindView(R.id.navigation_view)
     lateinit var navigationView: NavigationView
+
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +57,13 @@ abstract class NavigationDrawerActivity : NestedFragmentActivity() {
     override fun onDestroy() {
         unbinder.unbind()
         super.onDestroy()
+    }
+
+    fun setToolbar(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name) // todo ?
+        drawer.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
     }
 
     fun openDrawer() {

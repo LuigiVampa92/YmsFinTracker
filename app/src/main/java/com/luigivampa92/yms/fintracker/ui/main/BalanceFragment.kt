@@ -1,12 +1,12 @@
 package com.luigivampa92.yms.fintracker.ui.main
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import butterknife.Unbinder
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -29,6 +29,8 @@ class BalanceFragment : BaseFragment(), BalanceView {
     fun providePresenter() = presenter
 
     private lateinit var unbinder: Unbinder
+    @BindView(R.id.include_toolbar)
+    protected lateinit var toolbar: Toolbar
     @BindView(R.id.text_balance_usd)
     protected lateinit var textBalanceUsd: TextView
     @BindView(R.id.text_balance_rur)
@@ -40,6 +42,7 @@ class BalanceFragment : BaseFragment(), BalanceView {
             inflater.inflate(R.layout.fragment_balance, container, false).also {
                 unbinder = ButterKnife.bind(this, it)
                 hostActivity = activity as NavigationDrawerActivity
+                hostActivity.setToolbar(toolbar)
             }
 
     override fun onDestroyView() {
@@ -52,11 +55,6 @@ class BalanceFragment : BaseFragment(), BalanceView {
         hostActivity.selectDrawerItem(R.id.navigation_item_balance)
 
         presenter.provideCurrentBalance()
-    }
-
-    @OnClick(R.id.button_navigation_menu)
-    protected fun buttonMenuClicked() {
-        hostActivity.openDrawer()
     }
 
     override fun showBalanceUsd(value: String) {
