@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--common-->
+    <string name="app_name">FinTracker</string>
+    <string name="text_error_no_network">Отсутствует соединение с сетью</string>
+    <string name="text_error_network">Ошибка запроса</string>
+
     <!--navigation-->
     <string name="text_navigation_menu_title">Ой</string>
     <string name="text_navigation_item_balance">Баланс</string>

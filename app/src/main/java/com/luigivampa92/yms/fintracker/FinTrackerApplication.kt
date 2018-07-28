@@ -2,6 +2,7 @@ package com.luigivampa92.yms.fintracker
 
 import android.app.Activity
 import android.app.Application
+import com.luigivampa92.yms.fintracker.data.ExchangeRatesInterceptor
 import com.luigivampa92.yms.fintracker.di.component.AppComponent
 import com.luigivampa92.yms.fintracker.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -14,6 +15,9 @@ class FinTrackerApplication : Application(), HasActivityInjector {
     companion object {
         @JvmStatic lateinit var INSTANCE: FinTrackerApplication
     }
+
+    @Inject
+    protected lateinit var interceptor: ExchangeRatesInterceptor
 
     @Inject
     protected lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -30,5 +34,7 @@ class FinTrackerApplication : Application(), HasActivityInjector {
                 .withContext(this)
                 .build()
         appComponent.inject(this)
+
+        interceptor.setAccessKey(Constants.exchangeRateApiKey)
     }
 }

@@ -37,7 +37,12 @@ def versions = [
         dagger           : '2.14.1',
         butterknife      : '8.8.1',
         moxy             : '1.5.3',
-        cicerone         : '2.1.0'
+        cicerone         : '2.1.0',
+        rxjava           : '2.1.9',
+        rxandroid        : '2.0.1',
+        retrofit         : '2.3.0',
+        retrofitlogging  : '3.9.1',
+        gson             : '2.8.2'
 ]
 
 def versionsTest = [
@@ -71,6 +76,15 @@ dependencies {
     kapt "com.arello-mobile:moxy-compiler:${versions.moxy}"
 
     implementation "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
+
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.retrofitlogging}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
 
     androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"

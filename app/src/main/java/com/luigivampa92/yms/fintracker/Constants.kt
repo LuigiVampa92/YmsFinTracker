@@ -8,4 +8,7 @@ object Constants {
     const val contactVk = "https://vk.com/id54957320"
     const val contactTg= "https://t.me/luigivampa92"
     const val contactEmail = "luigivampa92@gmail.com"
+
+    const val exchangeRateBaseUrl = "http://data.fixer.io/api/"
+    const val exchangeRateApiKey = "7134aefa2365c4706fee431ec3a2127e"
 }

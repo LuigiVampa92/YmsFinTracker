@@ -47,7 +47,8 @@ class BalanceFragment : NavigationDrawerFragment(), BalanceView {
 
     override fun onResume() {
         super.onResume()
-        presenter.provideCurrentBalance()
+
+        presenter.testQuery()
     }
 
     override fun showBalanceUsd(value: String) {

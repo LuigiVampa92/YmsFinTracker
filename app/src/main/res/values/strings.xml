@@ -2,6 +2,8 @@
 
     <!--common-->
     <string name="app_name">FinTracker</string>
+    <string name="text_error_no_network">No network connection</string>
+    <string name="text_error_network">Network error</string>
 
     <!--navigation-->
     <string name="text_navigation_menu_title">Oops</string>

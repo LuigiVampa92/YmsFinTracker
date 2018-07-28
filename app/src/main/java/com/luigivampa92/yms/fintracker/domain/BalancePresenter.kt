@@ -6,6 +6,7 @@ import com.luigivampa92.yms.finops.RecordCalculator
 import com.luigivampa92.yms.finops.model.Currency
 import com.luigivampa92.yms.finops.model.OperationType
 import com.luigivampa92.yms.finops.model.Record
+import com.luigivampa92.yms.fintracker.data.ExchangeRatesNetworkSource
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
 import com.luigivampa92.yms.fintracker.formatAsMoney
 import com.luigivampa92.yms.fintracker.ui.main.BalanceView
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @FragmentScope
 @InjectViewState
 class BalancePresenter @Inject constructor(
+        private val ers: ExchangeRatesNetworkSource,
         private val calculator: RecordCalculator
 ) : MvpPresenter<BalanceView>() {
 
@@ -39,5 +41,10 @@ class BalancePresenter @Inject constructor(
 
         viewState.showBalanceUsd(balanceUsd.amount.formatAsMoney())
         viewState.showBalanceRur(balanceRur.amount.formatAsMoney())
+    }
+
+    fun testQuery() {
+//        ers.getExchangeRates()
+        ers.getAvailableSymbols()
     }
 }
