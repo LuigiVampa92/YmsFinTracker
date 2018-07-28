@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--navigation-->
+    <string name="text_navigation_menu_title">Ой</string>
+    <string name="text_navigation_item_balance">Баланс</string>
+    <string name="text_navigation_item_settings">Настройки</string>
+    <string name="text_navigation_item_info">О приложении</string>
+
+    <!--settings-->
+    <string name="text_settings_stub">Здесь могли быть ваши настройки</string>
+
+    <!--info-->
+    <string name="text_info_about_app_general">Домашнее задание летней школы мобильной разработки Яндекса 2018 г.</string>
+    <string name="text_info_about_app_author"><![CDATA[
+        Автор: Павел Васильев<br><br>
+        Email: <a href=\"mailto:luigivampa92@gmail.com\">luigivampa92@gmail.com</a><br>
+        VK: <a href=\"https://vk.com/luigivampa92\">luigivampa92</a><br>
+        TG: <a href=\"https://telegram.me/luigivampa92\">@luigivampa92</a><br>
+        ]]>
+    </string>
+    <string name="text_info_about_app_contacts">Автор: Павел Васильев\n\nСвязаться с автором:</string>
+    <string name="text_info_about_app_email_subject">О приложении школы мобильной разработки Яндекса</string>
+    <string name="text_info_about_app_email_no_client">Почтовый клиент не найден</string>
+
+    <!--balance-->
+    <string name="text_balance_description_usd">Текущий баланс ( $ ) :</string>
+    <string name="text_balance_description_rur">Текущий баланс ( \u20BD ) :</string>
+
+</resources>

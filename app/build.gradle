@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    compileSdkVersion targetsdk_version
+
+    defaultConfig {
+        applicationId "com.luigivampa92.yms.fintracker"
+        minSdkVersion minsdk_version
+        targetSdkVersion targetsdk_version
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def versions = [
+        constraintlayout : '1.1.2',
+        dagger           : '2.14.1',
+        butterknife      : '8.8.1',
+        moxy             : '1.5.3'
+]
+
+def versionsTest = [
+        espresso        : '3.0.2',
+        runner          : '1.0.2',
+        junit           : '4.12'
+]
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":finops")
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
+    implementation "com.android.support:design:$support_version"
+
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    implementation "com.jakewharton:butterknife:${versions.butterknife}"
+    kapt "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+
+    implementation "com.arello-mobile:moxy:${versions.moxy}"
+    implementation "com.arello-mobile:moxy-android:${versions.moxy}"
+    implementation "com.arello-mobile:moxy-app-compat:${versions.moxy}"
+    kapt "com.arello-mobile:moxy-compiler:${versions.moxy}"
+
+    androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
+    androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
+    testImplementation "junit:junit:${versionsTest.junit}"
+}

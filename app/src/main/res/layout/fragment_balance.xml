@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.luigivampa92.yms.fintracker.ui.main.MainActivity">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/view_toolbar"
+        />
+
+    <TextView
+        android:id="@+id/text_balance_usd_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_balance_description_usd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/text_balance_usd"
+        app:layout_constraintTop_toTopOf="@+id/text_balance_usd"
+        />
+
+    <TextView
+        android:id="@+id/text_balance_rur_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_balance_description_rur"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/text_balance_rur"
+        app:layout_constraintTop_toTopOf="@+id/text_balance_rur"
+        />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier_descriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="text_balance_usd_description,text_balance_rur_description"
+        />
+
+    <!--todo fix hw#1-->
+    <TextView
+        android:id="@+id/text_balance_usd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:textSize="18sp"
+        android:textColor="@color/color_primary_dark"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
+        app:layout_constraintStart_toEndOf="@+id/barrier_descriptions"
+        tools:text="123.45"
+        />
+
+    <TextView
+        android:id="@+id/text_balance_rur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="32dp"
+        android:textSize="18sp"
+        android:textColor="@color/color_primary_dark"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/text_balance_usd_description"
+        app:layout_constraintStart_toEndOf="@+id/barrier_descriptions"
+        tools:text="678.90"
+        />
+
+</android.support.constraint.ConstraintLayout>
