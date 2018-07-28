@@ -7,5 +7,6 @@
 
     <!--Info-->
     <dimen name="image_contact_size">50dp</dimen>
+    <dimen name="image_contact_inner_padding">8dp</dimen>
 
 </resources>
