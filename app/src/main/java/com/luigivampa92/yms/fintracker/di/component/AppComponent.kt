@@ -4,6 +4,7 @@ import android.content.Context
 import com.luigivampa92.yms.fintracker.FinTrackerApplication
 import com.luigivampa92.yms.fintracker.di.module.AppModule
 import com.luigivampa92.yms.fintracker.di.module.ContextModule
+import com.luigivampa92.yms.fintracker.di.module.RouterModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         ContextModule::class,
-        AppModule::class
+        AppModule::class,
+        RouterModule::class
 ))
 interface AppComponent {
 

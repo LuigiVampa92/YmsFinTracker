@@ -11,6 +11,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.routing.Screens
 import com.luigivampa92.yms.fintracker.ui.main.BalanceFragment
 import com.luigivampa92.yms.fintracker.ui.main.InfoFragment
 import com.luigivampa92.yms.fintracker.ui.main.SettingsFragment
@@ -36,17 +37,17 @@ abstract class NavigationDrawerActivity : NestedFragmentActivity() {
             when (it.itemId) {
                 R.id.navigation_item_balance -> {
                     if (topFragment !is BalanceFragment) {
-                        openFragment(BalanceFragment.newInstance())
+                        router.navigateTo(Screens.BALANCE)
                     }
                 }
                 R.id.navigation_item_settings -> {
                     if (topFragment !is SettingsFragment) {
-                        openFragment(SettingsFragment.newInstance())
+                        router.navigateTo(Screens.SETTINGS)
                     }
                 }
                 R.id.navigation_item_info -> {
                     if (topFragment !is InfoFragment) {
-                        openFragment(InfoFragment.newInstance())
+                        router.navigateTo(Screens.INFO)
                     }
                 }
             }
@@ -61,7 +62,7 @@ abstract class NavigationDrawerActivity : NestedFragmentActivity() {
 
     fun setToolbar(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.app_name, R.string.app_name) // todo ?
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.description_navigation_drawer_open, R.string.description_navigation_drawer_close)
         drawer.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
     }

@@ -36,7 +36,8 @@ def versions = [
         constraintlayout : '1.1.2',
         dagger           : '2.14.1',
         butterknife      : '8.8.1',
-        moxy             : '1.5.3'
+        moxy             : '1.5.3',
+        cicerone         : '2.1.0'
 ]
 
 def versionsTest = [
@@ -68,6 +69,8 @@ dependencies {
     implementation "com.arello-mobile:moxy-android:${versions.moxy}"
     implementation "com.arello-mobile:moxy-app-compat:${versions.moxy}"
     kapt "com.arello-mobile:moxy-compiler:${versions.moxy}"
+
+    implementation "ru.terrakok.cicerone:cicerone:${versions.cicerone}"
 
     androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
