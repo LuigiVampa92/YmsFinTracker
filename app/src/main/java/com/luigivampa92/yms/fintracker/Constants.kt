@@ -11,4 +11,6 @@ object Constants {
 
     const val exchangeRateBaseUrl = "http://data.fixer.io/api/"
     const val exchangeRateApiKey = "7134aefa2365c4706fee431ec3a2127e"
+
+    val supportedCurrencies = listOf("USD", "EUR", "RUB")
 }

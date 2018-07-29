@@ -6,8 +6,6 @@ import com.luigivampa92.yms.finops.RecordCalculator
 import com.luigivampa92.yms.finops.model.Currency
 import com.luigivampa92.yms.finops.model.OperationType
 import com.luigivampa92.yms.finops.model.Record
-import com.luigivampa92.yms.fintracker.data.ExchangeRatesDbSource
-import com.luigivampa92.yms.fintracker.data.ExchangeRatesNetworkSource
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
 import com.luigivampa92.yms.fintracker.formatAsMoney
 import com.luigivampa92.yms.fintracker.ui.main.BalanceView
@@ -16,8 +14,7 @@ import javax.inject.Inject
 @FragmentScope
 @InjectViewState
 class BalancePresenter @Inject constructor(
-        private val ers: ExchangeRatesNetworkSource,
-        private val eds: ExchangeRatesDbSource,
+        private val exchangeRatesRepository: ExchangeRatesRepository,
         private val calculator: RecordCalculator
 ) : MvpPresenter<BalanceView>() {
 
@@ -47,36 +44,14 @@ class BalancePresenter @Inject constructor(
 
     fun testQuery() {
 
-//        val listCurrencies = listOf<CurrencyEntity>(
-//                CurrencyEntity("USD", "United states dollar"),
-//                CurrencyEntity("RUB", "Russian ruble")
-//        )
-//        eds.setSymbols(listCurrencies).subscribe {  }
-//
-//        val listExchangeRates = listOf<ExchangeRateEntity>(
-//                ExchangeRateEntity("USD", "RUB", 0.01587302, Date()),
-//                ExchangeRateEntity("RUB", "USD", 63.0, Date())
-//        )
-//        eds.setExchangeRates(listExchangeRates).subscribe {  }
-
-
-        eds.getAvailableSymbols().subscribe(
-                        {
-                            val a = "a"
-                        },
-                        {
-                            val a = "a"
-                        }
-                )
-
-        eds.getAllExchangeRates().subscribe(
-                        {
-                            val a = "a"
-                        },
-                        {
-                            val a = "a"
-                        }
-                )
+        exchangeRatesRepository.getExchangeRates().subscribe(
+                {
+                    val a = "a"
+                },
+                {
+                    val a = "a"
+                }
+        )
 
         val a = "a"
 
