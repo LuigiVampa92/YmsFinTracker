@@ -35,5 +35,6 @@
     <!--add record-->
     <string name="text_operation_type_out">Expense</string>
     <string name="text_operation_type_in">Income</string>
+    <string name="text_button_save">Save</string>
 
 </resources>

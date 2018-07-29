@@ -36,5 +36,6 @@
     <!--add record-->
     <string name="text_operation_type_out">Расход</string>
     <string name="text_operation_type_in">Доход</string>
+    <string name="text_button_save">Сохранить</string>
 
 </resources>

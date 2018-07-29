@@ -21,7 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.addrecord.AddRecordActivity"/>
+        <activity
+            android:name=".ui.addrecord.AddRecordActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
         <activity android:name=".ui.account.AccountActivity"/>
     </application>
 

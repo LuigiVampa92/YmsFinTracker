@@ -25,4 +25,10 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="Button.Accent" parent="@style/Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_button_colored</item>
+        <item name="android:textColor">@drawable/bg_button_colored_text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

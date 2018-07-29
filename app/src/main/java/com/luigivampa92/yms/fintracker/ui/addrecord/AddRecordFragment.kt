@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.EditText
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -24,11 +25,14 @@ class AddRecordFragment : BaseFragment() {
     private lateinit var unbinder: Unbinder
     @BindView(R.id.include_toolbar)
     protected lateinit var toolbar: Toolbar
+    @BindView(R.id.edit_text_amount)
+    protected lateinit var editTextAmount: EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater.inflate(R.layout.fragment_add_record, container, false).also {
                 unbinder = ButterKnife.bind(this, it)
                 setupToolbar()
+                editTextAmount.setText("0")
             }
 
     override fun onDestroyView() {
