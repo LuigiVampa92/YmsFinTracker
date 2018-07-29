@@ -6,6 +6,7 @@ import com.luigivampa92.yms.finops.RecordCalculator
 import com.luigivampa92.yms.finops.model.Currency
 import com.luigivampa92.yms.finops.model.OperationType
 import com.luigivampa92.yms.finops.model.Record
+import com.luigivampa92.yms.fintracker.data.ExchangeRatesDbSource
 import com.luigivampa92.yms.fintracker.data.ExchangeRatesNetworkSource
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
 import com.luigivampa92.yms.fintracker.formatAsMoney
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @InjectViewState
 class BalancePresenter @Inject constructor(
         private val ers: ExchangeRatesNetworkSource,
+        private val eds: ExchangeRatesDbSource,
         private val calculator: RecordCalculator
 ) : MvpPresenter<BalanceView>() {
 
@@ -45,6 +47,25 @@ class BalancePresenter @Inject constructor(
 
     fun testQuery() {
 //        ers.getExchangeRates()
-        ers.getAvailableSymbols()
+//        ers.getAvailableSymbols()
+
+//        val listCurrencies = listOf<CurrencyEntity>(
+//                CurrencyEntity("USD", "United states dollar"),
+//                CurrencyEntity("RUB", "Russian ruble")
+//        )
+//        eds.setSymbols(listCurrencies)
+//
+//        val listExchangeRates = listOf<ExchangeRateEntity>(
+//                ExchangeRateEntity("USD", "RUB", 0.01587302, Date()),
+//                ExchangeRateEntity("RUB", "USD", 63.0, Date())
+//        )
+//        eds.setExchangeRates(listExchangeRates)
+
+        val availableSymbols = eds.getAvailableSymbols()
+        val exchangeRates = eds.getAllExchangeRates()
+
+
+        val a = "a"
+
     }
 }

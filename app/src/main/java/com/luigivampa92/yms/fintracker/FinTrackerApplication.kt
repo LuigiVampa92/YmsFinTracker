@@ -2,7 +2,7 @@ package com.luigivampa92.yms.fintracker
 
 import android.app.Activity
 import android.app.Application
-import com.luigivampa92.yms.fintracker.data.ExchangeRatesInterceptor
+import com.luigivampa92.yms.fintracker.data.network.ExchangeRatesInterceptor
 import com.luigivampa92.yms.fintracker.di.component.AppComponent
 import com.luigivampa92.yms.fintracker.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector

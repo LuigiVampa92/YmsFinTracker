@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.data
+package com.luigivampa92.yms.fintracker.data.network.error
 
 import okhttp3.ResponseBody
 

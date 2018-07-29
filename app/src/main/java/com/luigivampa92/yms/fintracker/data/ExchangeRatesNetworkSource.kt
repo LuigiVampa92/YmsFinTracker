@@ -1,5 +1,6 @@
 package com.luigivampa92.yms.fintracker.data
 
+import com.luigivampa92.yms.fintracker.data.network.ExchangeRatesApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

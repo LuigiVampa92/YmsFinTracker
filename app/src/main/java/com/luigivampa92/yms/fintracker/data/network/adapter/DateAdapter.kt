@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.data
+package com.luigivampa92.yms.fintracker.data.network.adapter
 
 import android.annotation.SuppressLint
 import com.google.gson.*

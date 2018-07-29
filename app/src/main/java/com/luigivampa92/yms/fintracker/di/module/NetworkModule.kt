@@ -3,7 +3,11 @@ package com.luigivampa92.yms.fintracker.di.module
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.luigivampa92.yms.fintracker.Constants
-import com.luigivampa92.yms.fintracker.data.*
+import com.luigivampa92.yms.fintracker.data.network.ExchangeRatesApi
+import com.luigivampa92.yms.fintracker.data.network.ExchangeRatesInterceptor
+import com.luigivampa92.yms.fintracker.data.network.error.NetworkErrorMapper
+import com.luigivampa92.yms.fintracker.data.network.error.NetworkErrorMapperImpl
+import com.luigivampa92.yms.fintracker.data.network.adapter.DateAdapter
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -56,13 +60,9 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideElpassApi(retrofit: Retrofit) = retrofit.create(ExchangeRatesApi::class.java)
+    fun provideExchangeRatesApi(retrofit: Retrofit) = retrofit.create(ExchangeRatesApi::class.java)
 
     @Singleton
     @Provides
     fun provideErrorMapper(retrofit: Retrofit): NetworkErrorMapper = NetworkErrorMapperImpl(retrofit)
-
-    @Singleton
-    @Provides
-    fun provideExchangeRatesNetworkSource(api: ExchangeRatesApi) = ExchangeRatesNetworkSource(api)
 }

@@ -1,5 +1,7 @@
-package com.luigivampa92.yms.fintracker.data
+package com.luigivampa92.yms.fintracker.data.network
 
+import com.luigivampa92.yms.fintracker.data.network.model.AvailableSymbolsModel
+import com.luigivampa92.yms.fintracker.data.network.model.ExchangeRatesModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.QueryMap

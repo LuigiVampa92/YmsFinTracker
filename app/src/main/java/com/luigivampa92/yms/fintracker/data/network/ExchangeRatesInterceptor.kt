@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.data
+package com.luigivampa92.yms.fintracker.data.network
 
 import okhttp3.Interceptor
 import okhttp3.Response

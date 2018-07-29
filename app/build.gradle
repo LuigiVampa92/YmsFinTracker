@@ -42,7 +42,8 @@ def versions = [
         rxandroid        : '2.0.1',
         retrofit         : '2.3.0',
         retrofitlogging  : '3.9.1',
-        gson             : '2.8.2'
+        gson             : '2.8.2',
+        room             : '1.1.1'
 ]
 
 def versionsTest = [
@@ -85,6 +86,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.retrofitlogging}"
     implementation "com.google.code.gson:gson:${versions.gson}"
+
+    implementation "android.arch.persistence.room:runtime:${versions.room}"
+    implementation "android.arch.persistence.room:rxjava2:${versions.room}"
+    kapt "android.arch.persistence.room:compiler:${versions.room}"
 
     androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
