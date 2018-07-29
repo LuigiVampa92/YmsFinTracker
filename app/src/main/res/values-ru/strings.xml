@@ -33,4 +33,8 @@
     <string name="text_balance_description_usd">Текущий баланс ( $ ) :</string>
     <string name="text_balance_description_rur">Текущий баланс ( \u20BD ) :</string>
 
+    <!--add record-->
+    <string name="text_operation_type_out">Расход</string>
+    <string name="text_operation_type_in">Доход</string>
+
 </resources>

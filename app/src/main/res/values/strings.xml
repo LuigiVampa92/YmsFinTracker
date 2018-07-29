@@ -32,4 +32,8 @@
     <string name="text_balance_description_usd">Current balance ( $ ) :</string>
     <string name="text_balance_description_rur">Current balance ( \u20BD ) :</string>
 
+    <!--add record-->
+    <string name="text_operation_type_out">Expense</string>
+    <string name="text_operation_type_in">Income</string>
+
 </resources>
