@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.luigivampa92.yms.fintracker.ContactRouter
 import com.luigivampa92.yms.fintracker.R
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder

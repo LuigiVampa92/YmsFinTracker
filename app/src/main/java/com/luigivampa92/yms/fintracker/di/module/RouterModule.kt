@@ -1,7 +1,7 @@
 package com.luigivampa92.yms.fintracker.di.module
 
 import android.content.Context
-import com.luigivampa92.yms.fintracker.ContactRouter
+import com.luigivampa92.yms.fintracker.routing.base.ContactRouter
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
