@@ -14,7 +14,6 @@ class DatabaseModule {
     @Provides
     fun provideDatabase(context: Context) =
             Room.databaseBuilder(context, FinTrackerDatabase::class.java, "database")
-                    .allowMainThreadQueries()  // todo makes daos rx and remove
                     .build()
 
     @Provides

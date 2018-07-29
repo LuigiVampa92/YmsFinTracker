@@ -1,29 +1,24 @@
 package com.luigivampa92.yms.fintracker.data.db.dao
 
 import android.arch.persistence.room.*
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import com.luigivampa92.yms.fintracker.data.db.entity.CurrencyEntity
+import io.reactivex.Single
 
 @Dao
-interface CurrencyDao {
+interface CurrencyDao : BaseDao<CurrencyEntity> {
 
     @Query("SELECT * FROM currency")
-    fun getAll(): List<CurrencyEntity>
+    fun getAll(): Single<List<CurrencyEntity>>
 
     @Query("SELECT * FROM currency WHERE ticker = :ticker")
-    fun getById(ticker: String): CurrencyEntity
+    fun getById(ticker: String): Single<CurrencyEntity>
 
-    @Insert(onConflict = REPLACE)
-    fun insert(currency: CurrencyEntity)
-
-    @Update(onConflict = REPLACE)
-    fun update(currency: CurrencyEntity)
-
-    @Delete
-    fun delete(currency: CurrencyEntity)
+    @Query("DELETE FROM currency")
+    fun deleteAll()
 
     @Transaction
     fun insertAll(currencies: Collection<CurrencyEntity>) {
+        deleteAll()
         currencies.forEach {
             insert(it)
         }

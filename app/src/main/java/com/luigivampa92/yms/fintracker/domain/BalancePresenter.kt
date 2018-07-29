@@ -46,24 +46,37 @@ class BalancePresenter @Inject constructor(
     }
 
     fun testQuery() {
-//        ers.getExchangeRates()
-//        ers.getAvailableSymbols()
 
 //        val listCurrencies = listOf<CurrencyEntity>(
 //                CurrencyEntity("USD", "United states dollar"),
 //                CurrencyEntity("RUB", "Russian ruble")
 //        )
-//        eds.setSymbols(listCurrencies)
+//        eds.setSymbols(listCurrencies).subscribe {  }
 //
 //        val listExchangeRates = listOf<ExchangeRateEntity>(
 //                ExchangeRateEntity("USD", "RUB", 0.01587302, Date()),
 //                ExchangeRateEntity("RUB", "USD", 63.0, Date())
 //        )
-//        eds.setExchangeRates(listExchangeRates)
+//        eds.setExchangeRates(listExchangeRates).subscribe {  }
 
-        val availableSymbols = eds.getAvailableSymbols()
-        val exchangeRates = eds.getAllExchangeRates()
 
+        eds.getAvailableSymbols().subscribe(
+                        {
+                            val a = "a"
+                        },
+                        {
+                            val a = "a"
+                        }
+                )
+
+        eds.getAllExchangeRates().subscribe(
+                        {
+                            val a = "a"
+                        },
+                        {
+                            val a = "a"
+                        }
+                )
 
         val a = "a"
 
