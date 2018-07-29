@@ -8,6 +8,7 @@ import com.luigivampa92.yms.finops.model.Currency
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
 import com.luigivampa92.yms.fintracker.getString
+import com.luigivampa92.yms.fintracker.routing.base.Screens
 import com.luigivampa92.yms.fintracker.ui.main.BalanceView
 import ru.terrakok.cicerone.Router
 import java.util.*
@@ -69,6 +70,10 @@ class BalancePresenter @Inject constructor(
     }
 
     fun addRecord() {
-        router.showSystemMessage("Stub")
+        router.navigateTo(Screens.ADD_RECORD)
+    }
+
+    fun pickAccount() {
+        router.navigateTo(Screens.ACCOUNTS)
     }
 }

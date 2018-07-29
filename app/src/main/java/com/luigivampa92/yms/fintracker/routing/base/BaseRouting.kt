@@ -1,5 +1,6 @@
-package com.luigivampa92.yms.fintracker.routing
+package com.luigivampa92.yms.fintracker.routing.base
 
+import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
@@ -65,6 +66,10 @@ abstract class BaseRouting<out T: AppCompatActivity> (
                 Toast.makeText(activity, command.message.toString(), Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    protected fun openActivity(intent: Intent) {
+        activity.startActivity(intent)
     }
 
     protected fun openFragment(fragment: Fragment, withBackStack:Boolean = false) {

@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
-import com.luigivampa92.yms.fintracker.routing.Screens
+import com.luigivampa92.yms.fintracker.routing.base.Screens
 import com.luigivampa92.yms.fintracker.ui.main.InfoView
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject

@@ -3,7 +3,7 @@ package com.luigivampa92.yms.fintracker.ui.base
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.arellomobile.mvp.MvpAppCompatActivity
-import com.luigivampa92.yms.fintracker.routing.BindableRouting
+import com.luigivampa92.yms.fintracker.routing.base.BindableRouting
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

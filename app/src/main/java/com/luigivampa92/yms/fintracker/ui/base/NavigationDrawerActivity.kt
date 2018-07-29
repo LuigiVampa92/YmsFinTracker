@@ -11,7 +11,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.routing.Screens
+import com.luigivampa92.yms.fintracker.routing.base.Screens
 import com.luigivampa92.yms.fintracker.ui.main.BalanceFragment
 import com.luigivampa92.yms.fintracker.ui.main.InfoFragment
 import com.luigivampa92.yms.fintracker.ui.main.SettingsFragment

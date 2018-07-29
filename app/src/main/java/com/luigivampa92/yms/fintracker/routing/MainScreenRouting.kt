@@ -1,9 +1,10 @@
 package com.luigivampa92.yms.fintracker.routing
 
-import com.luigivampa92.yms.fintracker.ui.main.BalanceFragment
-import com.luigivampa92.yms.fintracker.ui.main.InfoFragment
-import com.luigivampa92.yms.fintracker.ui.main.MainActivity
-import com.luigivampa92.yms.fintracker.ui.main.SettingsFragment
+import com.luigivampa92.yms.fintracker.routing.base.BaseRouting
+import com.luigivampa92.yms.fintracker.routing.base.Screens
+import com.luigivampa92.yms.fintracker.ui.account.AccountActivity
+import com.luigivampa92.yms.fintracker.ui.addrecord.AddRecordActivity
+import com.luigivampa92.yms.fintracker.ui.main.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Forward
@@ -28,6 +29,12 @@ class MainScreenRouting @Inject constructor (
                     }
                     Screens.INFO -> {
                         openFragment(InfoFragment.newInstance())
+                    }
+                    Screens.ACCOUNTS -> {
+                        openActivity(AccountActivity.newIntent(activity))
+                    }
+                    Screens.ADD_RECORD -> {
+                        openActivity(AddRecordActivity.newIntent(activity))
                     }
                 }
             }

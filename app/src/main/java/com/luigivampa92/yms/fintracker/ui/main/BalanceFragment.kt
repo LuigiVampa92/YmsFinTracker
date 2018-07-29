@@ -58,4 +58,9 @@ class BalanceFragment : NavigationDrawerFragment(), BalanceView {
     protected fun buttonAddClicked() {
         presenter.addRecord()
     }
+
+    @OnClick(R.id.button_account)
+    protected fun buttonAccounClicked() {
+        presenter.pickAccount()
+    }
 }
