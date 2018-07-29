@@ -6,14 +6,18 @@ import com.luigivampa92.yms.finops.RecordCalculator
 import com.luigivampa92.yms.finops.model.Currency
 import com.luigivampa92.yms.finops.model.OperationType
 import com.luigivampa92.yms.finops.model.Record
+import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.di.scope.FragmentScope
 import com.luigivampa92.yms.fintracker.formatAsMoney
+import com.luigivampa92.yms.fintracker.getString
 import com.luigivampa92.yms.fintracker.ui.main.BalanceView
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @FragmentScope
 @InjectViewState
 class BalancePresenter @Inject constructor(
+        private val router: Router,
         private val exchangeRatesRepository: ExchangeRatesRepository,
         private val calculator: RecordCalculator
 ) : MvpPresenter<BalanceView>() {
@@ -26,6 +30,18 @@ class BalancePresenter @Inject constructor(
 
         calculator.updateCurrencyExchangeRates(Pair(Currency.USD, Currency.RUR), usdRurExchangeRate)
         calculator.updateCurrencyExchangeRates(Pair(Currency.RUR, Currency.USD), rurUsdExchangeRate)
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        exchangeRatesRepository.getExchangeRates().subscribe(
+                {
+                    val a = "a"
+                },
+                {
+                    router.showSystemMessage(getString(R.string.text_error_data))
+                }
+        )
     }
 
     fun provideCurrentBalance() {
@@ -44,16 +60,11 @@ class BalancePresenter @Inject constructor(
 
     fun testQuery() {
 
-        exchangeRatesRepository.getExchangeRates().subscribe(
-                {
-                    val a = "a"
-                },
-                {
-                    val a = "a"
-                }
-        )
-
         val a = "a"
 
+    }
+
+    fun addRecord() {
+        router.showSystemMessage("Stub")
     }
 }

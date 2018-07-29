@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -57,5 +58,10 @@ class BalanceFragment : NavigationDrawerFragment(), BalanceView {
 
     override fun showBalanceRur(value: String) {
         textBalanceRur.text = value
+    }
+
+    @OnClick(R.id.button_add)
+    protected fun buttonAddClicked() {
+        presenter.addRecord()
     }
 }

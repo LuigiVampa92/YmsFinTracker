@@ -3,6 +3,7 @@ package com.luigivampa92.yms.fintracker.routing
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.luigivampa92.yms.fintracker.ContactRouter
 import com.luigivampa92.yms.fintracker.R
 import ru.terrakok.cicerone.Navigator
@@ -10,6 +11,7 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.commands.Back
 import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Forward
+import ru.terrakok.cicerone.commands.SystemMessage
 import javax.inject.Inject
 
 abstract class BaseRouting<out T: AppCompatActivity> (
@@ -58,6 +60,9 @@ abstract class BaseRouting<out T: AppCompatActivity> (
                 if (!popBack()) {
                     activity.finish()
                 }
+            }
+            is SystemMessage -> {
+                Toast.makeText(activity, command.message.toString(), Toast.LENGTH_LONG).show()
             }
         }
     }
