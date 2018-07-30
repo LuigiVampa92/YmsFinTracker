@@ -36,5 +36,6 @@
     <string name="text_operation_type_out">Expense</string>
     <string name="text_operation_type_in">Income</string>
     <string name="text_button_save">Save</string>
+    <string name="text_add_record_toolbar_title">Add new record</string>
 
 </resources>
