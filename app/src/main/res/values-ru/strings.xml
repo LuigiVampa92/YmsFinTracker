@@ -38,5 +38,6 @@
     <string name="text_operation_type_in">Доход</string>
     <string name="text_button_save">Сохранить</string>
     <string name="text_add_record_toolbar_title">Добавить запись</string>
+    <string name="text_edit_hint_date">Дата</string>
 
 </resources>
