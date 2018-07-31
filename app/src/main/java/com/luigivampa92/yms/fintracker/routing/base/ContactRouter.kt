@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker
+package com.luigivampa92.yms.fintracker.routing.base
 
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
@@ -6,6 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import com.luigivampa92.yms.fintracker.Constants
+import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.getString
 
 class ContactRouter(private val context: Context) {
 

@@ -10,4 +10,13 @@
     <color name="color_navigation_background">#bcaaa4</color>
     <color name="color_navigation_item">@color/color_white</color>
 
+    <color name="color_social_button_background">@color/color_primary</color>
+    <color name="color_social_button_icon">@color/color_white</color>
+
+    <color name="color_radio_toggle_accent">@color/color_white</color>
+    <color name="color_radio_toggle_background">@color/color_primary</color>
+
+    <color name="color_button_accent">@color/color_accent</color>
+    <color name="color_button_accent_pressed">@color/color_white</color>
+
 </resources>

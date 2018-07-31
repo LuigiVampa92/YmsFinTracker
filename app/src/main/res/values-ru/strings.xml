@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--common-->
+    <string name="app_name">FinTracker</string>
+    <string name="text_error_no_network">Отсутствует соединение с сетью</string>
+    <string name="text_error_network">Ошибка запроса</string>
+    <string name="text_error_data">Ошибка получения данных</string>
+
     <!--navigation-->
     <string name="text_navigation_menu_title">Ой</string>
     <string name="text_navigation_item_balance">Баланс</string>
@@ -26,5 +32,12 @@
     <!--balance-->
     <string name="text_balance_description_usd">Текущий баланс ( $ ) :</string>
     <string name="text_balance_description_rur">Текущий баланс ( \u20BD ) :</string>
+
+    <!--add record-->
+    <string name="text_operation_type_out">Расход</string>
+    <string name="text_operation_type_in">Доход</string>
+    <string name="text_button_save">Сохранить</string>
+    <string name="text_add_record_toolbar_title">Добавить запись</string>
+    <string name="text_edit_hint_date">Дата</string>
 
 </resources>

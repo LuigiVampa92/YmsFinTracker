@@ -2,8 +2,7 @@ package com.luigivampa92.yms.fintracker.di.component
 
 import android.content.Context
 import com.luigivampa92.yms.fintracker.FinTrackerApplication
-import com.luigivampa92.yms.fintracker.di.module.AppModule
-import com.luigivampa92.yms.fintracker.di.module.ContextModule
+import com.luigivampa92.yms.fintracker.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -11,7 +10,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         ContextModule::class,
-        AppModule::class
+        AppModule::class,
+        RouterModule::class,
+        NetworkModule::class,
+        DatabaseModule::class,
+        DataModule::class
 ))
 interface AppComponent {
 

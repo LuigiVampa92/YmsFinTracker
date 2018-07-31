@@ -4,7 +4,14 @@ import android.support.annotation.StringRes
 import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.widget.TextView
+
+fun log(message: String) {
+    if (BuildConfig.DEBUG) {
+        Log.d("FTTEST", message)
+    }
+}
 
 fun getString(@StringRes id: Int) = FinTrackerApplication.INSTANCE.getString(id)
 

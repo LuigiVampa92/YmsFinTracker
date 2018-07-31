@@ -2,6 +2,9 @@
 
     <!--common-->
     <string name="app_name">FinTracker</string>
+    <string name="text_error_no_network">No network connection</string>
+    <string name="text_error_network">Network error</string>
+    <string name="text_error_data">Error retrieving data</string>
 
     <!--navigation-->
     <string name="text_navigation_menu_title">Oops</string>
@@ -28,5 +31,12 @@
     <!--balance-->
     <string name="text_balance_description_usd">Current balance ( $ ) :</string>
     <string name="text_balance_description_rur">Current balance ( \u20BD ) :</string>
+
+    <!--add record-->
+    <string name="text_operation_type_out">Expense</string>
+    <string name="text_operation_type_in">Income</string>
+    <string name="text_button_save">Save</string>
+    <string name="text_add_record_toolbar_title">Add new record</string>
+    <string name="text_edit_hint_date">Date</string>
 
 </resources>

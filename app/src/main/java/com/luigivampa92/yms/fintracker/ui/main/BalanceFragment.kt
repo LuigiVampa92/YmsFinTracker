@@ -12,15 +12,17 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.domain.BalancePresenter
-import com.luigivampa92.yms.fintracker.ui.base.BaseFragment
-import com.luigivampa92.yms.fintracker.ui.base.NavigationDrawerActivity
+import com.luigivampa92.yms.fintracker.ui.base.NavigationDrawerFragment
 import javax.inject.Inject
 
-class BalanceFragment : BaseFragment(), BalanceView {
+class BalanceFragment : NavigationDrawerFragment(), BalanceView {
 
     companion object {
         fun newInstance() = BalanceFragment()
     }
+
+    override fun layoutRes() = R.layout.fragment_balance
+    override fun navigationItemRes() = R.id.navigation_item_balance
 
     @Inject
     @InjectPresenter
@@ -34,29 +36,14 @@ class BalanceFragment : BaseFragment(), BalanceView {
     @BindView(R.id.text_balance_rur)
     protected lateinit var textBalanceRur: TextView
 
-    private lateinit var hostActivity: NavigationDrawerActivity
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-            inflater.inflate(R.layout.fragment_balance, container, false).also {
+            super.onCreateView(inflater, container, savedInstanceState).also {
                 unbinder = ButterKnife.bind(this, it)
-                hostActivity = activity as NavigationDrawerActivity
             }
 
     override fun onDestroyView() {
         unbinder.unbind()
         super.onDestroyView()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        hostActivity.selectDrawerItem(R.id.navigation_item_balance)
-
-        presenter.provideCurrentBalance()
-    }
-
-    @OnClick(R.id.button_navigation_menu)
-    protected fun buttonMenuClicked() {
-        hostActivity.openDrawer()
     }
 
     override fun showBalanceUsd(value: String) {
@@ -65,5 +52,15 @@ class BalanceFragment : BaseFragment(), BalanceView {
 
     override fun showBalanceRur(value: String) {
         textBalanceRur.text = value
+    }
+
+    @OnClick(R.id.button_add)
+    protected fun buttonAddClicked() {
+        presenter.addRecord()
+    }
+
+    @OnClick(R.id.button_account)
+    protected fun buttonAccounClicked() {
+        presenter.pickAccount()
     }
 }
