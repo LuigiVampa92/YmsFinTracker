@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.finops.model
+package com.luigivampa92.yms.fintracker.model
 
 enum class Currency(sign: String) {
     USD("$"),

@@ -11,7 +11,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.routing.base.Screens
 import com.luigivampa92.yms.fintracker.ui.main.BalanceFragment
 import com.luigivampa92.yms.fintracker.ui.main.InfoFragment
 import com.luigivampa92.yms.fintracker.ui.main.SettingsFragment
@@ -37,17 +36,17 @@ abstract class NavigationDrawerActivity : NestedFragmentActivity() {
             when (it.itemId) {
                 R.id.navigation_item_balance -> {
                     if (topFragment !is BalanceFragment) {
-                        router.navigateTo(Screens.BALANCE)
+                        openFragment(BalanceFragment.newInstance())
                     }
                 }
                 R.id.navigation_item_settings -> {
                     if (topFragment !is SettingsFragment) {
-                        router.navigateTo(Screens.SETTINGS)
+                        openFragment(SettingsFragment.newInstance())
                     }
                 }
                 R.id.navigation_item_info -> {
                     if (topFragment !is InfoFragment) {
-                        router.navigateTo(Screens.INFO)
+                        openFragment(InfoFragment.newInstance())
                     }
                 }
             }

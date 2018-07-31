@@ -1,5 +1,6 @@
 package com.luigivampa92.yms.fintracker.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,11 +10,11 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Unbinder
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.domain.BalancePresenter
+import com.luigivampa92.yms.fintracker.ui.account.AccountActivity
+import com.luigivampa92.yms.fintracker.ui.addrecord.AddRecordActivity
 import com.luigivampa92.yms.fintracker.ui.base.NavigationDrawerFragment
-import javax.inject.Inject
 
 class BalanceFragment : NavigationDrawerFragment(), BalanceView {
 
@@ -24,11 +25,8 @@ class BalanceFragment : NavigationDrawerFragment(), BalanceView {
     override fun layoutRes() = R.layout.fragment_balance
     override fun navigationItemRes() = R.id.navigation_item_balance
 
-    @Inject
     @InjectPresenter
     lateinit var presenter: BalancePresenter
-    @ProvidePresenter
-    fun providePresenter() = presenter
 
     private lateinit var unbinder: Unbinder
     @BindView(R.id.text_balance_usd)
@@ -56,11 +54,11 @@ class BalanceFragment : NavigationDrawerFragment(), BalanceView {
 
     @OnClick(R.id.button_add)
     protected fun buttonAddClicked() {
-        presenter.addRecord()
+        activity!!.startActivity(Intent(context!!, AddRecordActivity::class.java))
     }
 
     @OnClick(R.id.button_account)
     protected fun buttonAccounClicked() {
-        presenter.pickAccount()
+        activity!!.startActivity(Intent(context!!, AccountActivity::class.java))
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,66 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
-        />
-
-    <LinearLayout
-        android:id="@+id/container_contact_author"
-        android:orientation="horizontal"
-        android:layout_margin="16dp"
-        android:gravity="start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageButton
-            android:id="@+id/button_contact_email"
-            android:layout_width="@dimen/image_contact_size"
-            android:layout_height="@dimen/image_contact_size"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_social_button"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_contact_email"
-            tools:ignore="ContentDescription"
-            />
-
-        <ImageButton
-            android:id="@+id/button_contact_vk"
-            android:layout_width="@dimen/image_contact_size"
-            android:layout_height="@dimen/image_contact_size"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_social_button"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_contact_vk"
-            tools:ignore="ContentDescription"
-            />
-
-        <ImageButton
-            android:id="@+id/button_contact_tg"
-            android:layout_width="@dimen/image_contact_size"
-            android:layout_height="@dimen/image_contact_size"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_social_button"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_contact_tg"
-            tools:ignore="ContentDescription"
-            />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_info_author"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="16sp"
-        android:text="@string/text_info_about_app_contacts"
-        app:layout_constraintBottom_toTopOf="@+id/container_contact_author"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         />
 
 </android.support.constraint.ConstraintLayout>

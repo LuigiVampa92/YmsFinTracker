@@ -1,11 +1,11 @@
-package com.luigivampa92.yms.finops.model
+package com.luigivampa92.yms.fintracker.model
 
 import java.util.*
 
 data class Record (
-        val type: OperationType,
         val amount: Double,
-        val category: Category,
+        val expense: Boolean,
+        val category: String,
         val time: Date,
         val account: Account,
         val comment: String? = null
