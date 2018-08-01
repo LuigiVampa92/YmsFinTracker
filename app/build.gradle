@@ -35,7 +35,6 @@ android {
 
 def versions = [
         constraintlayout: '1.1.2',
-        butterknife     : '8.8.1',
         moxy            : '1.5.3',
 ]
 

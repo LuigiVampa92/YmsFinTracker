@@ -6,13 +6,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/wallet_name_fragment_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headline_text_size"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="Name: Wallet 1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/wallet_balance_usd_fragment_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_name_fragment_balance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/sub_headline_text_size"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_green_light"
+        android:text="125 USD"/>
+
+    <TextView
+        android:id="@+id/wallet_balance_rub_fragment_balance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_usd_fragment_balance"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:textSize="@dimen/sub_headline_text_size"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_orange_light"
+        android:text="125 RUB"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_fragment_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:reverseLayout="true"
-        app:stackFromEnd="true"/>
+        app:stackFromEnd="true"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_rub_fragment_balance"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_fragment_balance"
