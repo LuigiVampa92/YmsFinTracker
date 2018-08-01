@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.view
+package com.luigivampa92.yms.fintracker.view.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.view
+package com.luigivampa92.yms.fintracker.view.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
+import com.luigivampa92.yms.fintracker.view.fragments.FragmentInfo
+import com.luigivampa92.yms.fintracker.view.fragments.FragmentSettings
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ActivityMain : AppCompatActivity() {
@@ -64,7 +67,7 @@ class ActivityMain : AppCompatActivity() {
                 .commit()
     }
 
-    fun loadFragmentWithoutBackStack(fragment: Fragment){
+    fun loadFragmentWithoutBackStack(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()
