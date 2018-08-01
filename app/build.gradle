@@ -34,15 +34,15 @@ android {
 }
 
 def versions = [
-        constraintlayout : '1.1.2',
-        butterknife      : '8.8.1',
-        moxy             : '1.5.3',
+        constraintlayout: '1.1.2',
+        butterknife     : '8.8.1',
+        moxy            : '1.5.3',
 ]
 
 def versionsTest = [
-        espresso        : '3.0.2',
-        runner          : '1.0.2',
-        junit           : '4.12'
+        espresso: '3.0.2',
+        runner  : '1.0.2',
+        junit   : '4.12'
 ]
 
 dependencies {
@@ -55,6 +55,7 @@ dependencies {
     implementation "com.android.support:design:$support_version"
 
     implementation "com.jakewharton:butterknife:${versions.butterknife}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     kapt "com.jakewharton:butterknife-compiler:${versions.butterknife}"
 
     implementation "com.arello-mobile:moxy:${versions.moxy}"
@@ -62,7 +63,7 @@ dependencies {
     implementation "com.arello-mobile:moxy-app-compat:${versions.moxy}"
     kapt "com.arello-mobile:moxy-compiler:${versions.moxy}"
 
-    androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
     testImplementation "junit:junit:${versionsTest.junit}"
 }
