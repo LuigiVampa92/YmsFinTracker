@@ -14,8 +14,8 @@ class ActivityMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(savedInstanceState == null){
-            loadFragment(FragmentBalance())
+        if (savedInstanceState == null) {
+            loadFragmentWithoutBackStack(FragmentBalance())
         }
 
         initComponents()
@@ -36,7 +36,7 @@ class ActivityMain : AppCompatActivity() {
         }
 
         navigation_view.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.navigation_item_balance -> {
                     loadFragment(FragmentBalance())
                 }
@@ -57,10 +57,16 @@ class ActivityMain : AppCompatActivity() {
 
     }
 
-     fun loadFragment(fragment: Fragment) {
+    fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(fragment.javaClass.name)
+                .commit()
+    }
+
+    fun loadFragmentWithoutBackStack(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
                 .commit()
     }
 }

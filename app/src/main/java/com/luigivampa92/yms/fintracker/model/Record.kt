@@ -7,6 +7,5 @@ data class Record (
         val expense: Boolean,
         val category: String,
         val time: Date,
-        val account: Account,
-        val comment: String? = null
+        val account: Account
 )
