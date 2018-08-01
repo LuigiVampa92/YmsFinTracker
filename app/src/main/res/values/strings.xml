@@ -39,5 +39,6 @@
     <string name="text_add_record_toolbar_title">Add new record</string>
     <string name="text_edit_hint_date">Date</string>
     <string name="add_wallet">Добавить Кошелек</string>
+    <string name="finance_tracker">Трекер Финансов</string>
 
 </resources>

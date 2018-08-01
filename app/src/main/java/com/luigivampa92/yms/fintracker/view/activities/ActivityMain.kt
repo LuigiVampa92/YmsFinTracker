@@ -1,5 +1,6 @@
 package com.luigivampa92.yms.fintracker.view.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -27,6 +28,8 @@ class ActivityMain : AppCompatActivity() {
 
     private fun initComponents() {
         toolbar.setNavigationIcon(R.drawable.ic_dehaze)
+        toolbar.title = resources.getString(R.string.finance_tracker)
+        toolbar.inflateMenu(R.menu.menu_toolbar)
         val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.description_navigation_drawer_open, R.string.description_navigation_drawer_close)
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
@@ -36,6 +39,13 @@ class ActivityMain : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             drawer_layout.openDrawer(GravityCompat.START)
+        }
+
+        toolbar.setOnMenuItemClickListener {
+            if(it.itemId == R.id.action_add_wallet){
+                startActivity(Intent(this, ActivityWallets::class.java))
+            }
+             true
         }
 
         navigation_view.setNavigationItemSelectedListener {
@@ -60,14 +70,14 @@ class ActivityMain : AppCompatActivity() {
 
     }
 
-    fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(fragment.javaClass.name)
                 .commit()
     }
 
-    fun loadFragmentWithoutBackStack(fragment: Fragment) {
+    private fun loadFragmentWithoutBackStack(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()
