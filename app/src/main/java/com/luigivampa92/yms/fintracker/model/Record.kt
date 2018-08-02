@@ -8,7 +8,7 @@ data class Record (
         val expense: Boolean,
         val amou: Double,
         val currency: String,
-        val account: Account,
+        val account: Wallet,
         val date: Date,
         val pending_date: Date
 )
