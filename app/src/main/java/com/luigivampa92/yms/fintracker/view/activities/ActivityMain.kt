@@ -1,11 +1,14 @@
 package com.luigivampa92.yms.fintracker.view.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentInfo
@@ -21,6 +24,11 @@ class ActivityMain : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             loadFragmentWithoutBackStack(FragmentBalance())
+        }
+
+        val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        if(sf.getString(Constants.CURRENT_WALLET, null) == null){
+            startActivity(Intent(this, ActivityAddWallet::class.java))
         }
 
         initComponents()
@@ -44,15 +52,19 @@ class ActivityMain : AppCompatActivity() {
         navigation_view.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_item_balance -> {
+                    toolbar.title = resources.getString(R.string.finance_tracker)
                     loadFragment(FragmentBalance())
                 }
                 R.id.navigation_item_settings -> {
+                    toolbar.title = resources.getString(R.string.settings)
                     loadFragment(FragmentSettings())
                 }
                 R.id.navigation_item_info -> {
+                    toolbar.title = resources.getString(R.string.info)
                     loadFragment(FragmentInfo())
                 }
                 else -> {
+                    toolbar.title = resources.getString(R.string.wallets)
                     loadFragment(FragmentWallets())
                 }
             }

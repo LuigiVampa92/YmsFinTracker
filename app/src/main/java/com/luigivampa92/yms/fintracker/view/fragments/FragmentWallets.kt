@@ -1,5 +1,6 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -34,28 +35,32 @@ class FragmentWallets : Fragment() {
     override fun onResume() {
         super.onResume()
         val database = FinanceTrackerDatabase.getInstance(activity!!)
-        launch {
-            val wallets = database?.walletsDao()?.getAllWallets()
-            launch(UI) {
-                wallets?.forEach {
-                    val fragment = FragmentWallet()
-                    val bundle = Bundle()
-                    bundle.putString(Constants.NAME, it.name)
-                    bundle.putString(Constants.BALANCE, it.balance.toString())
-                    fragment.arguments = bundle
-                    mWalletsAdapter.addFragment(fragment)
-                    mWalletsAdapter.notifyDataSetChanged()
-                }
-            }
-        }
+        database?.clearAllTables()
+//        launch {
+//            val wallets = database?.walletsDao()?.getAllWallets()
+//            launch(UI) {
+//                wallets?.forEach {
+//                    val fragment = FragmentWallet()
+//                    val bundle = Bundle()
+//                    bundle.putString(Constants.NAME, it.name)
+//                    bundle.putString(Constants.BALANCE, it.balance.toString())
+//                    fragment.arguments = bundle
+//                    mWalletsAdapter.addFragment(fragment)
+//                    mWalletsAdapter.notifyDataSetChanged()
+//                }
+//            }
+//        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sf = context?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        sf?.edit()?.putString(Constants.CURRENT_WALLET, mWalletsAdapter.getWalletName())?.apply()
     }
 
     private fun initComponents() {
         mWalletsAdapter = AdapterWallets(childFragmentManager)
         view_pager_fragment_wallets.adapter = mWalletsAdapter
-
-        mWalletsAdapter.addFragment(FragmentWallet())
-        mWalletsAdapter.notifyDataSetChanged()
     }
 
     private fun initComponentsListeners() {
@@ -65,4 +70,5 @@ class FragmentWallets : Fragment() {
         }
 
     }
+
 }

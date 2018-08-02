@@ -9,7 +9,9 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import kotlinx.android.synthetic.main.fragment_wallet.*
 
-class FragmentWallet: Fragment() {
+class FragmentWallet : Fragment() {
+
+    private lateinit var mFragmentName: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_wallet, container, false)
@@ -21,11 +23,15 @@ class FragmentWallet: Fragment() {
         initComponents(arguments)
     }
 
-    private fun initComponents(bundle: Bundle?){
-        if(bundle != null){
+    private fun initComponents(bundle: Bundle?) {
+        if (bundle != null) {
+            mFragmentName = bundle.getString(Constants.NAME)
             name_fragment_wallet.text = bundle.getString(Constants.NAME)
             balance_fragment_wallet.text = bundle.getString(Constants.BALANCE)
         }
     }
 
+    fun getFragmentName(): String {
+        return mFragmentName
+    }
 }
