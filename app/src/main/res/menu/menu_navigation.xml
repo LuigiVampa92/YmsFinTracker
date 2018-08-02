@@ -6,17 +6,20 @@
         <item
             android:id="@+id/navigation_item_balance"
             android:icon="@drawable/ic_navigation_item_balance"
-            android:title="@string/text_navigation_item_balance"
-            />
+            android:title="@string/text_navigation_item_balance" />
+
+        <item
+            android:id="@+id/navigation_item_wallets"
+            android:icon="@drawable/ic_credit_card"
+            android:title="@string/text_navigation_item_wallets" />
+
         <item
             android:id="@+id/navigation_item_settings"
             android:icon="@drawable/ic_navigation_item_settings"
-            android:title="@string/text_navigation_item_settings"
-            />
+            android:title="@string/text_navigation_item_settings" />
         <item
             android:id="@+id/navigation_item_info"
             android:icon="@drawable/ic_navigation_item_info"
-            android:title="@string/text_navigation_item_info"
-            />
+            android:title="@string/text_navigation_item_info" />
     </group>
 </menu>

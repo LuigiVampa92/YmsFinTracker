@@ -10,6 +10,7 @@ import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentInfo
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentSettings
+import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallets
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ActivityMain : AppCompatActivity() {
@@ -29,7 +30,6 @@ class ActivityMain : AppCompatActivity() {
     private fun initComponents() {
         toolbar.setNavigationIcon(R.drawable.ic_dehaze)
         toolbar.title = resources.getString(R.string.finance_tracker)
-        toolbar.inflateMenu(R.menu.menu_toolbar)
         val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.description_navigation_drawer_open, R.string.description_navigation_drawer_close)
         drawer_layout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()
@@ -39,13 +39,6 @@ class ActivityMain : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener {
             drawer_layout.openDrawer(GravityCompat.START)
-        }
-
-        toolbar.setOnMenuItemClickListener {
-            if(it.itemId == R.id.action_add_wallet){
-                startActivity(Intent(this, ActivityWallets::class.java))
-            }
-             true
         }
 
         navigation_view.setNavigationItemSelectedListener {
@@ -60,7 +53,7 @@ class ActivityMain : AppCompatActivity() {
                     loadFragment(FragmentInfo())
                 }
                 else -> {
-                    loadFragment(FragmentBalance())
+                    loadFragment(FragmentWallets())
                 }
             }
             it.isChecked = true

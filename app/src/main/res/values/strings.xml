@@ -2,35 +2,8 @@
 
     <!--common-->
     <string name="app_name">FinTracker</string>
-    <string name="text_error_no_network">No network connection</string>
-    <string name="text_error_network">Network error</string>
-    <string name="text_error_data">Error retrieving data</string>
 
-    <!--navigation-->
-    <string name="text_navigation_menu_title">Oops</string>
-    <string name="text_navigation_item_balance">Balance</string>
-    <string name="text_navigation_item_settings">Settings</string>
-    <string name="text_navigation_item_info">About app</string>
-
-    <!--settings-->
-    <string name="text_settings_stub">App settings stub</string>
-
-    <!--info-->
-    <string name="text_info_about_app_general">Yandex summer mobile developer school 2018 homework</string>
-    <string name="text_info_about_app_author"><![CDATA[
-        Author: Pavel Vasiliev<br><br>
-        Email: <a href=\"mailto:luigivampa92@gmail.com\">luigivampa92@gmail.com</a><br>
-        VK: <a href=\"https://vk.com/luigivampa92\">luigivampa92</a><br>
-        TG: <a href=\"https://telegram.me/luigivampa92\">@luigivampa92</a><br>
-        ]]>
-    </string>
-    <string name="text_info_about_app_contacts">Author: Pavel Vasiliev\n\nContact:</string>
     <string name="text_info_about_app_email_subject">About Yandex mobile developer school app</string>
-    <string name="text_info_about_app_email_no_client">No email client found</string>
-
-    <!--balance-->
-    <string name="text_balance_description_usd">Current balance ( $ ) :</string>
-    <string name="text_balance_description_rur">Current balance ( \u20BD ) :</string>
 
     <!--add record-->
     <string name="text_operation_type_out">Expense</string>
@@ -74,4 +47,5 @@
     </string-array>
 
     <string name="formatted_date">%1$d.%2$d.%3$d</string>
+    <string name="text_navigation_item_wallets">Кошельки</string>
 </resources>

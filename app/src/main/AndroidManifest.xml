@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.ActivityAddRecord" />
-        <activity android:name=".view.activities.ActivityWallets"></activity>
     </application>
 
 </manifest>

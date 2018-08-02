@@ -5,6 +5,7 @@
     <color name="colorAccent">#008394</color>
 
     <color name="color_white">#ffffff</color>
+    <color name="backgroundColor">#ECEFF1</color>
 
     <color name="color_navigation_header">#a1887f</color>
     <color name="color_navigation_background">#bcaaa4</color>
