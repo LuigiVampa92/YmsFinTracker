@@ -6,7 +6,6 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "wallets")
 data class Wallet (
-        @PrimaryKey(autoGenerate = true) var id: Long?,
-        @ColumnInfo(name = "name") var name: String,
+        @PrimaryKey() var name: String,
         @ColumnInfo(name = "balance") var balance: Double
 )

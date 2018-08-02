@@ -1,6 +1,8 @@
 package com.luigivampa92.yms.fintracker.view.activities
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -18,6 +20,7 @@ import kotlinx.coroutines.experimental.launch
 class ActivityAddWallet : AppCompatActivity() {
 
     private lateinit var mViewModel: ViewModelAddWallet
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +32,14 @@ class ActivityAddWallet : AppCompatActivity() {
 
     override fun onBackPressed() {
         //Не позволяем перейти на главный экран, если нет кошельков
-        val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        if (sf.getString(Constants.CURRENT_WALLET, null) != null) {
+        if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) != null) {
             super.onBackPressed()
         }
     }
 
     private fun initComponents() {
+        mSharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+        mViewModel = ViewModelProviders.of(this).get(ViewModelAddWallet::class.java)
         currency_activity_add_wallet.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
@@ -45,7 +49,11 @@ class ActivityAddWallet : AppCompatActivity() {
         done_activity_add_wallet.setOnClickListener {
             if (name_activity_add_wallet.text.toString().isNotEmpty() &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
+                mViewModel.addWallet(Wallet(name_activity_add_wallet.text.toString(),
+                        balance_activity_add_wallet.text.toString().toDouble()))
 
+                mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, name_activity_add_wallet.text.toString()).apply()
+                finish()
             }
         }
 

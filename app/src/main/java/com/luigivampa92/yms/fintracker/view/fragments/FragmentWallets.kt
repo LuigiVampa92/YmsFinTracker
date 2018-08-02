@@ -1,5 +1,7 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +15,7 @@ import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelWallets
 import kotlinx.android.synthetic.main.fragment_wallets.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -20,6 +23,12 @@ import kotlinx.coroutines.experimental.launch
 class FragmentWallets : Fragment() {
 
     private lateinit var mWalletsAdapter: AdapterWallets
+    private lateinit var mViewModel: ViewModelWallets
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(ViewModelWallets::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_wallets, container, false)
@@ -30,24 +39,7 @@ class FragmentWallets : Fragment() {
 
         initComponents()
         initComponentsListeners()
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        launch {
-//            val wallets = database?.walletsDao()?.getAllWallets()
-//            launch(UI) {
-//                wallets?.forEach {
-//                    val fragment = FragmentWallet()
-//                    val bundle = Bundle()
-//                    bundle.putString(Constants.NAME, it.name)
-//                    bundle.putString(Constants.BALANCE, it.balance.toString())
-//                    fragment.arguments = bundle
-//                    mWalletsAdapter.addFragment(fragment)
-//                    mWalletsAdapter.notifyDataSetChanged()
-//                }
-//            }
-//        }
+        initComponentsObservers()
     }
 
     override fun onPause() {
@@ -67,6 +59,21 @@ class FragmentWallets : Fragment() {
         fab_fragment_wallets.setOnClickListener {
             startActivity(Intent(context, ActivityAddWallet::class.java))
         }
+
+    }
+
+    private fun initComponentsObservers() {
+        mViewModel.getWallets().observe(viewLifecycleOwner, Observer {
+            it?.forEach {
+                val fragment = FragmentWallet()
+                val bundle = Bundle()
+                bundle.putString(Constants.NAME, it.name)
+                bundle.putString(Constants.BALANCE, it.balance.toString())
+                fragment.arguments = bundle
+                mWalletsAdapter.addFragment(fragment)
+                mWalletsAdapter.notifyDataSetChanged()
+            }
+        })
 
     }
 
