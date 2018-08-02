@@ -40,5 +40,38 @@
     <string name="text_edit_hint_date">Date</string>
     <string name="add_wallet">Добавить Кошелек</string>
     <string name="finance_tracker">Трекер Финансов</string>
+    <string name="your_wallets">Ваши Кошельки</string>
+    <string name="name">Название</string>
+    <string name="category">Категория</string>
+    <string name="type">Тип</string>
+    <string name="expense">Трата</string>
+    <string name="income">Доход</string>
+    <string name="amount">Количество</string>
+    <string name="default_date">02.08.2018</string>
+    <string name="account">Кошелек</string>
+    <string name="add_record">Добавьте Запись</string>
+    <string name="pending_date">Дата Списания</string>
 
+
+    <string-array name="expenditure_categories">
+        <item>Еда</item>
+        <item>Одежда</item>
+        <item>Отдых</item>
+        <item>Спорт</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="income_categories">
+        <item>Зарплата</item>
+        <item>Долг</item>
+        <item>Взяточничество</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>RUB</item>
+    </string-array>
+
+    <string name="formatted_date">%1$d.%2$d.%3$d</string>
 </resources>

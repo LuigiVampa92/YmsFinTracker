@@ -3,9 +3,12 @@ package com.luigivampa92.yms.fintracker.model
 import java.util.*
 
 data class Record (
-        val amount: Double,
-        val expense: Boolean,
+        val name: String,
         val category: String,
-        val time: Date,
-        val account: Account
+        val expense: Boolean,
+        val amou: Double,
+        val currency: String,
+        val account: Account,
+        val date: Date,
+        val pending_date: Date
 )

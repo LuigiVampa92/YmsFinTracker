@@ -6,4 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".view.activities.ActivityAddRecord">
 
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_activity_add_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStartWithNavigation="0dp"
+        app:title="@string/add_record" />
+
+
+    <EditText
+        android:id="@+id/name_activity_add_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/name"
+        android:inputType="textPersonName|textCapWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_activity_add_record" />
+
+    <AutoCompleteTextView
+        android:id="@+id/category_activity_add_record"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/category"
+        android:inputType="textPersonName|textCapWords"
+        app:layout_constraintEnd_toStartOf="@+id/date_activity_add_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_activity_add_record" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/expense_activity_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:checked="false"
+        android:text="@string/income"
+        android:textColor="?android:textColorHint"
+        android:textSize="@dimen/regular_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/category_activity_add_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/date_activity_add_record"
+        app:layout_constraintTop_toBottomOf="@+id/name_activity_add_record" />
+
+
+    <EditText
+        android:id="@+id/amount_activity_add_record"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/amount"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/date_activity_add_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_activity_add_record" />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/currency_activity_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/expense_activity_add_record"
+        app:layout_constraintTop_toBottomOf="@+id/category_activity_add_record" />
+
+    <EditText
+        android:id="@+id/account_activity_add_record"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/account"
+        android:inputType="textPersonName|textCapWords"
+        app:layout_constraintEnd_toStartOf="@+id/date_activity_add_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_activity_add_record" />
+
+    <Button
+        android:id="@+id/date_activity_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/default_date"
+        android:textColor="?android:textColorHint"
+        android:textSize="@dimen/regular_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/account_activity_add_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_activity_add_record" />
+
+    <Button
+        android:id="@+id/pending_date_activity_add_record"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="?android:textColorHint"
+        android:textSize="@dimen/regular_text_size"
+        android:text="@string/pending_date"
+        app:layout_constraintEnd_toStartOf="@+id/date_activity_add_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_activity_add_record" />
+
+
 </android.support.constraint.ConstraintLayout>
