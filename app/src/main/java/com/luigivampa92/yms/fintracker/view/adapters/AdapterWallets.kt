@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallet
 
-class AdapterWallets(fm: FragmentManager): FragmentStatePagerAdapter(fm){
+class AdapterWallets(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val mFragments = mutableListOf<FragmentWallet>()
 
@@ -17,7 +17,7 @@ class AdapterWallets(fm: FragmentManager): FragmentStatePagerAdapter(fm){
         return mFragments.size
     }
 
-    fun addFragment(fragment: FragmentWallet){
+    fun addFragment(fragment: FragmentWallet) {
         mFragments.add(fragment)
     }
 }

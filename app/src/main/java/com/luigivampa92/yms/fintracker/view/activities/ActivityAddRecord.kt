@@ -47,6 +47,10 @@ class ActivityAddRecord : AppCompatActivity() {
             finish()
         }
 
+        done_activity_add_record.setOnClickListener {
+            //Pass data to db
+            finish()
+        }
 
         date_activity_add_record.setOnClickListener {
             val calendar = Calendar.getInstance()

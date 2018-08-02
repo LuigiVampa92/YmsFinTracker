@@ -1,11 +1,13 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
 import kotlinx.android.synthetic.main.fragment_wallets.*
 
@@ -24,7 +26,7 @@ class FragmentWallets : Fragment() {
         initComponentsListeners()
     }
 
-    private fun initComponents(){
+    private fun initComponents() {
         mWalletsAdapter = AdapterWallets(childFragmentManager)
         view_pager_fragment_wallets.adapter = mWalletsAdapter
 
@@ -32,10 +34,9 @@ class FragmentWallets : Fragment() {
         mWalletsAdapter.notifyDataSetChanged()
     }
 
-    private fun initComponentsListeners(){
+    private fun initComponentsListeners() {
         fab_fragment_wallets.setOnClickListener {
-            //Implement setting the selected wallet
-            fragmentManager?.popBackStack()
+            startActivity(Intent(context, ActivityAddWallet::class.java))
         }
     }
 }
