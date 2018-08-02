@@ -41,7 +41,8 @@ def versions = [
         constraintlayout: '1.1.2',
         moxy            : '1.5.3',
         room            : '1.1.1',
-        coroutines      : '0.24.0'
+        coroutines      : '0.24.0',
+        lifecycle: '1.1.1'
 ]
 
 def versionsTest = [
@@ -56,6 +57,9 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
     implementation "com.android.support:design:$support_version"
+
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
 
     implementation "android.arch.persistence.room:runtime:$versions.room"
     kapt "android.arch.persistence.room:compiler:$versions.room"

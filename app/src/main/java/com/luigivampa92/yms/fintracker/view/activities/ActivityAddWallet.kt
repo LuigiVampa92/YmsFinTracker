@@ -9,12 +9,15 @@ import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.isNumeric
 import com.luigivampa92.yms.fintracker.model.Wallet
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
 import kotlinx.android.synthetic.main.activity_add_record.*
 import kotlinx.android.synthetic.main.activity_add_wallet.*
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import kotlinx.coroutines.experimental.launch
 
 class ActivityAddWallet : AppCompatActivity() {
+
+    private lateinit var mViewModel: ViewModelAddWallet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +46,6 @@ class ActivityAddWallet : AppCompatActivity() {
             if (name_activity_add_wallet.text.toString().isNotEmpty() &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
 
-                val database = FinanceTrackerDatabase.getInstance(this)
-                launch {
-                    database?.walletsDao()?.addWallet(Wallet(null, "Wallet", 100.0))
-                }
-
-                finish()
             }
         }
 
