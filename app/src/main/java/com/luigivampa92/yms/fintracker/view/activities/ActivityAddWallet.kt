@@ -7,9 +7,11 @@ import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.isNumeric
 import com.luigivampa92.yms.fintracker.model.Wallet
 import kotlinx.android.synthetic.main.activity_add_record.*
 import kotlinx.android.synthetic.main.activity_add_wallet.*
+import kotlinx.android.synthetic.main.fragment_wallet.*
 import kotlinx.coroutines.experimental.launch
 
 class ActivityAddWallet : AppCompatActivity() {
@@ -23,8 +25,9 @@ class ActivityAddWallet : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        //Не позволяем перейти на главный экран, если нет кошельков
         val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        if(sf.getString(Constants.CURRENT_WALLET, null) != null){
+        if (sf.getString(Constants.CURRENT_WALLET, null) != null) {
             super.onBackPressed()
         }
     }
@@ -37,17 +40,20 @@ class ActivityAddWallet : AppCompatActivity() {
 
     private fun initComponentsListeners() {
         done_activity_add_wallet.setOnClickListener {
-            //pass data to db
-            val database = FinanceTrackerDatabase.getInstance(this)
-            launch {
-                database?.walletsDao()?.addWallet(Wallet(null, "Wallet", 100.0))
-            }
+            if (name_activity_add_wallet.text.toString().isNotEmpty() &&
+                    isNumeric(balance_activity_add_wallet.text.toString())) {
 
-            finish()
+                val database = FinanceTrackerDatabase.getInstance(this)
+                launch {
+                    database?.walletsDao()?.addWallet(Wallet(null, "Wallet", 100.0))
+                }
+
+                finish()
+            }
         }
 
         toolbar_activity_add_wallet.setOnClickListener {
-            finish()
+            super.onBackPressed()
         }
     }
 }

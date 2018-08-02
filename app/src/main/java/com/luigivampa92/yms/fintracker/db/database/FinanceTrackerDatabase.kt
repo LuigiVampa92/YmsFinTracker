@@ -4,7 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.luigivampa92.yms.fintracker.db.WalletsDao
+import com.luigivampa92.yms.fintracker.db.dao.WalletsDao
 import com.luigivampa92.yms.fintracker.model.Wallet
 
 @Database(entities = [(Wallet::class)], version = 1)

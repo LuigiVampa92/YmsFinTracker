@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker.db
+package com.luigivampa92.yms.fintracker.db.dao
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert

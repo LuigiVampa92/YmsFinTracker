@@ -34,8 +34,6 @@ class FragmentWallets : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val database = FinanceTrackerDatabase.getInstance(activity!!)
-        database?.clearAllTables()
 //        launch {
 //            val wallets = database?.walletsDao()?.getAllWallets()
 //            launch(UI) {
@@ -54,6 +52,7 @@ class FragmentWallets : Fragment() {
 
     override fun onPause() {
         super.onPause()
+        //На какой вьюхе во вью пейджере остановились, та и будет текущим кошельком
         val sf = context?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         sf?.edit()?.putString(Constants.CURRENT_WALLET, mWalletsAdapter.getWalletName())?.apply()
     }
