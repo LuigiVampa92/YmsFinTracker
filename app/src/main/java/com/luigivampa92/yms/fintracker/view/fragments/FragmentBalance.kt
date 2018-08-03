@@ -42,6 +42,7 @@ class FragmentBalance : Fragment() {
                     .title(R.string.create_wallet)
                     .content(R.string.create_wallet_message)
                     .positiveText(R.string.create_wallet_positive_text)
+                    .cancelable(false)
                     .negativeText(R.string.create_wallet_negative_text)
                     .onPositive(MaterialDialog.SingleButtonCallback { dialog, which ->
                         startActivity(Intent(context, ActivityAddWallet::class.java))

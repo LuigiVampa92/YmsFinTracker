@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/wallet_name_fragment_balance"
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Name: Wallet 1"
         android:textColor="@android:color/black"
         android:textSize="@dimen/headline_text_size"
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="125 USD"
         android:textColor="@android:color/holo_green_light"
         android:textSize="@dimen/sub_headline_text_size"
@@ -39,21 +40,26 @@
         android:id="@+id/wallet_balance_rub_fragment_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="125 RUB"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="@dimen/sub_headline_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_usd_fragment_balance" />
+        app:layout_constraintTop_toBottomOf="@+id/wallet_balance_usd_fragment_balance"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_fragment_balance"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_fragment_balance"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/wallet_balance_rub_fragment_balance"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:reverseLayout="true"
         app:stackFromEnd="true" />
 
