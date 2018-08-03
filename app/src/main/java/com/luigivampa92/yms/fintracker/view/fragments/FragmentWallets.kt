@@ -54,6 +54,9 @@ class FragmentWallets : Fragment() {
     private fun initComponents() {
         mWalletsAdapter = AdapterWallets(childFragmentManager)
         view_pager_fragment_wallets.adapter = mWalletsAdapter
+        view_pager_fragment_wallets.clipToPadding = false
+        view_pager_fragment_wallets.setPadding(80, 0, 80, 0)
+        view_pager_fragment_wallets.pageMargin = 20
     }
 
     private fun initComponentsListeners() {
@@ -65,12 +68,7 @@ class FragmentWallets : Fragment() {
     private fun initComponentsObservers() {
         mViewModel.getWallets().observe(viewLifecycleOwner, Observer { it ->
             it?.forEach {
-                val fragment = FragmentWallet()
-                val bundle = Bundle()
-                bundle.putString(Constants.NAME, it.name)
-                bundle.putString(Constants.BALANCE, it.balance.toString())
-                fragment.arguments = bundle
-                mWalletsAdapter.addFragment(fragment)
+                mWalletsAdapter.addFragment(it)
                 mWalletsAdapter.notifyDataSetChanged()
             }
         })
