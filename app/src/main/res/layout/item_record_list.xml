@@ -7,7 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:id="@+id/item_transactions_list_date"
+        android:id="@+id/item_records_list_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -23,7 +23,7 @@
 
 
     <TextView
-        android:id="@+id/item_transactions_list_value"
+        android:id="@+id/item_records_list_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -33,21 +33,21 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/headline_text_size"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_date"
+        app:layout_constraintTop_toBottomOf="@+id/item_records_list_date"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
-        android:id="@+id/item_transactions_list_category"
+        android:id="@+id/item_records_list_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_food"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_value" />
+        app:layout_constraintTop_toBottomOf="@+id/item_records_list_amount" />
 
     <TextView
-        android:id="@+id/item_transactions_list_name"
+        android:id="@+id/item_records_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -55,7 +55,7 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/regular_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_transactions_list_category"
-        app:layout_constraintTop_toBottomOf="@+id/item_transactions_list_value" />
+        app:layout_constraintStart_toEndOf="@+id/item_records_list_category"
+        app:layout_constraintTop_toBottomOf="@+id/item_records_list_amount" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,11 +1,8 @@
 package com.luigivampa92.yms.fintracker
 
+import android.widget.TextView
 import java.lang.Double.parseDouble
 import java.util.*
-import java.util.UUID.randomUUID
-import java.util.Collections.replaceAll
-
-
 
 
 fun isNumeric(string: String): Boolean {
@@ -20,6 +17,17 @@ fun isNumeric(string: String): Boolean {
 
 
 @Throws(Exception::class)
-fun createRecordId(): String {
+fun createId(): String {
     return UUID.randomUUID().toString().replace("-", "").toUpperCase()
+}
+
+fun hasText(vararg views: TextView): Boolean {
+    views.forEach {
+        if (getTextFromView(it).isEmpty()) return false
+    }
+    return true
+}
+
+fun getTextFromView(view: TextView): String {
+    return view.text.toString()
 }

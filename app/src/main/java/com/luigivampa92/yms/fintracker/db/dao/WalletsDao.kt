@@ -19,5 +19,5 @@ interface WalletsDao {
     fun addWallet(wallet: Wallet)
 
     @Query("DELETE from wallets")
-    fun deleteAll()
+    fun deleteAllWallets()
 }

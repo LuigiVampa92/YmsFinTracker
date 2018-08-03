@@ -5,18 +5,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
-import com.luigivampa92.yms.fintracker.Constants
-import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.createRecordId
-import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
-import com.luigivampa92.yms.fintracker.isNumeric
+import com.luigivampa92.yms.fintracker.*
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
-import kotlinx.android.synthetic.main.activity_add_record.*
 import kotlinx.android.synthetic.main.activity_add_wallet.*
-import kotlinx.android.synthetic.main.fragment_wallet.*
-import kotlinx.coroutines.experimental.launch
 
 class ActivityAddWallet : AppCompatActivity() {
 
@@ -40,18 +34,19 @@ class ActivityAddWallet : AppCompatActivity() {
     }
 
     private fun initComponentsListeners() {
+
         done_activity_add_wallet.setOnClickListener {
-            if (name_activity_add_wallet.text.toString().isNotEmpty() &&
+            if (hasText(name_activity_add_wallet) &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
 
-                mViewModel.addWallet(Wallet(createRecordId(), name_activity_add_wallet.text.toString(),
+                mViewModel.addWallet(Wallet(createId(), name_activity_add_wallet.text.toString(),
                         balance_activity_add_wallet.text.toString().toDouble()))
 
                 //Если кошелька по умолчанию нет, то кладем туда только что добавленный
-                if(mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null){
-                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, name_activity_add_wallet.text.toString()).apply()
+                if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null) {
+                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, getTextFromView(name_activity_add_wallet)).apply()
                 }
-                super.onBackPressed()
+                finish()
             }
         }
 

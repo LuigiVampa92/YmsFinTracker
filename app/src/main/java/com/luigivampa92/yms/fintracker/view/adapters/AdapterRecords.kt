@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.model.Record
+import kotlinx.android.synthetic.main.item_record_list.view.*
 
 
 class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
@@ -18,16 +19,16 @@ class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.bind(mRecordsList[position])
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return mRecordsList.size
     }
 
 
-    fun addAll(items: List<Record>) {
-        items.forEach {
+    fun addAll(items: List<Record>?) {
+        items?.forEach {
             mRecordsList.add(it)
             notifyItemInserted(mRecordsList.size - 1)
         }
@@ -35,6 +36,9 @@ class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(record: Record) {
+            itemView.item_records_list_name.text = record.name
+            itemView.item_records_list_date.text = record.date
+            itemView.item_records_list_amount.text = record.amount.toString()
         }
     }
 }

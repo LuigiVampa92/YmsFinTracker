@@ -47,19 +47,15 @@ class ActivityMain : AppCompatActivity() {
         navigation_view.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_item_balance -> {
-                    toolbar.title = resources.getString(R.string.finance_tracker)
                     loadFragment(FragmentBalance())
                 }
                 R.id.navigation_item_settings -> {
-                    toolbar.title = resources.getString(R.string.settings)
                     loadFragment(FragmentSettings())
                 }
                 R.id.navigation_item_info -> {
-                    toolbar.title = resources.getString(R.string.info)
                     loadFragment(FragmentInfo())
                 }
                 else -> {
-                    toolbar.title = resources.getString(R.string.wallets)
                     loadFragment(FragmentWallets())
                 }
             }

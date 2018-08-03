@@ -1,14 +1,18 @@
 package com.luigivampa92.yms.fintracker.model
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import java.util.*
 
-data class Record (
-        val name: String,
-        val category: String,
-        val expense: Boolean,
-        val amou: Double,
-        val currency: String,
-        val account: Wallet,
-        val date: Date,
-        val pending_date: Date
-)
+@Entity(tableName = "records")
+data class Record(
+        @PrimaryKey(autoGenerate = true) var id: Long = 0,
+        @ColumnInfo(name = "name") val name: String,
+        @ColumnInfo() val category: String,
+        @ColumnInfo() val income: Boolean,
+        @ColumnInfo() val amount: Double,
+        @ColumnInfo() val currency: String,
+        @ColumnInfo() val wallet: String,
+        @ColumnInfo() val date: String,
+        @ColumnInfo() val pending_date: String?)
