@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.ActivityAddRecord" />
-        <activity android:name=".view.activities.ActivityAddWallet"></activity>
+        <activity android:name=".view.activities.ActivityAddWallet" />
     </application>
 
 </manifest>

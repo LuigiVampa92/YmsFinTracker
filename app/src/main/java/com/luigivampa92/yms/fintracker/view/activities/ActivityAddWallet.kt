@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.createRecordId
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.isNumeric
 import com.luigivampa92.yms.fintracker.model.Wallet
@@ -30,13 +31,6 @@ class ActivityAddWallet : AppCompatActivity() {
         initComponentsListeners()
     }
 
-    override fun onBackPressed() {
-        //Не позволяем перейти на главный экран, если нет кошельков
-        if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) != null) {
-            super.onBackPressed()
-        }
-    }
-
     private fun initComponents() {
         mSharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mViewModel = ViewModelProviders.of(this).get(ViewModelAddWallet::class.java)
@@ -49,11 +43,15 @@ class ActivityAddWallet : AppCompatActivity() {
         done_activity_add_wallet.setOnClickListener {
             if (name_activity_add_wallet.text.toString().isNotEmpty() &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
-                mViewModel.addWallet(Wallet(name_activity_add_wallet.text.toString(),
+
+                mViewModel.addWallet(Wallet(createRecordId(), name_activity_add_wallet.text.toString(),
                         balance_activity_add_wallet.text.toString().toDouble()))
 
-                mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, name_activity_add_wallet.text.toString()).apply()
-                finish()
+                //Если кошелька по умолчанию нет, то кладем туда только что добавленный
+                if(mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null){
+                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, name_activity_add_wallet.text.toString()).apply()
+                }
+                super.onBackPressed()
             }
         }
 

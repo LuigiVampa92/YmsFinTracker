@@ -3,6 +3,7 @@ package com.luigivampa92.yms.fintracker.db.dao
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
@@ -14,7 +15,7 @@ interface WalletsDao {
     @Query("SELECT * from wallets")
     fun getAllWallets(): LiveData<List<Wallet>>
 
-    @Insert(onConflict = REPLACE)
+    @Insert()
     fun addWallet(wallet: Wallet)
 
     @Query("DELETE from wallets")

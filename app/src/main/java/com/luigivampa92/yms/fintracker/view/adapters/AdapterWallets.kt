@@ -24,7 +24,10 @@ class AdapterWallets(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         mFragments.add(fragment)
     }
 
-    fun getWalletName(): String {
-        return mFragments[mVisibleItemPosition].getFragmentName()
+    fun getWalletName(): String? {
+        if(mVisibleItemPosition > 0){
+            return mFragments[mVisibleItemPosition].getFragmentName()
+        }
+        return null
     }
 }

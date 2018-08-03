@@ -52,4 +52,8 @@
     <string name="settings">Настройки</string>
     <string name="info">О Приложении</string>
     <string name="wallets">Кошельки</string>
+    <string name="create_wallet">Создать Кошелек?</string>
+    <string name="create_wallet_message">Чтобы добавлять доходы и расходы, Вам необходимо создать кошелек.</string>
+    <string name="create_wallet_positive_text">Создать Кошелек</string>
+    <string name="create_wallet_negative_text">Позже</string>
 </resources>

@@ -42,7 +42,8 @@ def versions = [
         moxy            : '1.5.3',
         room            : '1.1.1',
         coroutines      : '0.24.0',
-        lifecycle: '1.1.1'
+        lifecycle: '1.1.1',
+        material_dialogs: '0.9.6.0'
 ]
 
 def versionsTest = [
@@ -60,6 +61,8 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
     kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
+
+    implementation "com.afollestad.material-dialogs:core:$versions.material_dialogs"
 
     implementation "android.arch.persistence.room:runtime:$versions.room"
     kapt "android.arch.persistence.room:compiler:$versions.room"

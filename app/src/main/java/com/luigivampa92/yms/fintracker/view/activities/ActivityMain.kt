@@ -26,11 +26,6 @@ class ActivityMain : AppCompatActivity() {
             loadFragmentWithoutBackStack(FragmentBalance())
         }
 
-        val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        if(sf.getString(Constants.CURRENT_WALLET, null) == null){
-            startActivity(Intent(this, ActivityAddWallet::class.java))
-        }
-
         initComponents()
         initComponentsListeners()
     }

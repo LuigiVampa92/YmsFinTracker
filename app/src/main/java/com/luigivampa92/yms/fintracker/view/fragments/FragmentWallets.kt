@@ -55,15 +55,13 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponentsListeners() {
-
         fab_fragment_wallets.setOnClickListener {
             startActivity(Intent(context, ActivityAddWallet::class.java))
         }
-
     }
 
     private fun initComponentsObservers() {
-        mViewModel.getWallets().observe(viewLifecycleOwner, Observer {
+        mViewModel.getWallets().observe(viewLifecycleOwner, Observer { it ->
             it?.forEach {
                 val fragment = FragmentWallet()
                 val bundle = Bundle()
@@ -76,5 +74,4 @@ class FragmentWallets : Fragment() {
         })
 
     }
-
 }
