@@ -42,21 +42,12 @@ class FragmentWallets : Fragment() {
         initComponentsObservers()
     }
 
-    override fun onPause() {
-        super.onPause()
-        //На какой вьюхе во вью пейджере остановились, та и будет текущим кошельком
-        val sf = context?.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        if(mWalletsAdapter.getWalletName() != null){
-            sf?.edit()?.putString(Constants.CURRENT_WALLET, mWalletsAdapter.getWalletName())?.apply()
-        }
-    }
-
     private fun initComponents() {
         mWalletsAdapter = AdapterWallets(childFragmentManager)
         view_pager_fragment_wallets.adapter = mWalletsAdapter
         view_pager_fragment_wallets.clipToPadding = false
-        view_pager_fragment_wallets.setPadding(80, 0, 80, 0)
-        view_pager_fragment_wallets.pageMargin = 20
+        view_pager_fragment_wallets.setPadding(50, 0, 50, 0)
+        view_pager_fragment_wallets.pageMargin = 30
     }
 
     private fun initComponentsListeners() {

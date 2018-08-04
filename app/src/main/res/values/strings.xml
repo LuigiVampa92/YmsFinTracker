@@ -58,4 +58,6 @@
     <string name="create_wallet_negative_text">Позже</string>
     <string name="date">Дата</string>
     <string name="price">Стоимость</string>
+    <string name="make_current">Сделать Основным</string>
+    <string name="primary">Основной</string>
 </resources>

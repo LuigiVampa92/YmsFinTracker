@@ -13,10 +13,10 @@ class ViewModelRecords(application: Application) : AndroidViewModel(application)
     private var mRecords: LiveData<List<Record>> = MutableLiveData()
     private val mApplication = application
 
-    fun getRecordsFromWallet(walletName: String): LiveData<List<Record>> {
+    fun getRecordsFromWallet(walletId: String): LiveData<List<Record>> {
         val database = FinanceTrackerDatabase.getInstance(mApplication)
-        if (database?.recordsDao()?.getAllRecordsFromWallet(walletName) != null) {
-            mRecords = database.recordsDao().getAllRecordsFromWallet(walletName)
+        if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
+            mRecords = database.recordsDao().getAllRecordsFromWallet(walletId)
         }
         return mRecords
     }

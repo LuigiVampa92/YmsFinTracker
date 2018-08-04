@@ -10,12 +10,10 @@ import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallet
 
 class AdapterWallets(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private var mVisibleItemPosition = -1
     private val mFragments = mutableListOf<FragmentWallet>()
     private val mWallets = mutableListOf<Wallet>()
 
     override fun getItem(p0: Int): Fragment {
-        mVisibleItemPosition = p0
         return mFragments[p0]
     }
 
@@ -25,8 +23,10 @@ class AdapterWallets(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     fun addFragment(wallet: Wallet) {
         if (!contains(wallet)) {
+            mWallets.add(wallet)
             val fragment = FragmentWallet()
             val bundle = Bundle()
+            bundle.putString(Constants.ID, wallet.id)
             bundle.putString(Constants.NAME, wallet.name)
             bundle.putString(Constants.BALANCE, wallet.balance.toString())
             fragment.arguments = bundle
@@ -34,16 +34,11 @@ class AdapterWallets(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         }
     }
 
-    fun getWalletName(): String? {
-        if (mVisibleItemPosition >= 0) {
-            return mFragments[mVisibleItemPosition].getFragmentName()
-        }
-        return null
-    }
-
     fun contains(wallet: Wallet): Boolean {
         mWallets.forEach {
-            if (it.id == wallet.id) return true
+            if (it.id == wallet.id) {
+                return true
+            }
         }
         return false
     }

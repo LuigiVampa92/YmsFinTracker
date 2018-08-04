@@ -13,6 +13,6 @@ data class Record(
         @ColumnInfo() val income: Boolean,
         @ColumnInfo() val amount: Double,
         @ColumnInfo() val currency: String,
-        @ColumnInfo() val wallet: String,
+        @ColumnInfo() val wallet_id: String,
         @ColumnInfo() val date: String,
         @ColumnInfo() val pending_date: String?)

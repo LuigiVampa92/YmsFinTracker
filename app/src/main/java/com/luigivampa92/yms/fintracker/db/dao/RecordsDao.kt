@@ -10,8 +10,8 @@ import com.luigivampa92.yms.fintracker.model.Wallet
 @Dao
 interface RecordsDao {
 
-    @Query("SELECT * from records WHERE wallet = :walletName")
-    fun getAllRecordsFromWallet(walletName: String): LiveData<List<Record>>
+    @Query("SELECT * from records WHERE wallet_id = :walletId")
+    fun getAllRecordsFromWallet(walletId: String): LiveData<List<Record>>
 
     @Insert()
     fun addRecord(record: Record)

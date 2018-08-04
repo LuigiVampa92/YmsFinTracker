@@ -79,9 +79,9 @@ class FragmentBalance : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
     private fun initComponentsObservers() {
         val sf = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        val walletName = sf.getString(Constants.CURRENT_WALLET, null)
-        if (walletName != null) {
-            mViewModel.getRecordsFromWallet(walletName).observe(viewLifecycleOwner, Observer {
+        val walletId = sf.getString(Constants.CURRENT_WALLET, null)
+        if (walletId != null) {
+            mViewModel.getRecordsFromWallet(walletId).observe(viewLifecycleOwner, Observer {
                 mAdapterRecords.addAll(it)
             })
         }

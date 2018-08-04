@@ -39,12 +39,13 @@ class ActivityAddWallet : AppCompatActivity() {
             if (hasText(name_activity_add_wallet) &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
 
-                mViewModel.addWallet(Wallet(createId(), name_activity_add_wallet.text.toString(),
+                val walletId = createId()
+                mViewModel.addWallet(Wallet(walletId, name_activity_add_wallet.text.toString(),
                         balance_activity_add_wallet.text.toString().toDouble()))
 
                 //Если кошелька по умолчанию нет, то кладем туда только что добавленный
                 if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null) {
-                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, getTextFromView(name_activity_add_wallet)).apply()
+                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, walletId).apply()
                 }
                 finish()
             }
