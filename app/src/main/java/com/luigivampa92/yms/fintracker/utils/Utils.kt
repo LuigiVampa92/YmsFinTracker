@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker
+package com.luigivampa92.yms.fintracker.utils
 
 import android.widget.TextView
 import java.lang.Double.parseDouble

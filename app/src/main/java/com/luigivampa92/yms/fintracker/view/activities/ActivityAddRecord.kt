@@ -5,12 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.getTextFromView
-import com.luigivampa92.yms.fintracker.hasText
+import com.luigivampa92.yms.fintracker.utils.getTextFromView
+import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddRecord
 import kotlinx.android.synthetic.main.activity_add_record.*
@@ -95,15 +94,6 @@ class ActivityAddRecord : AppCompatActivity() {
                         sf.getString(Constants.CURRENT_WALLET, "No"),
                         getTextFromView(date_activity_add_record),
                         getTextFromView(pending_date_label_activity_add_record)))
-                Log.d("Object", Record(0,
-                        getTextFromView(name_activity_add_record),
-                        getTextFromView(category_activity_add_record),
-                        income_activity_add_record.isChecked,
-                        getTextFromView(amount_activity_add_record).toDouble(),
-                        currency_activity_add_record.selectedItem.toString(),
-                        sf.getString(Constants.CURRENT_WALLET, "No"),
-                        getTextFromView(date_activity_add_record),
-                        getTextFromView(pending_date_label_activity_add_record)).toString())
                 finish()
             }
         }

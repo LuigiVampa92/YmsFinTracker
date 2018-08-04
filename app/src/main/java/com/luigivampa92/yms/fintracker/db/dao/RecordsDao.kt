@@ -13,9 +13,6 @@ interface RecordsDao {
     @Query("SELECT * from records WHERE wallet_id = :walletId")
     fun getAllRecordsFromWallet(walletId: String): LiveData<List<Record>>
 
-    @Query("SELECT * from wallets WHERE id = :walletId")
-    fun getWallet(walletId: String): LiveData<Wallet>
-
     @Insert()
     fun addRecord(record: Record)
 

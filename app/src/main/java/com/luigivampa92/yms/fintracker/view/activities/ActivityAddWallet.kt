@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.*
 import com.luigivampa92.yms.fintracker.model.Wallet
+import com.luigivampa92.yms.fintracker.utils.createId
+import com.luigivampa92.yms.fintracker.utils.hasText
+import com.luigivampa92.yms.fintracker.utils.isNumeric
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
 import kotlinx.android.synthetic.main.activity_add_wallet.*
 

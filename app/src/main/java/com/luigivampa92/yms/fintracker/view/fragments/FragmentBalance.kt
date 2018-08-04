@@ -1,35 +1,37 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import com.afollestad.materialdialogs.MaterialDialog
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
-import com.luigivampa92.yms.fintracker.formatDecimalNumber
+import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
+import com.luigivampa92.yms.fintracker.utils.getCurrencies
+import com.luigivampa92.yms.fintracker.utils.saveCurrencies
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecords
 import kotlinx.android.synthetic.main.fragment_balance.*
 
-class FragmentBalance : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class FragmentBalance : Fragment() {
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
     private lateinit var mViewModel: ViewModelRecords
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        saveCurrencies(getCurrencies(), activity!!.application)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_balance, container, false)
@@ -40,10 +42,6 @@ class FragmentBalance : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
 
         initComponents()
         initComponentsListeners()
-        initComponentsObservers()
-    }
-
-    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
         initComponentsObservers()
     }
 

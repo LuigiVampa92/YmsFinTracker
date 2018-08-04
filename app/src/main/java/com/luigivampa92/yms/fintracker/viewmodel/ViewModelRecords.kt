@@ -22,10 +22,10 @@ class ViewModelRecords(application: Application) : AndroidViewModel(application)
         return mRecords
     }
 
-    fun getWallet(walletId: String): LiveData<Wallet>{
+    fun getWallet(walletId: String): LiveData<Wallet> {
         val database = FinanceTrackerDatabase.getInstance(mApplication)
         if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
-            mWallet = database.recordsDao().getWallet(walletId)
+            mWallet = database.walletsDao().getWallet(walletId)
         }
         return mWallet
     }

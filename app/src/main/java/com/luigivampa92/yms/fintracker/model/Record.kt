@@ -8,7 +8,7 @@ import java.util.*
 @Entity(tableName = "records")
 data class Record(
         @PrimaryKey(autoGenerate = true) var id: Long = 0,
-        @ColumnInfo(name = "name") val name: String,
+        @ColumnInfo() val name: String,
         @ColumnInfo() val category: String,
         @ColumnInfo() val income: Boolean,
         @ColumnInfo() val amount: Double,
