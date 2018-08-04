@@ -29,9 +29,18 @@ class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
 
     fun addAll(items: List<Record>?) {
         items?.forEach {
-            mRecordsList.add(it)
-            notifyItemInserted(mRecordsList.size - 1)
+            if (!contains(it)) {
+                mRecordsList.add(it)
+                notifyItemInserted(mRecordsList.size - 1)
+            }
         }
+    }
+
+    private fun contains(record: Record): Boolean {
+        mRecordsList.forEach {
+            if (it.id == record.id) return true
+        }
+        return false
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

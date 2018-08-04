@@ -2,6 +2,7 @@ package com.luigivampa92.yms.fintracker
 
 import android.widget.TextView
 import java.lang.Double.parseDouble
+import java.text.DecimalFormat
 import java.util.*
 
 
@@ -30,4 +31,8 @@ fun hasText(vararg views: TextView): Boolean {
 
 fun getTextFromView(view: TextView): String {
     return view.text.toString()
+}
+
+fun formatDecimalNumber(value: Double): String {
+    return DecimalFormat("0.00").format(value)
 }

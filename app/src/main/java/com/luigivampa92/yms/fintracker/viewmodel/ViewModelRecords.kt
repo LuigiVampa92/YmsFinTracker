@@ -11,6 +11,7 @@ import com.luigivampa92.yms.fintracker.model.Wallet
 class ViewModelRecords(application: Application) : AndroidViewModel(application) {
 
     private var mRecords: LiveData<List<Record>> = MutableLiveData()
+    private var mWallet: LiveData<Wallet> = MutableLiveData()
     private val mApplication = application
 
     fun getRecordsFromWallet(walletId: String): LiveData<List<Record>> {
@@ -19,5 +20,13 @@ class ViewModelRecords(application: Application) : AndroidViewModel(application)
             mRecords = database.recordsDao().getAllRecordsFromWallet(walletId)
         }
         return mRecords
+    }
+
+    fun getWallet(walletId: String): LiveData<Wallet>{
+        val database = FinanceTrackerDatabase.getInstance(mApplication)
+        if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
+            mWallet = database.recordsDao().getWallet(walletId)
+        }
+        return mWallet
     }
 }

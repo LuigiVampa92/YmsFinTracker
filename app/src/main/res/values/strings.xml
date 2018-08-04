@@ -47,6 +47,10 @@
     </string-array>
 
     <string name="formatted_date">%1$d.%2$d.%3$d</string>
+    <string name="formatted_wallet_name">Кошелек: %1$s</string>
+    <string name="formatted_balance_usd">Текущий Баланс: %1$s USD</string>
+    <string name="formatted_balance_rub">Текущий Баланс: %1$s RUB</string>
+
     <string name="text_navigation_item_wallets">Кошельки</string>
     <string name="balance">Баланс</string>
     <string name="settings">Настройки</string>

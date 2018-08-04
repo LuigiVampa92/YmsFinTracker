@@ -19,5 +19,4 @@ class ViewModelWallets(application: Application) : AndroidViewModel(application)
         }
         return mWallets
     }
-
 }

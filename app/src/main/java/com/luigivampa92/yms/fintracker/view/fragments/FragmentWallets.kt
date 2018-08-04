@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
@@ -43,11 +45,9 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponents() {
-        mWalletsAdapter = AdapterWallets(childFragmentManager)
-        view_pager_fragment_wallets.adapter = mWalletsAdapter
-        view_pager_fragment_wallets.clipToPadding = false
-        view_pager_fragment_wallets.setPadding(50, 0, 50, 0)
-        view_pager_fragment_wallets.pageMargin = 30
+        mWalletsAdapter = AdapterWallets()
+        recycler_fragment_wallets.adapter = mWalletsAdapter
+        recycler_fragment_wallets.layoutManager = LinearLayoutManager(context)
     }
 
     private fun initComponentsListeners() {
@@ -58,10 +58,7 @@ class FragmentWallets : Fragment() {
 
     private fun initComponentsObservers() {
         mViewModel.getWallets().observe(viewLifecycleOwner, Observer { it ->
-            it?.forEach {
-                mWalletsAdapter.addFragment(it)
-                mWalletsAdapter.notifyDataSetChanged()
-            }
+            mWalletsAdapter.addAll(it)
         })
 
     }

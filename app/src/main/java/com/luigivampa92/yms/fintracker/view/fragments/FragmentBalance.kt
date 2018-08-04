@@ -17,6 +17,8 @@ import android.widget.Adapter
 import com.afollestad.materialdialogs.MaterialDialog
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
+import com.luigivampa92.yms.fintracker.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
@@ -83,6 +85,13 @@ class FragmentBalance : Fragment(), SharedPreferences.OnSharedPreferenceChangeLi
         if (walletId != null) {
             mViewModel.getRecordsFromWallet(walletId).observe(viewLifecycleOwner, Observer {
                 mAdapterRecords.addAll(it)
+            })
+            mViewModel.getWallet(walletId).observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    wallet_name_fragment_balance.text = context?.getString(R.string.formatted_wallet_name, it.name)
+                    wallet_balance_usd_fragment_balance.text = context?.getString(R.string.formatted_balance_usd, formatDecimalNumber(it.balance))
+                    wallet_balance_rub_fragment_balance.text = context?.getString(R.string.formatted_balance_rub, formatDecimalNumber(CurrencyConverter.convertToRoubles(it.balance)))
+                }
             })
         }
 
