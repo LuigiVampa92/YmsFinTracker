@@ -22,6 +22,7 @@ class ActivityMain : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fetchCurrencies(application)
+        //Потом будет использоваться
         getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putString(Constants.SECONDARY_CURRENCY, "RUB").apply()
         if (savedInstanceState == null) {
             loadFragmentWithoutBackStack(FragmentBalance())

@@ -69,7 +69,7 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
             itemView.name_item_wallets_list.text = wallet.name
             itemView.balance_item_wallets_list.text = formatDecimalNumber(wallet.balance)
             itemView.balance_secondary_item_wallets_list.text = formatDecimalNumber(CurrencyConverter.convertCurrency(
-                    "USD", wallet.balance, wallet.currency))
+                    "USD", wallet.balance, itemView.context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.SECONDARY_CURRENCY, "RUB")))
         }
 
     }
