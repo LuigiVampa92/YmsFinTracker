@@ -40,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:hint="@string/balance"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/currency_activity_add_wallet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_activity_add_wallet" />

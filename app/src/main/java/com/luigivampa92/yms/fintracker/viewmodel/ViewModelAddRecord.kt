@@ -4,11 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
-import com.luigivampa92.yms.fintracker.model.Wallet
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 
 class ViewModelAddRecord(application: Application) : AndroidViewModel(application) {
 
@@ -20,9 +16,11 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun updateWallet(walletId: String, record: Record){
+    fun updateWallet(walletId: String, balance: Double){
         launch {
-            val wallet = FinanceTrackerDatabase.getInstance(mApplication)?.walletsDao()?.getWalletObject(walletId)
+            val database = FinanceTrackerDatabase.getInstance(mApplication)
+            database?.walletsDao()?.updateWalletBalance(walletId, balance)
         }
     }
+
 }

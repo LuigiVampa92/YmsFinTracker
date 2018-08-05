@@ -1,7 +1,6 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -28,7 +27,7 @@ class FragmentWallet : Fragment() {
     }
 
     private fun initComponents(bundle: Bundle?) {
-        mCurrentWalletID = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.CURRENT_WALLET, null)
+        mCurrentWalletID = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.CURRENT_WALLET_ID, null)
         if (bundle != null) {
             mFragmentId = bundle.getString(Constants.ID)
             name_fragment_wallet.text = bundle.getString(Constants.NAME)
@@ -42,7 +41,7 @@ class FragmentWallet : Fragment() {
     private fun initComponentsListeners(){
         make_current_fragment_wallet.setOnClickListener {
             val sf = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-            sf.edit().putString(Constants.CURRENT_WALLET, mFragmentId).apply()
+            sf.edit().putString(Constants.CURRENT_WALLET_ID, mFragmentId).apply()
             current_fragment_wallet.text = resources.getString(R.string.primary)
         }
     }

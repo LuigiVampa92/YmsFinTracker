@@ -5,9 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import java.lang.Double.parseDouble
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
@@ -81,19 +83,37 @@ class ActivityAddRecord : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        done_activity_add_record.setOnClickListener {
+        done_activity_add_record.setOnClickListener { _ ->
             if (hasText(name_activity_add_record, category_activity_add_record,
                             amount_activity_add_record)) {
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-                mViewModel.addRecord(Record(0,
-                        getTextFromView(name_activity_add_record),
-                        getTextFromView(category_activity_add_record),
-                        income_activity_add_record.isChecked,
-                        getTextFromView(amount_activity_add_record).toDouble(),
-                        currency_activity_add_record.selectedItem.toString(),
-                        sf.getString(Constants.CURRENT_WALLET, "No"),
-                        getTextFromView(date_activity_add_record),
-                        getTextFromView(pending_date_label_activity_add_record)))
+                val name = getTextFromView(name_activity_add_record)
+                val category = getTextFromView(category_activity_add_record)
+                val income = income_activity_add_record.isChecked
+                var amount = getTextFromView(amount_activity_add_record).toDouble()
+                val currency = currency_activity_add_record.selectedItem.toString()
+                val walletId = sf.getString(Constants.CURRENT_WALLET_ID, "DEFAULT")
+                val date = getTextFromView(date_activity_add_record)
+                val pendingDate = getTextFromView(pending_date_activity_add_record)
+
+                if (!income) amount = -amount
+
+                val record = Record(0,
+                        name,
+                        category,
+                        income,
+                        amount,
+                        currency,
+                        walletId,
+                        date,
+                        pendingDate)
+
+                mViewModel.addRecord(record)
+                //Перед обновлением баланса выбранного кошелька, переводим "ценность" записи в $
+                val walletBalance = parseDouble(sf.getString(Constants.CURRENT_WALLET_BALANCE, null)) +
+                        CurrencyConverter.convertCurrency(currency, amount, "USD")
+                mViewModel.updateWallet(walletId, walletBalance)
+                sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, walletBalance.toString()).apply()
                 finish()
             }
         }

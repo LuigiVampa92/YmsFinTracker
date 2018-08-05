@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.Wallet
-import kotlinx.android.synthetic.main.item_record_list.view.*
+import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import kotlinx.android.synthetic.main.item_wallets_list.view.*
 
 
@@ -26,7 +26,7 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sf = holder.itemView.context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        if (sf.getString(Constants.CURRENT_WALLET, null) == mWalletsList[position].id) {
+        if (sf.getString(Constants.CURRENT_WALLET_ID, null) == mWalletsList[position].id) {
             holder.itemView.layout_item_wallets_list.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_orange_light))
             mColoredItemPosition = position
         } else {
@@ -36,7 +36,8 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
         holder.itemView.setOnClickListener {
             it.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_orange_light))
-            sf.edit().putString(Constants.CURRENT_WALLET, mWalletsList[position].id).apply()
+            sf.edit().putString(Constants.CURRENT_WALLET_ID, mWalletsList[position].id).apply()
+            sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, mWalletsList[position].balance.toString()).apply()
             notifyItemChanged(position)
             notifyItemChanged(mColoredItemPosition)
         }
@@ -66,7 +67,9 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
         fun bind(wallet: Wallet) {
             itemView.name_item_wallets_list.text = wallet.name
-            itemView.balance_item_wallets_list.text = wallet.balance.toString()
+            itemView.balance_item_wallets_list.text = formatDecimalNumber(wallet.balance)
+            itemView.balance_secondary_item_wallets_list.text = formatDecimalNumber(CurrencyConverter.convertCurrency(
+                    "USD", wallet.balance, wallet.currency))
         }
 
     }

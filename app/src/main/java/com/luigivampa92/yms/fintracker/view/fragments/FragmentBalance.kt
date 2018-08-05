@@ -15,8 +15,6 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
-import com.luigivampa92.yms.fintracker.utils.getCurrencies
-import com.luigivampa92.yms.fintracker.utils.saveCurrencies
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
@@ -24,14 +22,10 @@ import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecords
 import kotlinx.android.synthetic.main.fragment_balance.*
 
 class FragmentBalance : Fragment() {
+
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
     private lateinit var mViewModel: ViewModelRecords
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        saveCurrencies(getCurrencies(), activity!!.application)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_balance, container, false)
@@ -42,6 +36,10 @@ class FragmentBalance : Fragment() {
 
         initComponents()
         initComponentsListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
         initComponentsObservers()
     }
 
@@ -55,7 +53,7 @@ class FragmentBalance : Fragment() {
     private fun initComponentsListeners() {
 
         fab_fragment_balance.setOnClickListener {
-            if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null) {
+            if (mSharedPreferences.getString(Constants.CURRENT_WALLET_ID, null) == null) {
                 MaterialDialog.Builder(context!!)
                         .title(R.string.create_wallet)
                         .content(R.string.create_wallet_message)
@@ -79,7 +77,7 @@ class FragmentBalance : Fragment() {
 
     private fun initComponentsObservers() {
         val sf = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        val walletId = sf.getString(Constants.CURRENT_WALLET, null)
+        val walletId = sf.getString(Constants.CURRENT_WALLET_ID, null)
         if (walletId != null) {
             mViewModel.getRecordsFromWallet(walletId).observe(viewLifecycleOwner, Observer {
                 mAdapterRecords.addAll(it)
@@ -87,8 +85,11 @@ class FragmentBalance : Fragment() {
             mViewModel.getWallet(walletId).observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     wallet_name_fragment_balance.text = context?.getString(R.string.formatted_wallet_name, it.name)
-                    wallet_balance_usd_fragment_balance.text = context?.getString(R.string.formatted_balance_usd, formatDecimalNumber(it.balance))
-                    wallet_balance_rub_fragment_balance.text = context?.getString(R.string.formatted_balance_rub, formatDecimalNumber(CurrencyConverter.convertToRoubles(it.balance)))
+                    wallet_balance_usd_fragment_balance.text = context?.getString(R.string.formatted_balance_usd,
+                            formatDecimalNumber(it.balance))
+                    //Всегда из USD конвертируем т.к. дефолтная валюта - доллары
+                    wallet_balance_rub_fragment_balance.text = context?.getString(R.string.formatted_balance_rub,
+                            formatDecimalNumber(CurrencyConverter.convertCurrency("USD", it.balance, sf.getString(Constants.SECONDARY_CURRENCY, "RUB"))))
                 }
             })
         }

@@ -1,15 +1,19 @@
 package com.luigivampa92.yms.fintracker.utils
 
+import android.app.Application
+import com.luigivampa92.yms.fintracker.calculations.Currencies
+import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Currency
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
-fun getCurrencies(): MutableList<Currency> {
+fun fetchCurrencies(application: Application) {
+    val API_KEY = "3be78471808493901286fa1c7e22266d"
+    val database = FinanceTrackerDatabase.getInstance(application)
     val client = OkHttpClient()
-    val url = "http://www.apilayer.net/api/live?access_key=3be78471808493901286fa1c7e22266d&format=1"
+    val url = "http://www.apilayer.net/api/live?access_key=$API_KEY&format=1"
     val request = Request.Builder().url(url).build()
-    val currencies: MutableList<Currency> = mutableListOf()
     try {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -23,7 +27,8 @@ fun getCurrencies(): MutableList<Currency> {
                     for (i in 0 until keys.length()) {
                         val key = keys.get(i).toString()
                         val value = data.getString(key)
-                        currencies.add(Currency(0, key.substring(3), value.toDouble()))
+                        Currencies.currencies.add(Currency(0, key.substring(3), value.toDouble()))
+                        database?.currenciesDao()?.addCurrency(Currency(0, key.substring(3), value.toDouble()))
                     }
 
                 }
@@ -33,5 +38,4 @@ fun getCurrencies(): MutableList<Currency> {
     } catch (e: Exception) {
         e.printStackTrace()
     }
-    return currencies
 }

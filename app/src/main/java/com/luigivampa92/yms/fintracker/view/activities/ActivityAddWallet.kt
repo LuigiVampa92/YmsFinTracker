@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.*
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.utils.createId
+import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.utils.isNumeric
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
@@ -17,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_add_wallet.*
 class ActivityAddWallet : AppCompatActivity() {
 
     private lateinit var mViewModel: ViewModelAddWallet
-    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,6 @@ class ActivityAddWallet : AppCompatActivity() {
     }
 
     private fun initComponents() {
-        mSharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mViewModel = ViewModelProviders.of(this).get(ViewModelAddWallet::class.java)
         currency_activity_add_wallet.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
@@ -37,18 +37,32 @@ class ActivityAddWallet : AppCompatActivity() {
 
     private fun initComponentsListeners() {
 
-        done_activity_add_wallet.setOnClickListener {
+        done_activity_add_wallet.setOnClickListener { _ ->
             if (hasText(name_activity_add_wallet) &&
                     isNumeric(balance_activity_add_wallet.text.toString())) {
 
+                //Всегда конвертируем в доллары
                 val walletId = createId()
-                mViewModel.addWallet(Wallet(walletId, name_activity_add_wallet.text.toString(),
-                        balance_activity_add_wallet.text.toString().toDouble()))
+                val walletName = getTextFromView(name_activity_add_wallet)
+                val walletCurrency = currency_activity_add_wallet.selectedItem.toString()
+                val walletBalance = CurrencyConverter.convertCurrency(
+                        walletCurrency,
+                        getTextFromView(balance_activity_add_wallet).toDouble(),
+                        "USD"
+                )
 
-                //Если кошелька по умолчанию нет, то кладем туда только что добавленный
-                if (mSharedPreferences.getString(Constants.CURRENT_WALLET, null) == null) {
-                    mSharedPreferences.edit().putString(Constants.CURRENT_WALLET, walletId).apply()
+                mViewModel.addWallet(Wallet(
+                        walletId, walletName, walletBalance, walletCurrency
+                ))
+
+
+                //Если кошельков не было, то добавляем этот как дефолтный
+                val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+                if (sf.getString(Constants.CURRENT_WALLET_ID, null) == null) {
+                    sf.edit().putString(Constants.CURRENT_WALLET_ID, walletId).apply()
+                    sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, walletBalance.toString()).apply()
                 }
+
                 finish()
             }
         }
