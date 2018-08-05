@@ -23,7 +23,7 @@
     <string name="default_date">02.08.2018</string>
     <string name="account">Кошелек</string>
     <string name="add_record">Добавьте Запись</string>
-    <string name="pending_date">Дата Списания</string>
+    <string name="pending_date">Списание (Месяцы)</string>
 
 
     <string-array name="expenditure_categories">
@@ -64,4 +64,6 @@
     <string name="price">Стоимость</string>
     <string name="make_current">Сделать Основным</string>
     <string name="primary">Основной</string>
+    <string name="pending_date_weeks">Списание (Недели)</string>
+    <string name="repeat">Повторять</string>
 </resources>
