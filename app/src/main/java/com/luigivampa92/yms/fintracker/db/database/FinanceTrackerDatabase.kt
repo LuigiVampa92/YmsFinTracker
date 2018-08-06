@@ -19,6 +19,7 @@ abstract class FinanceTrackerDatabase : RoomDatabase() {
     abstract fun currenciesDao(): CurrenciesDao
 
     companion object {
+        var TEST_MODE = false
         private var INSTANCE: FinanceTrackerDatabase? = null
 
         fun getInstance(context: Context): FinanceTrackerDatabase?{
