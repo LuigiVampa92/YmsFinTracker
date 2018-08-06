@@ -1,11 +1,12 @@
 package com.luigivampa92.yms.fintracker.calculations
 
 import com.luigivampa92.yms.fintracker.model.Currency
+import com.luigivampa92.yms.fintracker.utils.loadJsonFromAssets
+import kotlinx.coroutines.experimental.launch
 
 object Currencies {
 
     val currencies = mutableListOf<Currency>()
-
     //to dollar
     fun getCurrencyRatio(currencyName: String): Double {
         currencies.forEach {
@@ -13,4 +14,5 @@ object Currencies {
         }
         return 62.5
     }
+
 }

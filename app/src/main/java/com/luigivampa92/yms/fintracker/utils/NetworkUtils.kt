@@ -1,12 +1,20 @@
 package com.luigivampa92.yms.fintracker.utils
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.support.constraint.Constraints
+import android.util.Log
+import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.Currencies
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Currency
 import okhttp3.*
 import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 fun fetchCurrencies(application: Application) {
     val API_KEY = "3be78471808493901286fa1c7e22266d"
@@ -37,5 +45,25 @@ fun fetchCurrencies(application: Application) {
         })
     } catch (e: Exception) {
         e.printStackTrace()
+    }
+}
+
+
+fun loadJsonFromAssets(activity: Activity) {
+    var jsonText: String? = ""
+    try {
+        val inputStream = activity.resources.openRawResource(R.raw.currencies)
+        inputStream.bufferedReader().use {
+            jsonText = it.readText()
+        }
+    } catch (e: Exception) {
+        Log.d(Constraints.TAG, e.toString())
+    }
+    val data = JSONObject(jsonText).getJSONObject("quotes")
+    val keys = data.names()
+    for (i in 0 until keys.length()) {
+        val key = keys.get(i).toString()
+        val value = data.getString(key)
+        Currencies.currencies.add(Currency(0, key.substring(3), value.toDouble()))
     }
 }

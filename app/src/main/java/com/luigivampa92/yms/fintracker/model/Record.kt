@@ -15,4 +15,4 @@ data class Record(
         @ColumnInfo() val currency: String,
         @ColumnInfo() val wallet_id: String,
         @ColumnInfo() val date: String,
-        @ColumnInfo() val pending_date: String?)
+        @ColumnInfo() val pending_time: Long? = 0L)

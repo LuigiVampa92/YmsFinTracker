@@ -8,19 +8,30 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.model.Currency
+import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.utils.fetchCurrencies
+import com.luigivampa92.yms.fintracker.utils.loadJsonFromAssets
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentInfo
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentSettings
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallets
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.experimental.launch
 
 class ActivityMain : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val context = this
+        // на всякий случай, пока не привязал валюты из бд, гружу из json
+        launch {
+            loadJsonFromAssets(context)
+        }
         fetchCurrencies(application)
         //Потом будет использоваться
         getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putString(Constants.SECONDARY_CURRENCY, "RUB").apply()

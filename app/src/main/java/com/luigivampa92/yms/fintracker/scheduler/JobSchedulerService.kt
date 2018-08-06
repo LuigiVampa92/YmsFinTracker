@@ -19,7 +19,7 @@ class JobSchedulerService : JobService() {
                 p0.extras!!.getString(Constants.RECORD_CURRENCY),
                 p0.extras!!.getString(Constants.RECORD_WALET_ID),
                 p0.extras!!.getString(Constants.RECORD_DATE),
-                p0.extras!!.getString(Constants.RECORD_PENDING_DATE)
+                p0.extras!!.getString(Constants.RECORD_PENDING_TIME).toLong()
         )
         val balance = p0.extras!!.getString(Constants.WALLET_BALANCE).toDouble() - p0.extras!!.getString(Constants.RECORD_AMOUNT).toDouble()
         val context = this

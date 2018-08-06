@@ -52,7 +52,8 @@ def versions = [
 def versionsTest = [
         espresso: '3.0.2',
         runner  : '1.0.2',
-        junit   : '4.12'
+        junit   : '4.12',
+        assertk : '0.10'
 ]
 
 dependencies {
@@ -86,4 +87,5 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
     testImplementation "junit:junit:${versionsTest.junit}"
+    testImplementation "com.willowtreeapps.assertk:assertk:$versionsTest.assertk"
 }
