@@ -1,4 +1,4 @@
-package com.luigivampa92.yms.fintracker
+package com.luigivampa92.yms.fintracker.instrumented
 
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry

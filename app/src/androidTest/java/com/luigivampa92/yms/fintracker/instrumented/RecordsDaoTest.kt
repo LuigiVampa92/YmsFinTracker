@@ -1,10 +1,9 @@
-package com.luigivampa92.yms.fintracker
+package com.luigivampa92.yms.fintracker.instrumented
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.test.runner.AndroidJUnit4
 import com.luigivampa92.yms.fintracker.model.Record
-import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.utils.createId
 import org.junit.Assert
 import org.junit.Test

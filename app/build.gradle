@@ -46,14 +46,17 @@ def versions = [
         material_dialogs: '0.9.6.0',
         okhttp          : '3.10.0',
         asyncawait      : '1.0.0',
-        anko: '0.10.5'
+        anko            : '0.10.5'
 ]
 
 def versionsTest = [
-        espresso: '3.0.2',
-        runner  : '1.0.2',
-        junit   : '4.12',
-        assertk : '0.10'
+        espresso   : '3.0.2',
+        runner     : '1.0.2',
+        junit      : '4.12',
+        assertk    : '0.10',
+        atsl_runner: '1.0.2',
+        mockito    : '2.7.22',
+        hamcrest   : '1.3'
 ]
 
 dependencies {
@@ -87,5 +90,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
     testImplementation "junit:junit:${versionsTest.junit}"
-    testImplementation "com.willowtreeapps.assertk:assertk:$versionsTest.assertk"
+    androidTestImplementation "com.android.support.test:rules:$versionsTest.atsl_runner"
+    androidTestImplementation "org.hamcrest:hamcrest-library:$versionsTest.hamcrest"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
 }
