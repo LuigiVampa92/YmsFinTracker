@@ -74,7 +74,9 @@ class ActivityAddRecord : AppCompatActivity() {
         done_activity_add_record.setOnClickListener { _ ->
             if (hasText(name_activity_add_record, category_activity_add_record,
                             amount_activity_add_record)) {
+
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+
                 val name = getTextFromView(name_activity_add_record)
                 val category = getTextFromView(category_activity_add_record)
                 val income = income_activity_add_record.isChecked
@@ -82,26 +84,18 @@ class ActivityAddRecord : AppCompatActivity() {
                 val currency = currency_activity_add_record.selectedItem.toString()
                 val walletId = sf.getString(Constants.CURRENT_WALLET_ID, "DEFAULT")
                 val date = getTextFromView(date_activity_add_record)
+                val repeatable = repeat_activity_add_record.isChecked
 
                 var pendingTime = 0L
-                if (hasText(pending_time_activity_add_record)) {
+                if(hasText(pending_time_activity_add_record)){
                     pendingTime = TimeUnit.DAYS.toMillis(getTextFromView(pending_time_activity_add_record).toLong())
                 }
-
                 if (!income) amount = -amount
 
                 val record = Record(0, name, category, income, amount, currency,
-                        walletId, date, pendingTime)
+                        walletId, date, pendingTime, repeatable)
 
-                if (hasText(pending_time_activity_add_record) && repeat_activity_add_record.isChecked) {
-                    mViewModel.addRepeatingPendingRecord(record, pendingTime)
-                } else if (hasText(pending_time_activity_add_record) && !repeat_activity_add_record.isChecked) {
-                    mViewModel.addPendingRecord(record, pendingTime)
-                } else {
-                    mViewModel.addRecord(record)
-                    mViewModel.updateWallet(record)
-                }
-
+                mViewModel.addRecord(record)
                 finish()
             }
         }

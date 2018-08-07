@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_record_list.view.*
 
 class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
 
-    val mRecordsList: MutableList<Record> = mutableListOf()
+    private val mRecordsList: MutableList<Record> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterRecords.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_record_list, parent, false)

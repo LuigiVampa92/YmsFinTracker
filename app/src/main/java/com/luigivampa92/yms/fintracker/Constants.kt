@@ -19,5 +19,6 @@ object Constants{
     const val RECORD_WALET_ID = "RECORD_WALET_ID"
     const val RECORD_DATE = "RECORD_DATE"
     const val RECORD_PENDING_TIME = "RECORD_PENDING_TIME"
+    const val RECORD_REPEATABLE = "RECORD_REPEATABLE"
     const val WALLET_BALANCE = "WALLET_BALANCE"
 }

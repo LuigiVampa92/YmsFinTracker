@@ -23,13 +23,47 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
     private val mApplication = application
 
     fun addRecord(record: Record) {
-        launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsDao()?.addRecord(record)
+        if(!record.repeatable && record.pending_time == 0L){
+            addInstantRecord(record)
+        }else if(record.pending_time != 0L && record.repeatable){
+            addRepeatingPendingRecord(record)
+        }else{
+            addPendingRecord(record)
         }
     }
 
+    private fun addInstantRecord(record: Record){
+        launch {
+            FinanceTrackerDatabase.getInstance(mApplication)?.recordsDao()?.addRecord(record)
+        }
+        updateWallet(record)
+    }
 
-    fun updateWallet(record: Record) {
+
+    private fun addPendingRecord(record: Record) {
+        val service = ComponentName(mApplication, JobSchedulerService::class.java)
+        val jobInfo = JobInfo.Builder(Constants.JOB_ID, service)
+                .setMinimumLatency(record.pending_time)
+                .setPersisted(true)
+                .setExtras(createPersistableBundle(record))
+                .build()
+        val scheduler = mApplication.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        scheduler.schedule(jobInfo)
+    }
+
+
+    private fun addRepeatingPendingRecord(record: Record) {
+        val service = ComponentName(mApplication, JobSchedulerService::class.java)
+        val jobInfo = JobInfo.Builder(Constants.REPEATED_JOB_ID, service)
+                .setPeriodic(record.pending_time)
+                .setPersisted(true)
+                .setExtras(createPersistableBundle(record))
+                .build()
+        val scheduler = mApplication.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        scheduler.schedule(jobInfo)
+    }
+
+    private fun updateWallet(record: Record) {
         val sf = mApplication.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val walletId = record.wallet_id
         val walletBalance = parseDouble(sf.getString(Constants.CURRENT_WALLET_BALANCE, null)) +
@@ -39,28 +73,6 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
             val database = FinanceTrackerDatabase.getInstance(mApplication)
             database?.walletsDao()?.updateWalletBalance(walletId, walletBalance)
         }
-    }
-
-    fun addPendingRecord(record: Record, pendingTime: Long) {
-        val service = ComponentName(mApplication, JobSchedulerService::class.java)
-        val jobInfo = JobInfo.Builder(Constants.JOB_ID, service)
-                .setMinimumLatency(pendingTime)
-                .setPersisted(true)
-                .setExtras(createPersistableBundle(record))
-                .build()
-        val scheduler = mApplication.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        scheduler.schedule(jobInfo)
-    }
-
-    fun addRepeatingPendingRecord(record: Record, pendingTime: Long) {
-        val service = ComponentName(mApplication, JobSchedulerService::class.java)
-        val jobInfo = JobInfo.Builder(Constants.REPEATED_JOB_ID, service)
-                .setPeriodic(pendingTime)
-                .setPersisted(true)
-                .setExtras(createPersistableBundle(record))
-                .build()
-        val scheduler = mApplication.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-        scheduler.schedule(jobInfo)
     }
 
     private fun createPersistableBundle(record: Record): PersistableBundle {
