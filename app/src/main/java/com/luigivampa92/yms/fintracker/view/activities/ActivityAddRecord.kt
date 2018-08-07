@@ -106,10 +106,10 @@ open class ActivityAddRecord : AppCompatActivity() {
 
                 if(this::mOldRecord.isInitialized){
                     record.id = mOldRecord.id
-                    mViewModel.updateWallet(record.copy(amount = -mOldRecord.amount))
+                    mViewModel.editRecord(record)
+                }else{
+                    mViewModel.addRecord(record)
                 }
-
-                mViewModel.addRecord(record)
                 finish()
             }
         }

@@ -33,11 +33,16 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun editRecord(record: Record){
+        launch {
+            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.updateRecordUpdateWalletBalance(record, record.wallet_id)
+        }
+    }
+
     private fun addInstantRecord(record: Record) {
         launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsDao()?.addRecord(record)
+            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record, record.wallet_id)
         }
-        updateWallet(record)
     }
 
 
@@ -57,18 +62,6 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
 
         WorkManager.getInstance().enqueue(recordWork)
     }
-
-    fun updateWallet(record: Record) {
-        launch {
-            val database = FinanceTrackerDatabase.getInstance(mApplication)
-            val walletBalance = FinanceTrackerDatabase.getInstance(mApplication)?.walletsDao()
-                    ?.getWalletObject(record.wallet_id)?.balance?.plus(
-                    CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
-            ) ?: 0.0
-            database?.walletsDao()?.updateWalletBalance(record.wallet_id, walletBalance)
-        }
-    }
-
 
     private fun createWorkerArguments(record: Record): Data {
         return mapOf(Constants.RECORD_NAME to record.name,

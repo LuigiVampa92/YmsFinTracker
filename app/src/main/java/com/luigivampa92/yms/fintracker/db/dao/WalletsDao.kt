@@ -18,12 +18,6 @@ interface WalletsDao {
     @Query("SELECT * from wallets WHERE id = :walletId")
     fun getWallet(walletId: String): LiveData<Wallet>
 
-    @Query("SELECT * from wallets WHERE id = :walletId")
-    fun getWalletObject(walletId: String): Wallet
-
-    @Query("UPDATE wallets SET balance = :newBalance WHERE id = :walletId")
-    fun updateWalletBalance(walletId: String, newBalance: Double)
-
     @Insert()
     fun addWallet(wallet: Wallet)
 

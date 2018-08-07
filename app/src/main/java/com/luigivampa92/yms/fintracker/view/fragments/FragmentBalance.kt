@@ -25,7 +25,7 @@ class FragmentBalance : Fragment() {
 
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
-    private lateinit var mViewModel: ViewModelRecords
+    lateinit var mViewModel: ViewModelRecords
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_balance, container, false)
@@ -46,7 +46,7 @@ class FragmentBalance : Fragment() {
     private fun initComponents() {
         mSharedPreferences = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mViewModel = ViewModelProviders.of(activity!!).get(ViewModelRecords::class.java)
-        mAdapterRecords = AdapterRecords()
+        mAdapterRecords = AdapterRecords(this)
         recycler_fragment_balance.adapter = mAdapterRecords
     }
 

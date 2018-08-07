@@ -7,6 +7,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
+import kotlinx.coroutines.experimental.launch
 
 class ViewModelRecords(application: Application) : AndroidViewModel(application) {
 
@@ -28,5 +29,12 @@ class ViewModelRecords(application: Application) : AndroidViewModel(application)
             mWallet = database.walletsDao().getWallet(walletId)
         }
         return mWallet
+    }
+
+    fun deleteRecord(record: Record) {
+        launch {
+            val database = FinanceTrackerDatabase.getInstance(mApplication)
+            database?.recordsWalletsDao()?.deleteRecordUpdateWalletBalance(record, record.wallet_id)
+        }
     }
 }

@@ -24,20 +24,9 @@ class RecordWorker : Worker() {
                 inputData.getBoolean(Constants.RECORD_REPEATABLE, false)
         )
 
-
         launch {
-            FinanceTrackerDatabase.getInstance(applicationContext)?.recordsDao()?.addRecord(record)
+            FinanceTrackerDatabase.getInstance(applicationContext)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record, record.wallet_id)
         }
-
-        launch {
-            val database = FinanceTrackerDatabase.getInstance(applicationContext)
-            val walletBalance = FinanceTrackerDatabase.getInstance(applicationContext)?.walletsDao()
-                    ?.getWalletObject(record.wallet_id)?.balance?.plus(
-                    CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
-            ) ?: 0.0
-            database?.walletsDao()?.updateWalletBalance(record.wallet_id, walletBalance)
-        }
-
 
         return Result.SUCCESS
     }

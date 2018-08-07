@@ -6,6 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.luigivampa92.yms.fintracker.db.dao.CurrenciesDao
 import com.luigivampa92.yms.fintracker.db.dao.RecordsDao
+import com.luigivampa92.yms.fintracker.db.dao.RecordsWalletsDao
 import com.luigivampa92.yms.fintracker.db.dao.WalletsDao
 import com.luigivampa92.yms.fintracker.model.Currency
 import com.luigivampa92.yms.fintracker.model.Record
@@ -17,9 +18,9 @@ abstract class FinanceTrackerDatabase : RoomDatabase() {
     abstract fun walletsDao(): WalletsDao
     abstract fun recordsDao(): RecordsDao
     abstract fun currenciesDao(): CurrenciesDao
+    abstract fun recordsWalletsDao(): RecordsWalletsDao
 
     companion object {
-        var TEST_MODE = false
         private var INSTANCE: FinanceTrackerDatabase? = null
 
         fun getInstance(context: Context): FinanceTrackerDatabase?{
