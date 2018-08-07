@@ -5,7 +5,6 @@ object Constants{
     const val BALANCE = "BALANCE"
     const val SHARED_PREFERENCES = "SHARED_PREFERENCES"
     const val CURRENT_WALLET_ID = "CURRENT_WALLET_ID"
-    const val CURRENT_WALLET_BALANCE = "CURRENT_WALLET_BALANCE"
     const val ID = "ID"
     const val SECONDARY_CURRENCY = "SECONDARY_CURRENCY"
     const val REPEATED_JOB_ID = 888
@@ -21,4 +20,7 @@ object Constants{
     const val RECORD_PENDING_TIME = "RECORD_PENDING_TIME"
     const val RECORD_REPEATABLE = "RECORD_REPEATABLE"
     const val WALLET_BALANCE = "WALLET_BALANCE"
+    const val ACTIVITY_EDIT = "ACTIVITY_EDIT"
+    const val RECORD_ID = "RECORD_ID"
+    const val RECORD = "RECORD"
 }

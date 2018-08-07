@@ -4,7 +4,7 @@
     package="com.luigivampa92.yms.fintracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".view.activities.ActivityAddRecord" />
         <activity android:name=".view.activities.ActivityAddWallet" />
+        <activity android:name=".view.activities.ActivityEditRecord"></activity>
     </application>
 
 </manifest>

@@ -37,7 +37,6 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
         holder.itemView.setOnClickListener {
             it.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_orange_light))
             sf.edit().putString(Constants.CURRENT_WALLET_ID, mWalletsList[position].id).apply()
-            sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, mWalletsList[position].balance.toString()).apply()
             notifyItemChanged(position)
             notifyItemChanged(mColoredItemPosition)
         }

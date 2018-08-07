@@ -1,11 +1,17 @@
 package com.luigivampa92.yms.fintracker.view.adapters
 
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.afollestad.materialdialogs.MaterialDialog
+import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
+import com.luigivampa92.yms.fintracker.view.activities.ActivityEditRecord
 import kotlinx.android.synthetic.main.item_record_list.view.*
 
 
@@ -20,12 +26,28 @@ class AdapterRecords : RecyclerView.Adapter<AdapterRecords.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(mRecordsList[position])
+        holder.itemView.setOnLongClickListener(View.OnLongClickListener {
+            MaterialDialog.Builder(it.context)
+                    .title(R.string.choose_records_action)
+                    .items(R.array.records_actions)
+                    .itemsCallback { dialog, itemView, pos, text ->
+                        when(pos){
+                            0 -> {
+                                val intent = Intent(it.context, ActivityAddRecord::class.java)
+                                intent.putExtra(Constants.RECORD, mRecordsList[position])
+                                it.context.startActivity(intent)
+                                dialog.dismiss()
+                            }
+                        }
+                    }
+                    .build().show()
+            true
+        })
     }
 
     override fun getItemCount(): Int {
         return mRecordsList.size
     }
-
 
     fun addAll(items: List<Record>?) {
         items?.forEach {

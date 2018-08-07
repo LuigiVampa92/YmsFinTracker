@@ -47,7 +47,7 @@ def versions = [
         okhttp          : '3.10.0',
         asyncawait      : '1.0.0',
         anko            : '0.10.5',
-        workmanager: '1.0.0-alpha06'
+        workmanager     : '1.0.0-alpha06'
 ]
 
 def versionsTest = [
@@ -70,6 +70,7 @@ dependencies {
     implementation "com.android.support:design:$support_version"
 
     implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
 
     implementation "com.afollestad.material-dialogs:core:$versions.material_dialogs"

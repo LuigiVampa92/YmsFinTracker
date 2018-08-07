@@ -60,7 +60,6 @@ class ActivityAddWallet : AppCompatActivity() {
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
                 if (sf.getString(Constants.CURRENT_WALLET_ID, null) == null) {
                     sf.edit().putString(Constants.CURRENT_WALLET_ID, walletId).apply()
-                    sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, walletBalance.toString()).apply()
                 }
 
                 finish()

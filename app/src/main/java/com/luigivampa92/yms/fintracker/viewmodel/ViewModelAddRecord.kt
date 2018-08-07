@@ -2,6 +2,9 @@ package com.luigivampa92.yms.fintracker.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.Transformations
 import android.content.Context
 import android.os.PersistableBundle
 import androidx.work.*
@@ -10,7 +13,9 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.scheduler.RecordWorker
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.TimeUnit
 
@@ -19,16 +24,16 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
     private val mApplication = application
 
     fun addRecord(record: Record) {
-        if(!record.repeatable && record.pending_time == 0){
+        if (!record.repeatable && record.pending_time == 0) {
             addInstantRecord(record)
-        }else if(record.pending_time != 0 && record.repeatable){
+        } else if (record.pending_time != 0 && record.repeatable) {
             addRepeatingPendingRecord(record)
-        }else{
+        } else {
             addPendingRecord(record)
         }
     }
 
-    private fun addInstantRecord(record: Record){
+    private fun addInstantRecord(record: Record) {
         launch {
             FinanceTrackerDatabase.getInstance(mApplication)?.recordsDao()?.addRecord(record)
         }
@@ -53,15 +58,14 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
         WorkManager.getInstance().enqueue(recordWork)
     }
 
-    private fun updateWallet(record: Record) {
-        val sf = mApplication.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        val walletId = record.wallet_id
-        val walletBalance = parseDouble(sf.getString(Constants.CURRENT_WALLET_BALANCE, null)) +
-                CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
-        sf.edit().putString(Constants.CURRENT_WALLET_BALANCE, walletBalance.toString()).apply()
+    fun updateWallet(record: Record) {
         launch {
             val database = FinanceTrackerDatabase.getInstance(mApplication)
-            database?.walletsDao()?.updateWalletBalance(walletId, walletBalance)
+            val walletBalance = FinanceTrackerDatabase.getInstance(mApplication)?.walletsDao()
+                    ?.getWalletObject(record.wallet_id)?.balance?.plus(
+                    CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
+            ) ?: 0.0
+            database?.walletsDao()?.updateWalletBalance(record.wallet_id, walletBalance)
         }
     }
 

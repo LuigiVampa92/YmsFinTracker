@@ -6,12 +6,13 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.utils.createId
 import kotlinx.coroutines.experimental.launch
 
 class RecordWorker : Worker() {
     override fun doWork(): Result {
         val record = Record(
-                0,
+                createId(),
                 inputData.getString(Constants.RECORD_NAME) ?: "Pedning",
                 inputData.getString(Constants.RECORD_CATEGORY) ?: "Pending Category",
                 inputData.getBoolean(Constants.RECORD_INCOME, false),
@@ -23,17 +24,20 @@ class RecordWorker : Worker() {
                 inputData.getBoolean(Constants.RECORD_REPEATABLE, false)
         )
 
-        val sf = applicationContext.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        val walletBalance = sf.getString(Constants.WALLET_BALANCE, "0").toDouble() + CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
-        val walletId = record.wallet_id
 
         launch {
             FinanceTrackerDatabase.getInstance(applicationContext)?.recordsDao()?.addRecord(record)
         }
 
         launch {
-            FinanceTrackerDatabase.getInstance(applicationContext)?.walletsDao()?.updateWalletBalance(walletId, walletBalance)
+            val database = FinanceTrackerDatabase.getInstance(applicationContext)
+            val walletBalance = FinanceTrackerDatabase.getInstance(applicationContext)?.walletsDao()
+                    ?.getWalletObject(record.wallet_id)?.balance?.plus(
+                    CurrencyConverter.convertCurrency(record.currency, record.amount, "USD")
+            ) ?: 0.0
+            database?.walletsDao()?.updateWalletBalance(record.wallet_id, walletBalance)
         }
+
 
         return Result.SUCCESS
     }

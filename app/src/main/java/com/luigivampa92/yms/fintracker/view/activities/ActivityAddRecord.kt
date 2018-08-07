@@ -5,24 +5,32 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddRecord
 import kotlinx.android.synthetic.main.activity_add_record.*
 import java.util.*
-import java.util.concurrent.TimeUnit
 
-class ActivityAddRecord : AppCompatActivity() {
+open class ActivityAddRecord : AppCompatActivity() {
 
-    private lateinit var mViewModel: ViewModelAddRecord
+    lateinit var mViewModel: ViewModelAddRecord
+    private lateinit var mOldRecord: Record
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
+
+        if(intent.getParcelableExtra<Record>(Constants.RECORD) != null){
+            mOldRecord = intent.getParcelableExtra<Record>(Constants.RECORD)
+            toolbar_activity_add_record.title = resources.getString(R.string.edit_record)
+        }
+
 
         initComponents()
         initComponentsListeners()
@@ -76,7 +84,7 @@ class ActivityAddRecord : AppCompatActivity() {
                             amount_activity_add_record)) {
 
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-
+                val id = createId()
                 val name = getTextFromView(name_activity_add_record)
                 val category = getTextFromView(category_activity_add_record)
                 val income = income_activity_add_record.isChecked
@@ -87,13 +95,19 @@ class ActivityAddRecord : AppCompatActivity() {
                 val repeatable = repeat_activity_add_record.isChecked
 
                 var pendingTime = 0
-                if(hasText(pending_time_activity_add_record)){
+                if (hasText(pending_time_activity_add_record)) {
                     pendingTime = getTextFromView(pending_time_activity_add_record).toInt()
                 }
                 if (!income) amount = -amount
 
-                val record = Record(0, name, category, income, amount, currency,
+
+                val record = Record(id, name, category, income, amount, currency,
                         walletId, date, pendingTime, repeatable)
+
+                if(this::mOldRecord.isInitialized){
+                    record.id = mOldRecord.id
+                    mViewModel.updateWallet(record.copy(amount = -mOldRecord.amount))
+                }
 
                 mViewModel.addRecord(record)
                 finish()
