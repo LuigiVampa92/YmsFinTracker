@@ -86,9 +86,9 @@ class ActivityAddRecord : AppCompatActivity() {
                 val date = getTextFromView(date_activity_add_record)
                 val repeatable = repeat_activity_add_record.isChecked
 
-                var pendingTime = 0L
+                var pendingTime = 0
                 if(hasText(pending_time_activity_add_record)){
-                    pendingTime = TimeUnit.DAYS.toMillis(getTextFromView(pending_time_activity_add_record).toLong())
+                    pendingTime = getTextFromView(pending_time_activity_add_record).toInt()
                 }
                 if (!income) amount = -amount
 

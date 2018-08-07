@@ -46,7 +46,8 @@ def versions = [
         material_dialogs: '0.9.6.0',
         okhttp          : '3.10.0',
         asyncawait      : '1.0.0',
-        anko            : '0.10.5'
+        anko            : '0.10.5',
+        workmanager: '1.0.0-alpha06'
 ]
 
 def versionsTest = [
@@ -81,6 +82,8 @@ dependencies {
     implementation "org.jetbrains.anko:anko-coroutines:$versions.anko"
 
     implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
+
+    implementation "android.arch.work:work-runtime-ktx:$versions.workmanager"
 
     implementation "com.arello-mobile:moxy:${versions.moxy}"
     implementation "com.arello-mobile:moxy-android:${versions.moxy}"
