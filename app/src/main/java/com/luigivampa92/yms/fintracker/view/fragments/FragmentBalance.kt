@@ -14,18 +14,28 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
+import com.luigivampa92.yms.fintracker.model.repositories.RecordsWalletRepository
+import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
-import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecords
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecordsWallet
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelWallets
+import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_balance.*
 
 class FragmentBalance : Fragment() {
 
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
-    lateinit var mViewModel: ViewModelRecords
+    lateinit var mViewModel: ViewModelRecordsWallet
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this,
+                viewModelFactory { ViewModelRecordsWallet(RecordsWalletRepository(activity!!.application)) }).get(ViewModelRecordsWallet::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_balance, container, false)
@@ -45,7 +55,6 @@ class FragmentBalance : Fragment() {
 
     private fun initComponents() {
         mSharedPreferences = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-        mViewModel = ViewModelProviders.of(activity!!).get(ViewModelRecords::class.java)
         mAdapterRecords = AdapterRecords(this)
         recycler_fragment_balance.adapter = mAdapterRecords
     }

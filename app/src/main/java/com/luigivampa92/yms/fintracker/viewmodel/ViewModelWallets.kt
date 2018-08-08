@@ -1,22 +1,11 @@
 package com.luigivampa92.yms.fintracker.viewmodel
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
-import com.luigivampa92.yms.fintracker.model.Wallet
+import android.arch.lifecycle.*
+import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 
-class ViewModelWallets(application: Application) : AndroidViewModel(application) {
+class ViewModelWallets(repository: WalletsRepository) : ViewModel() {
 
-    private var mWallets: LiveData<List<Wallet>> = MutableLiveData()
-    private val mApplication = application
+    private val mWalletsRepository = repository
 
-    fun getWallets(): LiveData<List<Wallet>> {
-        val database = FinanceTrackerDatabase.getInstance(mApplication)
-        if (database?.walletsDao()?.getAllWallets() != null) {
-            mWallets = database.walletsDao().getAllWallets()
-        }
-        return mWallets
-    }
+    val wallets = mWalletsRepository.getWallets()
 }

@@ -15,9 +15,11 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Wallet
+import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelWallets
+import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_wallets.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
@@ -29,7 +31,8 @@ class FragmentWallets : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(ViewModelWallets::class.java)
+        mViewModel = ViewModelProviders.of(this,
+                viewModelFactory { ViewModelWallets(WalletsRepository(activity!!.application)) }).get(ViewModelWallets::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,7 +60,7 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponentsObservers() {
-        mViewModel.getWallets().observe(viewLifecycleOwner, Observer { it ->
+        mViewModel.wallets.observe(viewLifecycleOwner, Observer { it ->
             mWalletsAdapter.addAll(it)
         })
 

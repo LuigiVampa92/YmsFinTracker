@@ -38,10 +38,13 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
                                 val intent = Intent(it.context, ActivityAddRecord::class.java)
                                 intent.putExtra(Constants.RECORD, mRecordsList[position])
                                 it.context.startActivity(intent)
+                                notifyItemChanged(position)
                                 dialog.dismiss()
                             }
                             else ->{
                                 mFragment.mViewModel.deleteRecord(mRecordsList[position])
+                                notifyItemRemoved(position)
+                                dialog.dismiss()
                             }
                         }
                     }

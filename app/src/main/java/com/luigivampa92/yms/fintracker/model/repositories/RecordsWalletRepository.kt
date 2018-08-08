@@ -1,7 +1,6 @@
-package com.luigivampa92.yms.fintracker.viewmodel
+package com.luigivampa92.yms.fintracker.model.repositories
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
@@ -9,26 +8,26 @@ import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 import kotlinx.coroutines.experimental.launch
 
-class ViewModelRecords(application: Application) : AndroidViewModel(application) {
+class RecordsWalletRepository(application: Application){
 
-    private var mRecords: LiveData<List<Record>> = MutableLiveData()
-    private var mWallet: LiveData<Wallet> = MutableLiveData()
     private val mApplication = application
 
     fun getRecordsFromWallet(walletId: String): LiveData<List<Record>> {
+        var records: LiveData<List<Record>> = MutableLiveData()
         val database = FinanceTrackerDatabase.getInstance(mApplication)
         if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
-            mRecords = database.recordsDao().getAllRecordsFromWallet(walletId)
+            records = database.recordsDao().getAllRecordsFromWallet(walletId)
         }
-        return mRecords
+        return records
     }
 
     fun getWallet(walletId: String): LiveData<Wallet> {
+        var wallet: LiveData<Wallet> = MutableLiveData()
         val database = FinanceTrackerDatabase.getInstance(mApplication)
         if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
-            mWallet = database.walletsDao().getWallet(walletId)
+            wallet = database.walletsDao().getWallet(walletId)
         }
-        return mWallet
+        return wallet
     }
 
     fun deleteRecord(record: Record) {
