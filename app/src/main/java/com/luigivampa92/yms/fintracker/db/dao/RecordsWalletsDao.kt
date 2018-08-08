@@ -1,6 +1,7 @@
 package com.luigivampa92.yms.fintracker.db.dao
 
 import android.arch.persistence.room.*
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 
@@ -32,9 +33,9 @@ interface RecordsWalletsDao{
     }
 
     @Transaction
-    fun insertRecordUpdateWalletBalance(record: Record, walletId: String){
+    fun insertRecordUpdateWalletBalance(record: Record){
         insertRecord(record)
-        updateWalletBalance(record.amount, walletId)
+        updateWalletBalance(record.amount, record.wallet_id)
     }
 
 }

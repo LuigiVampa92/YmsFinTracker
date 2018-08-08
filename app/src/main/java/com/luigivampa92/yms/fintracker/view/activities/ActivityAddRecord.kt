@@ -9,11 +9,15 @@ import android.view.View
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddRecord
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecordsWallet
+import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.activity_add_record.*
 import java.util.*
 
@@ -25,14 +29,14 @@ open class ActivityAddRecord : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
 
-
         initComponents()
         initComponentsListeners()
     }
 
     private fun initComponents() {
 
-        viewModel = ViewModelProviders.of(this).get(ViewModelAddRecord::class.java)
+        viewModel = ViewModelProviders.of(this,
+                viewModelFactory { ViewModelAddRecord(Repository(this.application)) }).get(ViewModelAddRecord::class.java)
         currency_activity_add_record.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )

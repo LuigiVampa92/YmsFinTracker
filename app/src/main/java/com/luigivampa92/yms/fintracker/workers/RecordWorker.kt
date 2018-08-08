@@ -1,9 +1,7 @@
-package com.luigivampa92.yms.fintracker.scheduler
+package com.luigivampa92.yms.fintracker.workers
 
-import android.content.Context
 import androidx.work.Worker
 import com.luigivampa92.yms.fintracker.Constants
-import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.utils.createId
@@ -25,7 +23,7 @@ class RecordWorker : Worker() {
         )
 
         launch {
-            FinanceTrackerDatabase.getInstance(applicationContext)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record, record.wallet_id)
+            FinanceTrackerDatabase.getInstance(applicationContext)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record)
         }
 
         return Result.SUCCESS

@@ -2,26 +2,19 @@ package com.luigivampa92.yms.fintracker.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
-import android.content.Context
-import android.os.PersistableBundle
+import android.arch.lifecycle.ViewModel
 import androidx.work.*
-import java.lang.Double.parseDouble
 import com.luigivampa92.yms.fintracker.Constants
-import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Record
-import com.luigivampa92.yms.fintracker.model.Wallet
-import com.luigivampa92.yms.fintracker.scheduler.RecordWorker
-import kotlinx.coroutines.experimental.android.UI
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
+import com.luigivampa92.yms.fintracker.workers.RecordWorker
 import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.TimeUnit
 
-class ViewModelAddRecord(application: Application) : AndroidViewModel(application) {
+class ViewModelAddRecord(repository: Repository) : ViewModel() {
 
-    private val mApplication = application
+    private val mRepository = repository
 
     fun addRecord(record: Record) {
         if (!record.repeatable && record.pending_time == 0) {
@@ -34,21 +27,17 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
     }
 
     fun editRecord(record: Record, oldRecord: Record){
-        launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.updateRecordUpdateWalletBalance(record, oldRecord)
-        }
+        mRepository.editRecord(record, oldRecord)
     }
 
     private fun addInstantRecord(record: Record) {
-        launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record, record.wallet_id)
-        }
+        mRepository.addRecord(record)
     }
 
 
     private fun addPendingRecord(record: Record) {
         val compressionWork = OneTimeWorkRequestBuilder<RecordWorker>()
-                .setInitialDelay(16, TimeUnit.MINUTES)
+                .setInitialDelay(record.pending_time.toLong() * 7, TimeUnit.DAYS)
                 .setInputData(createWorkerArguments(record))
                 .build()
         WorkManager.getInstance().enqueue(compressionWork)
@@ -56,7 +45,7 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
 
 
     private fun addRepeatingPendingRecord(record: Record) {
-        val recordWork = PeriodicWorkRequestBuilder<RecordWorker>(16, TimeUnit.MINUTES)
+        val recordWork = PeriodicWorkRequestBuilder<RecordWorker>(record.pending_time.toLong() * 7, TimeUnit.DAYS)
                 .setInputData(createWorkerArguments(record))
                 .build()
 

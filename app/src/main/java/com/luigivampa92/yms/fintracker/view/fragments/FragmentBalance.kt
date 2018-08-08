@@ -15,6 +15,7 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.repositories.RecordsWalletRepository
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
@@ -32,7 +33,7 @@ class FragmentBalance : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this,
-                viewModelFactory { ViewModelRecordsWallet(RecordsWalletRepository(activity!!.application)) }).get(ViewModelRecordsWallet::class.java)
+                viewModelFactory { ViewModelRecordsWallet(Repository(activity!!.application)) }).get(ViewModelRecordsWallet::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,10 +45,6 @@ class FragmentBalance : Fragment() {
 
         initComponents()
         initComponentsListeners()
-    }
-
-    override fun onResume() {
-        super.onResume()
         initComponentsObservers()
     }
 

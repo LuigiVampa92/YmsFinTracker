@@ -49,10 +49,11 @@ fun fetchCurrencies(application: Application) {
 }
 
 
-fun loadJsonFromAssets(activity: Activity) {
+fun fetchCurrenciesFromAssets(application: Application) {
+    val database = FinanceTrackerDatabase.getInstance(application)
     var jsonText: String? = ""
     try {
-        val inputStream = activity.resources.openRawResource(R.raw.currencies)
+        val inputStream = application.resources.openRawResource(R.raw.currencies)
         inputStream.bufferedReader().use {
             jsonText = it.readText()
         }
@@ -65,5 +66,6 @@ fun loadJsonFromAssets(activity: Activity) {
         val key = keys.get(i).toString()
         val value = data.getString(key)
         Currencies.currencies.add(Currency(0, key.substring(3), value.toDouble()))
+        database?.currenciesDao()?.addCurrency(Currency(0, key.substring(3), value.toDouble()))
     }
 }

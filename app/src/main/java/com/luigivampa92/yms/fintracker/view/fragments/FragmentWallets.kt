@@ -15,6 +15,7 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Wallet
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
@@ -32,7 +33,7 @@ class FragmentWallets : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this,
-                viewModelFactory { ViewModelWallets(WalletsRepository(activity!!.application)) }).get(ViewModelWallets::class.java)
+                viewModelFactory { ViewModelWallets(Repository(activity!!.application)) }).get(ViewModelWallets::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

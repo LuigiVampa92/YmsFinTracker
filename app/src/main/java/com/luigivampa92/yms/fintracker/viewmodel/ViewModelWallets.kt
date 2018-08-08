@@ -1,11 +1,11 @@
 package com.luigivampa92.yms.fintracker.viewmodel
 
 import android.arch.lifecycle.*
-import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
 
-class ViewModelWallets(repository: WalletsRepository) : ViewModel() {
+class ViewModelWallets(repository: Repository) : ViewModel() {
 
-    private val mWalletsRepository = repository
+    private val mRepository = repository
 
-    val wallets = mWalletsRepository.getWallets()
+    val wallets = mRepository.getWallets()
 }
