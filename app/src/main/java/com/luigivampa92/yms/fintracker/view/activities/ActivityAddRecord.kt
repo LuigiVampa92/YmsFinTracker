@@ -19,17 +19,11 @@ import java.util.*
 
 open class ActivityAddRecord : AppCompatActivity() {
 
-    lateinit var mViewModel: ViewModelAddRecord
-    private lateinit var mOldRecord: Record
+    lateinit var viewModel: ViewModelAddRecord
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
-
-        if(intent.getParcelableExtra<Record>(Constants.RECORD) != null){
-            mOldRecord = intent.getParcelableExtra<Record>(Constants.RECORD)
-            toolbar_activity_add_record.title = resources.getString(R.string.edit_record)
-        }
 
 
         initComponents()
@@ -38,7 +32,7 @@ open class ActivityAddRecord : AppCompatActivity() {
 
     private fun initComponents() {
 
-        mViewModel = ViewModelProviders.of(this).get(ViewModelAddRecord::class.java)
+        viewModel = ViewModelProviders.of(this).get(ViewModelAddRecord::class.java)
         currency_activity_add_record.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
@@ -104,14 +98,15 @@ open class ActivityAddRecord : AppCompatActivity() {
                 val record = Record(id, name, category, income, amount, currency,
                         walletId, date, pendingTime, repeatable)
 
-                if(this::mOldRecord.isInitialized){
-                    record.id = mOldRecord.id
-                    mViewModel.editRecord(record)
-                }else{
-                    mViewModel.addRecord(record)
-                }
+
+                makeTransaction(record)
                 finish()
             }
         }
+    }
+
+    //Переопределим его в потомке, чтобы лишний раз код не писать
+    open fun makeTransaction(record: Record) {
+        viewModel.addRecord(record)
     }
 }

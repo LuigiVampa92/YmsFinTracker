@@ -33,9 +33,9 @@ class ViewModelAddRecord(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun editRecord(record: Record){
+    fun editRecord(record: Record, oldRecord: Record){
         launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.updateRecordUpdateWalletBalance(record, record.wallet_id)
+            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.updateRecordUpdateWalletBalance(record, oldRecord)
         }
     }
 

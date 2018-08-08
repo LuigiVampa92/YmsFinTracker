@@ -19,9 +19,10 @@ interface RecordsWalletsDao{
     @Query("UPDATE wallets SET balance = balance + :recordValue WHERE id =:walletId")
     fun updateWalletBalance(recordValue: Double, walletId: String)
 
-    @Transaction fun updateRecordUpdateWalletBalance(record: Record, walletId: String){
+    @Transaction fun updateRecordUpdateWalletBalance(record: Record, oldRecord: Record){
+        updateWalletBalance(-oldRecord.amount, oldRecord.wallet_id)
         updateRecord(record)
-        updateWalletBalance(record.amount, walletId)
+        updateWalletBalance(record.amount, record.wallet_id)
     }
 
     @Transaction

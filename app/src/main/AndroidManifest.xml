@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".view.activities.ActivityAddRecord" />
         <activity android:name=".view.activities.ActivityAddWallet" />
-        <activity android:name=".view.activities.ActivityEditRecord"></activity>
+        <activity android:name=".view.activities.ActivityEditRecord" />
     </application>
 
 </manifest>

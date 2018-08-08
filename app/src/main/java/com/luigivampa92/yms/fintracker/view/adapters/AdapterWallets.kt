@@ -57,7 +57,7 @@ class AdapterWallets : RecyclerView.Adapter<AdapterWallets.ViewHolder>() {
 
     fun contains(wallet: Wallet): Boolean {
         mWalletsList.forEach {
-            if (it.id == wallet.id) return true
+            if (it == wallet) return true
         }
         return false
     }

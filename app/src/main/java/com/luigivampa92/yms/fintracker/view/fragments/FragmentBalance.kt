@@ -15,13 +15,11 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.repositories.RecordsWalletRepository
-import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecordsWallet
-import com.luigivampa92.yms.fintracker.viewmodel.ViewModelWallets
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_balance.*
 

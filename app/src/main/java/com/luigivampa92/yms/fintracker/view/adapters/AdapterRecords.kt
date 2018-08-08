@@ -1,7 +1,6 @@
 package com.luigivampa92.yms.fintracker.view.adapters
 
 import android.content.Intent
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.model.Record
-import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
 import com.luigivampa92.yms.fintracker.view.activities.ActivityEditRecord
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
 import kotlinx.android.synthetic.main.item_record_list.view.*
@@ -33,16 +31,16 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
                     .title(R.string.choose_records_action)
                     .items(R.array.records_actions)
                     .itemsCallback { dialog, itemView, pos, text ->
-                        when(pos){
+                        when (pos) {
                             0 -> {
-                                val intent = Intent(it.context, ActivityAddRecord::class.java)
+                                val intent = Intent(it.context, ActivityEditRecord::class.java)
                                 intent.putExtra(Constants.RECORD, mRecordsList[position])
                                 it.context.startActivity(intent)
-                                notifyItemChanged(position)
                                 dialog.dismiss()
                             }
-                            else ->{
+                            else -> {
                                 mFragment.mViewModel.deleteRecord(mRecordsList[position])
+                                mRecordsList.removeAt(position)
                                 notifyItemRemoved(position)
                                 dialog.dismiss()
                             }
@@ -58,19 +56,11 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
     }
 
     fun addAll(items: List<Record>?) {
+        mRecordsList.clear()
         items?.forEach {
-            if (!contains(it)) {
-                mRecordsList.add(it)
-                notifyItemInserted(mRecordsList.size - 1)
-            }
+            mRecordsList.add(it)
         }
-    }
-
-    private fun contains(record: Record): Boolean {
-        mRecordsList.forEach {
-            if (it.id == record.id) return true
-        }
-        return false
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
