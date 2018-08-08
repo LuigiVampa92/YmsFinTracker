@@ -12,9 +12,9 @@ import org.junit.Test as test
 class CurrencyConverterUnitTest {
 
     val walletId = createId()
-    val record1 = Record(0L, "Burger", "Food",
+    val record1 = Record("", "Burger", "Food",
             false, 126.0, "RUB", walletId, "05.08.2018",
-            null)
+            0)
     val record2 = Record(1L, "Hot-Dog", "Food",
             false, 126.0, "RUB", walletId, "05.08.2018",
             null)

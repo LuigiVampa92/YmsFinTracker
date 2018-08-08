@@ -13,7 +13,7 @@ class ActivityEditRecord : ActivityAddRecord() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(intent.getParcelableExtra<Record>(Constants.RECORD) != null){
+        if (intent.getParcelableExtra<Record>(Constants.RECORD) != null) {
             mOldRecord = intent.getParcelableExtra<Record>(Constants.RECORD)
             toolbar_activity_add_record.title = resources.getString(R.string.edit_record)
         }

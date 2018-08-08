@@ -14,21 +14,28 @@ import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.model.Template
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddRecord
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecordsWallet
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
+import kotlinx.android.synthetic.main.abc_list_menu_item_checkbox.view.*
 import kotlinx.android.synthetic.main.activity_add_record.*
 import java.util.*
 
 open class ActivityAddRecord : AppCompatActivity() {
 
     lateinit var viewModel: ViewModelAddRecord
+    lateinit var mTemplate: Template
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
+
+        if (intent.getParcelableExtra<Template>(Constants.TEMPLATE) != null) {
+            initTemplate(intent.getParcelableExtra<Template>(Constants.TEMPLATE))
+        }
 
         initComponents()
         initComponentsListeners()
@@ -114,5 +121,19 @@ open class ActivityAddRecord : AppCompatActivity() {
     //Переопределим его в потомке, чтобы лишний раз код не писать
     open fun makeTransaction(record: Record) {
         viewModel.addRecord(record)
+    }
+
+    //Метод для вызывание активити с темплейтом
+    fun initTemplate(template: Template) {
+
+        val array = resources.getStringArray(R.array.currencies)
+
+        name_activity_add_record.setText(template.name)
+        category_activity_add_record.setText(template.category)
+        income_activity_add_record.isChecked = template.income
+        amount_activity_add_record.setText(template.amount.toString())
+        currency_activity_add_record.setSelection(array.indexOf(template.currency), true)
+        pending_time_activity_add_record.setText(template.pending_time.toString())
+        repeat_activity_add_record.isChecked = template.repeatable
     }
 }
