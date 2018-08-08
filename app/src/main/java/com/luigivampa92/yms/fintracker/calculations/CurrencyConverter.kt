@@ -11,7 +11,8 @@ import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.coroutines.experimental.bg
 
 object CurrencyConverter {
-    fun convertCurrency(currency: String, currencyAmount: Double, currencyConvertTo: String): Double {
+
+    fun convertCurrency(currency: String, currencyAmount: Double, currencyConvertTo: String = "USD"): Double {
         val currencyRatio = Currencies.getCurrencyRatio(currency)
         val currencyToConvertRatio = Currencies.getCurrencyRatio(currencyConvertTo)
         return currencyAmount / currencyRatio * currencyToConvertRatio

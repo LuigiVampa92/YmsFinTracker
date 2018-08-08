@@ -52,16 +52,11 @@ class ActivityAddWallet : AppCompatActivity() {
                 val walletId = createId()
                 val walletName = getTextFromView(name_activity_add_wallet)
                 val walletCurrency = currency_activity_add_wallet.selectedItem.toString()
-                val walletBalance = CurrencyConverter.convertCurrency(
-                        walletCurrency,
-                        getTextFromView(balance_activity_add_wallet).toDouble(),
-                        "USD"
-                )
+                val walletBalance = getTextFromView(balance_activity_add_wallet).toDouble()
 
                 mViewModel.addWallet(Wallet(
                         walletId, walletName, walletBalance, walletCurrency
                 ))
-
 
                 //Если кошельков не было, то добавляем этот как дефолтный
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
