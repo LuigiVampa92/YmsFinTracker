@@ -25,6 +25,7 @@ class Repository(database: FinanceTrackerDatabase) {
         }
     }
 
+
     fun deleteRecord(record: Record) {
         launch {
             mDatabase.recordsWalletsDao().deleteRecordUpdateWalletBalance(record, record.wallet_id)

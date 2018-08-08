@@ -8,16 +8,14 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.interfaces.IChangeFragmentInterface
 import com.luigivampa92.yms.fintracker.utils.fetchCurrencies
 import com.luigivampa92.yms.fintracker.utils.fetchCurrenciesFromAssets
-import com.luigivampa92.yms.fintracker.view.fragments.FragmentBalance
-import com.luigivampa92.yms.fintracker.view.fragments.FragmentInfo
-import com.luigivampa92.yms.fintracker.view.fragments.FragmentSettings
-import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallets
+import com.luigivampa92.yms.fintracker.view.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 
-class ActivityMain : AppCompatActivity() {
+class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +57,9 @@ class ActivityMain : AppCompatActivity() {
                 R.id.navigation_item_info -> {
                     loadFragment(FragmentInfo())
                 }
+                R.id.navigation_item_templates -> {
+                    loadFragment(FragmentTemplates())
+                }
                 else -> {
                     loadFragment(FragmentWallets())
                 }
@@ -70,14 +71,14 @@ class ActivityMain : AppCompatActivity() {
 
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(fragment.javaClass.name)
                 .commit()
     }
 
-    private fun loadFragmentWithoutBackStack(fragment: Fragment) {
+    override fun loadFragmentWithoutBackStack(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()

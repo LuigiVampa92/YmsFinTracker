@@ -20,4 +20,5 @@ object Constants{
 
     const val RECORD = "RECORD"
     const val WALLET = "WALLET"
+    const val TEMPLATE = "TEMPLATE"
 }

@@ -76,4 +76,5 @@
     <string name="repeat">Повторять</string>
     <string name="edit_record">Измените Запись</string>
     <string name="edit_wallet">Измените Кошелек</string>
+    <string name="text_navigation_item_templates">Шаблоны</string>
 </resources>
