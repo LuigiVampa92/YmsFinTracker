@@ -48,6 +48,11 @@ class FragmentBalance : Fragment() {
         initComponentsObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initComponentsObservers()
+    }
+
     private fun initComponents() {
         mSharedPreferences = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mAdapterRecords = AdapterRecords(this)

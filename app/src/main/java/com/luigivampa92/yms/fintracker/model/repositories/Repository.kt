@@ -51,4 +51,10 @@ class Repository(database: FinanceTrackerDatabase) {
         return mDatabase.walletsDao().getWallet(walletId)
     }
 
+    fun deleteWallet(walletId: String) {
+        launch {
+            mDatabase.recordsWalletsDao().deleteWalletAndRecords(walletId)
+        }
+    }
+
 }

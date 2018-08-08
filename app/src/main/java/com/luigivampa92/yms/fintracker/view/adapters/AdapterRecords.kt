@@ -40,8 +40,6 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
                             }
                             else -> {
                                 mFragment.mViewModel.deleteRecord(mRecordsList[position])
-                                mRecordsList.removeAt(position)
-                                notifyItemRemoved(position)
                                 dialog.dismiss()
                             }
                         }
@@ -57,10 +55,10 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
 
     fun addAll(items: List<Record>?) {
         mRecordsList.clear()
-        items?.forEach {
-            mRecordsList.add(it)
+        items?.let {
+            mRecordsList.addAll(items)
+            notifyDataSetChanged()
         }
-        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

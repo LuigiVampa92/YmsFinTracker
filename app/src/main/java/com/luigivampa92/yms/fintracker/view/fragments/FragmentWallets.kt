@@ -21,11 +21,11 @@ import kotlinx.android.synthetic.main.fragment_wallets.*
 class FragmentWallets : Fragment() {
 
     private lateinit var mWalletsAdapter: AdapterWallets
-    private lateinit var mViewModel: ViewModelWallets
+    lateinit var viewModel: ViewModelWallets
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this,
+        viewModel = ViewModelProviders.of(this,
                 viewModelFactory { ViewModelWallets(Repository(FinanceTrackerDatabase.getInstance(activity!!.application)!!)) }).get(ViewModelWallets::class.java)
     }
 
@@ -42,7 +42,7 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponents() {
-        mWalletsAdapter = AdapterWallets()
+        mWalletsAdapter = AdapterWallets(this)
         recycler_fragment_wallets.adapter = mWalletsAdapter
         recycler_fragment_wallets.layoutManager = LinearLayoutManager(context)
     }
@@ -54,7 +54,7 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponentsObservers() {
-        mViewModel.wallets.observe(viewLifecycleOwner, Observer { it ->
+        viewModel.wallets.observe(viewLifecycleOwner, Observer { it ->
             mWalletsAdapter.addAll(it)
         })
 
