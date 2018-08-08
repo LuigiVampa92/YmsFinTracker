@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.luigivampa92.yms.fintracker.R
+import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
@@ -25,7 +26,7 @@ class FragmentWallets : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this,
-                viewModelFactory { ViewModelWallets(Repository(activity!!.application)) }).get(ViewModelWallets::class.java)
+                viewModelFactory { ViewModelWallets(Repository(FinanceTrackerDatabase.getInstance(activity!!.application)!!)) }).get(ViewModelWallets::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

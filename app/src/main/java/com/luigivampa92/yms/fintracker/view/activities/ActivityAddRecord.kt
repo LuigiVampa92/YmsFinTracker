@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
+import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
@@ -34,9 +35,10 @@ open class ActivityAddRecord : AppCompatActivity() {
     }
 
     private fun initComponents() {
-
+        val database = FinanceTrackerDatabase.getInstance(this.application)
         viewModel = ViewModelProviders.of(this,
-                viewModelFactory { ViewModelAddRecord(Repository(this.application)) }).get(ViewModelAddRecord::class.java)
+                viewModelFactory { ViewModelAddRecord(Repository(database!!)) }).get(ViewModelAddRecord::class.java)
+
         currency_activity_add_record.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )

@@ -1,6 +1,5 @@
 package com.luigivampa92.yms.fintracker.model.repositories
 
-import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
@@ -8,66 +7,48 @@ import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 import kotlinx.coroutines.experimental.launch
 
-class Repository(application: Application){
+class Repository(database: FinanceTrackerDatabase) {
 
     //На одном экране нужны будут два репозитория, поэтому я решил слить все в один
-    private val mApplication = application
-
+    private val mDatabase = database
 
     //Операции с записями
     fun addRecord(record: Record) {
         launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.insertRecordUpdateWalletBalance(record)
+            mDatabase.recordsWalletsDao().insertRecordUpdateWalletBalance(record)
         }
     }
 
-    fun editRecord(record: Record, oldRecord: Record){
+    fun editRecord(record: Record, oldRecord: Record) {
         launch {
-            FinanceTrackerDatabase.getInstance(mApplication)?.recordsWalletsDao()?.updateRecordUpdateWalletBalance(record, oldRecord)
+            mDatabase.recordsWalletsDao().updateRecordUpdateWalletBalance(record, oldRecord)
         }
     }
 
     fun deleteRecord(record: Record) {
         launch {
-            val database = FinanceTrackerDatabase.getInstance(mApplication)
-            database?.recordsWalletsDao()?.deleteRecordUpdateWalletBalance(record, record.wallet_id)
+            mDatabase.recordsWalletsDao().deleteRecordUpdateWalletBalance(record, record.wallet_id)
         }
     }
 
     fun getRecordsFromWallet(walletId: String): LiveData<List<Record>> {
-        var records: LiveData<List<Record>> = MutableLiveData()
-        val database = FinanceTrackerDatabase.getInstance(mApplication)
-        if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
-            records = database.recordsDao().getAllRecordsFromWallet(walletId)
-        }
-        return records
+        return mDatabase.recordsDao().getAllRecordsFromWallet(walletId)
     }
 
 
     //Операции с кошельками
     fun addWallet(wallet: Wallet) {
-        val database = FinanceTrackerDatabase.getInstance(mApplication)
         launch {
-            database?.walletsDao()?.addWallet(wallet)
+            mDatabase.walletsDao().addWallet(wallet)
         }
     }
 
     fun getWallets(): LiveData<List<Wallet>> {
-        var wallets: LiveData<List<Wallet>> = MutableLiveData()
-        val database = FinanceTrackerDatabase.getInstance(mApplication)
-        if (database?.walletsDao()?.getAllWallets() != null) {
-            wallets = database.walletsDao().getAllWallets()
-        }
-        return wallets
+        return mDatabase.walletsDao().getAllWallets()
     }
 
     fun getWallet(walletId: String): LiveData<Wallet> {
-        var wallet: LiveData<Wallet> = MutableLiveData()
-        val database = FinanceTrackerDatabase.getInstance(mApplication)
-        if (database?.recordsDao()?.getAllRecordsFromWallet(walletId) != null) {
-            wallet = database.walletsDao().getWallet(walletId)
-        }
-        return wallet
+        return mDatabase.walletsDao().getWallet(walletId)
     }
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.*
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
+import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.createId
@@ -32,8 +33,10 @@ class ActivityAddWallet : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        val database = FinanceTrackerDatabase.getInstance(this.application)
         mViewModel = ViewModelProviders.of(this,
-                viewModelFactory { ViewModelAddWallet(Repository(this.application)) }).get(ViewModelAddWallet::class.java)
+                viewModelFactory { ViewModelAddWallet(Repository(database!!)) }).get(ViewModelAddWallet::class.java)
+
         currency_activity_add_wallet.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
