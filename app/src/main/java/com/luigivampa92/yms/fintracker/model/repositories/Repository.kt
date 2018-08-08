@@ -57,4 +57,10 @@ class Repository(database: FinanceTrackerDatabase) {
         }
     }
 
+    fun updateWallet(wallet: Wallet){
+        launch {
+            mDatabase.walletsDao().updateWallet(wallet)
+        }
+    }
+
 }

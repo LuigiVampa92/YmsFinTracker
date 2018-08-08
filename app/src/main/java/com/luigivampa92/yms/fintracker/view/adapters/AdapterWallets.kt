@@ -14,6 +14,7 @@ import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityEditRecord
+import com.luigivampa92.yms.fintracker.view.activities.ActivityEditWallet
 import com.luigivampa92.yms.fintracker.view.fragments.FragmentWallets
 import kotlinx.android.synthetic.main.item_wallets_list.view.*
 
@@ -54,9 +55,9 @@ class AdapterWallets(fragment: FragmentWallets) : RecyclerView.Adapter<AdapterWa
                     .itemsCallback { dialog, itemView, pos, text ->
                         when (pos) {
                             0 -> {
-//                                val intent = Intent(it.context, ActivityEditRecord::class.java)
-//                                intent.putExtra(Constants.RECORD, mRecordsList[position])
-//                                it.context.startActivity(intent)
+                                val intent = Intent(it.context, ActivityEditWallet::class.java)
+                                intent.putExtra(Constants.WALLET, mWalletsList[position])
+                                it.context.startActivity(intent)
                                 dialog.dismiss()
                             }
                             else -> {

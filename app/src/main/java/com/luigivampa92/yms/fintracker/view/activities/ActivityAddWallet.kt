@@ -20,9 +20,9 @@ import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.activity_add_wallet.*
 
-class ActivityAddWallet : AppCompatActivity() {
+open class ActivityAddWallet : AppCompatActivity() {
 
-    private lateinit var mViewModel: ViewModelAddWallet
+    lateinit var viewModel: ViewModelAddWallet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class ActivityAddWallet : AppCompatActivity() {
 
     private fun initComponents() {
         val database = FinanceTrackerDatabase.getInstance(this.application)
-        mViewModel = ViewModelProviders.of(this,
+        viewModel = ViewModelProviders.of(this,
                 viewModelFactory { ViewModelAddWallet(Repository(database!!)) }).get(ViewModelAddWallet::class.java)
 
         currency_activity_add_wallet.adapter = ArrayAdapter<String>(
@@ -53,10 +53,9 @@ class ActivityAddWallet : AppCompatActivity() {
                 val walletName = getTextFromView(name_activity_add_wallet)
                 val walletCurrency = currency_activity_add_wallet.selectedItem.toString()
                 val walletBalance = getTextFromView(balance_activity_add_wallet).toDouble()
+                val wallet = Wallet(walletId, walletName, walletBalance, walletCurrency)
 
-                mViewModel.addWallet(Wallet(
-                        walletId, walletName, walletBalance, walletCurrency
-                ))
+                makeTransaction(wallet)
 
                 //Если кошельков не было, то добавляем этот как дефолтный
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
@@ -71,5 +70,9 @@ class ActivityAddWallet : AppCompatActivity() {
         toolbar_activity_add_wallet.setOnClickListener {
             super.onBackPressed()
         }
+    }
+
+    open fun makeTransaction(wallet: Wallet){
+        viewModel.addWallet(wallet)
     }
 }

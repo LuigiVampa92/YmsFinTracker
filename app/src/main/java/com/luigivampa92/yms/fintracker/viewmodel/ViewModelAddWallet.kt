@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import android.content.Context
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import kotlinx.coroutines.experimental.launch
@@ -17,5 +18,11 @@ class ViewModelAddWallet(repository: Repository) : ViewModel() {
     fun addWallet(wallet: Wallet) {
         wallet.balance = CurrencyConverter.convertCurrency(wallet.currency, wallet.balance)
         mRepository.addWallet(wallet)
+    }
+
+    fun editWallet(wallet: Wallet, oldWallet: Wallet){
+        wallet.id = oldWallet.id
+        wallet.balance = CurrencyConverter.convertCurrency(wallet.currency, wallet.balance)
+        mRepository.updateWallet(wallet)
     }
 }
