@@ -14,7 +14,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
-import com.luigivampa92.yms.fintracker.model.repositories.RecordsWalletRepository
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord

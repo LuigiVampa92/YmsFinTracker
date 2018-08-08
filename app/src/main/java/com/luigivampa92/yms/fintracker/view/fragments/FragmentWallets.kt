@@ -2,7 +2,6 @@ package com.luigivampa92.yms.fintracker.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,20 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
-import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
-import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
-import com.luigivampa92.yms.fintracker.model.repositories.WalletsRepository
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterWallets
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelWallets
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.fragment_wallets.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
 
 class FragmentWallets : Fragment() {
 

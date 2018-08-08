@@ -45,6 +45,13 @@ class Repository(application: Application){
 
 
     //Операции с кошельками
+    fun addWallet(wallet: Wallet) {
+        val database = FinanceTrackerDatabase.getInstance(mApplication)
+        launch {
+            database?.walletsDao()?.addWallet(wallet)
+        }
+    }
+
     fun getWallets(): LiveData<List<Wallet>> {
         var wallets: LiveData<List<Wallet>> = MutableLiveData()
         val database = FinanceTrackerDatabase.getInstance(mApplication)

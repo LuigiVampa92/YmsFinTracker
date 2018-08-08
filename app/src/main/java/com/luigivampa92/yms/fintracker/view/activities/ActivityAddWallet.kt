@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter
 import com.luigivampa92.yms.fintracker.*
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.model.Wallet
+import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.utils.isNumeric
+import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddRecord
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelAddWallet
+import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
 import kotlinx.android.synthetic.main.activity_add_wallet.*
 
 class ActivityAddWallet : AppCompatActivity() {
@@ -29,7 +32,8 @@ class ActivityAddWallet : AppCompatActivity() {
     }
 
     private fun initComponents() {
-        mViewModel = ViewModelProviders.of(this).get(ViewModelAddWallet::class.java)
+        mViewModel = ViewModelProviders.of(this,
+                viewModelFactory { ViewModelAddWallet(Repository(this.application)) }).get(ViewModelAddWallet::class.java)
         currency_activity_add_wallet.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
