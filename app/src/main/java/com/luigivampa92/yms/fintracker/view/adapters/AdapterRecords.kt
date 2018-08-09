@@ -1,6 +1,7 @@
 package com.luigivampa92.yms.fintracker.view.adapters
 
 import android.content.Intent
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -63,9 +64,18 @@ class AdapterRecords(fragmentBalance: FragmentBalance) : RecyclerView.Adapter<Ad
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(record: Record) {
-            itemView.item_records_list_name.text = record.name
-            itemView.item_records_list_date.text = record.date
-            itemView.item_records_list_amount.text = record.amount.toString()
+            val context = itemView.context
+            itemView.item_records_list_name.text = context.resources.getString(R.string.formatted_name, record.name)
+            itemView.item_records_list_date.text = context.getString(R.string.formatted_date_label, record.date)
+            if(record.amount < 0){
+                itemView.item_records_list_amount.text = context.resources.getString(R.string.formatted_spent, record.amount.toString(), record.currency)
+                itemView.item_records_list_amount.setTextColor(ResourcesCompat.getColor(context.resources, android.R.color.holo_red_dark, null))
+            }else{
+                itemView.item_records_list_amount.text = context.resources.getString(R.string.formatted_earned, record.amount.toString(), record.currency)
+                itemView.item_records_list_amount.setTextColor(ResourcesCompat.getColor(context.resources, android.R.color.holo_green_light, null))
+            }
+
+            itemView.item_records_list_category.text = record.category
         }
     }
 }

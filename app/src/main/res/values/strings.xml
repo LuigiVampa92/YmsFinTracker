@@ -78,6 +78,11 @@
     <string name="formatted_wallet_name">Кошелек: %1$s</string>
     <string name="formatted_balance_usd">Текущий Баланс: %1$s USD</string>
     <string name="formatted_balance_rub">Текущий Баланс: %1$s RUB</string>
+    <string name="formatted_date_label">Дата: %1$s</string>
+    <string name="formatted_spent">Потрачено: %1$s %2$s</string>
+    <string name="formatted_earned">Получено: %1$s %2$s</string>
+    <string name="formatted_category">Категория: %1$s</string>
+    <string name="formatted_name">Название: %1$s</string>
 
     <string name="text_navigation_item_wallets">Кошельки</string>
     <string name="balance">Баланс</string>
@@ -109,4 +114,5 @@
     <string name="create_category">Создать Категорию</string>
     <string name="category_name">Название Категории</string>
     <string name="category_prefill">Категория</string>
+
 </resources>
