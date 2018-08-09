@@ -1,31 +1,24 @@
 package com.luigivampa92.yms.fintracker.view.fragments
 
-import android.app.DatePickerDialog
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
-import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Template
 import com.luigivampa92.yms.fintracker.model.repositories.TemplatesRepository
-import com.luigivampa92.yms.fintracker.utils.createId
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelTemplates
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
-import kotlinx.android.synthetic.main.activity_add_record.*
-import kotlinx.android.synthetic.main.fragment_template.*
-import kotlinx.android.synthetic.main.fragment_templates.*
-import java.util.*
+import kotlinx.android.synthetic.main.abc_dialog_title_material.view.*
+import kotlinx.android.synthetic.main.fragment_add_template.*
 
-class FragmentAddTemplate: Fragment(){
+class FragmentAddTemplate : Fragment() {
 
     lateinit var viewModel: ViewModelTemplates
 
@@ -36,7 +29,7 @@ class FragmentAddTemplate: Fragment(){
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_template, container, false)
+        return inflater.inflate(R.layout.fragment_add_template, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +39,13 @@ class FragmentAddTemplate: Fragment(){
         initComponentsListeners()
     }
 
-    private fun initComponents(){
+    private fun initComponents() {
+
+
+        toolbar_fragment_template.setNavigationOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         currency_fragment_template.adapter = ArrayAdapter<String>(
                 context, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
@@ -55,7 +54,7 @@ class FragmentAddTemplate: Fragment(){
         ))
     }
 
-    private fun initComponentsListeners(){
+    private fun initComponentsListeners() {
 
         val categoriesOptions = arrayListOf<String>()
         income_fragment_template.setOnCheckedChangeListener { buttonView, isChecked ->

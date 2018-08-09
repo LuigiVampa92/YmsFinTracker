@@ -11,10 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.afollestad.materialdialogs.MaterialDialog
+import com.commit451.modalbottomsheetdialogfragment.ModalBottomSheetDialogFragment
+import com.commit451.modalbottomsheetdialogfragment.Option
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.interfaces.IChangeFragmentInterface
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
@@ -22,13 +25,21 @@ import com.luigivampa92.yms.fintracker.view.activities.ActivityAddWallet
 import com.luigivampa92.yms.fintracker.view.adapters.AdapterRecords
 import com.luigivampa92.yms.fintracker.viewmodel.ViewModelRecordsWallet
 import com.luigivampa92.yms.fintracker.viewmodel.factory.viewModelFactory
+import kotlinx.android.synthetic.main.abc_dialog_title_material.view.*
 import kotlinx.android.synthetic.main.fragment_balance.*
+import kotlinx.android.synthetic.main.fragment_add_template.*
 
-class FragmentBalance : Fragment() {
+class FragmentBalance : Fragment(), ModalBottomSheetDialogFragment.Listener {
 
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
+    private lateinit var mChangeFragmentCallback: IChangeFragmentInterface
     lateinit var mViewModel: ViewModelRecordsWallet
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mChangeFragmentCallback = context as IChangeFragmentInterface
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +64,14 @@ class FragmentBalance : Fragment() {
         initComponentsObservers()
     }
 
+    override fun onModalOptionSelected(tag: String?, option: Option) {
+        when(option.id){
+            R.id.action_templates -> mChangeFragmentCallback.loadFragment(FragmentTemplates())
+            R.id.action_settings -> mChangeFragmentCallback.loadFragment(FragmentSettings())
+            R.id.action_info -> mChangeFragmentCallback.loadFragment(FragmentInfo())
+        }
+    }
+
     private fun initComponents() {
         mSharedPreferences = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mAdapterRecords = AdapterRecords(this)
@@ -61,6 +80,17 @@ class FragmentBalance : Fragment() {
     }
 
     private fun initComponentsListeners() {
+
+        bottom_appbar.setNavigationOnClickListener {
+            mChangeFragmentCallback.loadFragment(FragmentWallets())
+        }
+
+        bottom_appbar.setOnMenuItemClickListener {
+            ModalBottomSheetDialogFragment.Builder()
+                    .add(R.menu.menu_toolbar_navigation)
+                    .show(childFragmentManager, "Options")
+            true
+        }
 
         fab_fragment_balance.setOnClickListener {
             if (mSharedPreferences.getString(Constants.CURRENT_WALLET_ID, null) == null) {

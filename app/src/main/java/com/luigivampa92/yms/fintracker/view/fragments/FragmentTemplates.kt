@@ -56,6 +56,11 @@ class FragmentTemplates : Fragment() {
     }
 
     private fun initComponentsListeners(){
+
+        toolbar_fragment_templates.setNavigationOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         fab_fragment_templates.setOnClickListener {
             mFragmentLoader.loadFragment(FragmentAddTemplate())
         }

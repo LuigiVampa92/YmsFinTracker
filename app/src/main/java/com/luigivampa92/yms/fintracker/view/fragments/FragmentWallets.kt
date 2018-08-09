@@ -48,6 +48,11 @@ class FragmentWallets : Fragment() {
     }
 
     private fun initComponentsListeners() {
+
+        toolbar_fragment_wallets.setNavigationOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         fab_fragment_wallets.setOnClickListener {
             startActivity(Intent(context, ActivityAddWallet::class.java))
         }

@@ -6,13 +6,26 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_fragment_wallets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="@string/wallets"
+        app:titleTextColor="@android:color/white" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_fragment_wallets"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_fragment_wallets" />
 
 
     <android.support.design.widget.FloatingActionButton
