@@ -26,4 +26,7 @@ interface RecordsDao {
 
     @Query("DELETE from records")
     fun deleteAllRecords()
+
+    @Query("SELECT * from records WHERE repeatable = 1")
+    fun getPendingRecords(): LiveData<List<Record>>
 }

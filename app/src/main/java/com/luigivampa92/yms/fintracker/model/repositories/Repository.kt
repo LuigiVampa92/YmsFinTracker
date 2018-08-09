@@ -41,6 +41,10 @@ class Repository(database: FinanceTrackerDatabase) {
         return mDatabase.recordsDao().getAllRecords()
     }
 
+    fun getPendingRecords():LiveData<List<Record>>{
+        return mDatabase.recordsDao().getPendingRecords()
+    }
+
 
     //Операции с кошельками
     fun addWallet(wallet: Wallet) {

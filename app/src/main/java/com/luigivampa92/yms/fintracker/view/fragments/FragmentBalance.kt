@@ -67,9 +67,9 @@ class FragmentBalance : Fragment(), ModalBottomSheetDialogFragment.Listener {
     override fun onModalOptionSelected(tag: String?, option: Option) {
         when(option.id){
             R.id.action_templates -> mChangeFragmentCallback.loadFragment(FragmentTemplates())
-            R.id.action_settings -> mChangeFragmentCallback.loadFragment(FragmentSettings())
             R.id.action_info -> mChangeFragmentCallback.loadFragment(FragmentInfo())
             R.id.action_statistics -> mChangeFragmentCallback.loadFragment(FragmentStatistics())
+            R.id.action_pending_transactions -> mChangeFragmentCallback.loadFragment(FragmentPendingRecords())
             R.id.action_categories -> mChangeFragmentCallback.loadFragment(FragmentCategories())
         }
     }

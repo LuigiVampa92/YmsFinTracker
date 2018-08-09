@@ -10,7 +10,7 @@ class ViewModelRecordsWallet(repository: Repository) : ViewModel() {
 
     private val mRepository = repository
 
-    fun getRecordsFromWallet(walletId: String): LiveData<List<Record>>{
+    fun getRecordsFromWallet(walletId: String): LiveData<List<Record>> {
         return mRepository.getRecordsFromWallet(walletId)
     }
 
@@ -18,12 +18,12 @@ class ViewModelRecordsWallet(repository: Repository) : ViewModel() {
         return mRepository.getWallet(walletId)
     }
 
-    fun getAllRecords(): LiveData<List<Record>>{
-        return mRepository.getAllRecords()
-    }
-
     fun deleteRecord(record: Record) {
         record.amount = CurrencyConverter.convertCurrency(record.currency, record.amount)
         mRepository.deleteRecord(record)
+    }
+
+    fun getPendingRecords(): LiveData<List<Record>> {
+        return mRepository.getPendingRecords()
     }
 }

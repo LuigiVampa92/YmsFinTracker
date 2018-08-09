@@ -7,6 +7,7 @@
     <color name="colorAccent">#F9AA33</color>
     <color name="backgroundColor">#ECEFF1</color>
     <color name="color_white">#ffffff</color>
+    <color name="colorHint">#808080</color>
 
     <color name="color_navigation_header">#a1887f</color>
     <color name="color_navigation_background">#bcaaa4</color>

@@ -70,6 +70,10 @@
     <string-array name="templates_actions">
         <item>Удалить</item>
     </string-array>
+    <string-array name="pending_actions">
+        <item>Остановить</item>
+    </string-array>
+
 
     <string name="choose_records_action">Выберите Действие</string>
 
@@ -114,5 +118,7 @@
     <string name="create_category">Создать Категорию</string>
     <string name="category_name">Название Категории</string>
     <string name="category_prefill">Категория</string>
+    <string name="text_navigation_item_pending">Отложенные Транзакции</string>
+    <string name="pending_records">Отложенные Транзакции</string>
 
 </resources>
