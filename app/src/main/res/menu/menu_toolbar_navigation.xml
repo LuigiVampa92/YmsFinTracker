@@ -3,6 +3,11 @@
 
 
     <item
+        android:id="@+id/action_statistics"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/text_navigation_item_statistics" />
+
+    <item
         android:id="@+id/action_templates"
         android:icon="@drawable/ic_templates"
         android:title="@string/text_navigation_item_templates" />

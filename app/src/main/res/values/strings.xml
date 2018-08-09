@@ -41,6 +41,7 @@
         <item>Другое</item>
     </string-array>
 
+
     <string-array name="currencies">
         <item>USD</item>
         <item>RUB</item>
@@ -85,4 +86,8 @@
     <string name="actions">Действия</string>
     <string name="add_template">Добавьте Шаблон</string>
     <string name="templates">Шаблоны</string>
+    <string name="text_navigation_item_statistics">Статистика</string>
+    <string name="statistics">Статистика</string>
+    <string name="date_starting_from">Начиная с</string>
+    <string name="date_ending_with">Заканчивая</string>
 </resources>
