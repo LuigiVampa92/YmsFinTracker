@@ -31,6 +31,8 @@
         <item>Одежда</item>
         <item>Отдых</item>
         <item>Спорт</item>
+        <item>Развлечения</item>
+        <item>Работа</item>
         <item>Другое</item>
     </string-array>
 
@@ -41,6 +43,19 @@
         <item>Другое</item>
     </string-array>
 
+    <string-array name="categories">
+        <item>Зарплата</item>
+        <item>Долг</item>
+        <item>Взяточничество</item>
+        <item>Другое</item>
+        <item>Еда</item>
+        <item>Одежда</item>
+        <item>Отдых</item>
+        <item>Спорт</item>
+        <item>Развлечения</item>
+        <item>Работа</item>
+        <item>Другое</item>
+    </string-array>
 
     <string-array name="currencies">
         <item>USD</item>
@@ -90,4 +105,8 @@
     <string name="statistics">Статистика</string>
     <string name="date_starting_from">Начиная с</string>
     <string name="date_ending_with">Заканчивая</string>
+    <string name="text_navigation_item_categories">Категории</string>
+    <string name="create_category">Создать Категорию</string>
+    <string name="category_name">Название Категории</string>
+    <string name="category_prefill">Категория</string>
 </resources>

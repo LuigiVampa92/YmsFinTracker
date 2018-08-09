@@ -2,11 +2,13 @@ package com.luigivampa92.yms.fintracker.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import androidx.work.*
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.model.Category
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.workers.RecordWorker
@@ -26,6 +28,10 @@ class ViewModelAddRecord(repository: Repository) : ViewModel() {
         } else {
             addPendingRecord(record)
         }
+    }
+
+    fun getCategories(): LiveData<List<Category>>{
+        return mRepository.getCategories()
     }
 
     fun editRecord(record: Record, oldRecord: Record){

@@ -33,14 +33,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_activity_add_record" />
 
-    <AutoCompleteTextView
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/category_activity_add_record"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="@string/category"
         android:inputType="textPersonName|textCapWords"
         app:layout_constraintEnd_toStartOf="@+id/date_activity_add_record"
         app:layout_constraintStart_toStartOf="parent"

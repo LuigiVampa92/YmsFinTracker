@@ -18,6 +18,10 @@ class ViewModelRecordsWallet(repository: Repository) : ViewModel() {
         return mRepository.getWallet(walletId)
     }
 
+    fun getAllRecords(): LiveData<List<Record>>{
+        return mRepository.getAllRecords()
+    }
+
     fun deleteRecord(record: Record) {
         record.amount = CurrencyConverter.convertCurrency(record.currency, record.amount)
         mRepository.deleteRecord(record)

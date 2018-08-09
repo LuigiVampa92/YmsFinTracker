@@ -3,6 +3,7 @@ package com.luigivampa92.yms.fintracker.model.repositories
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.model.Category
 import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 import kotlinx.coroutines.experimental.launch
@@ -36,6 +37,10 @@ class Repository(database: FinanceTrackerDatabase) {
         return mDatabase.recordsDao().getAllRecordsFromWallet(walletId)
     }
 
+    fun getAllRecords(): LiveData<List<Record>>{
+        return mDatabase.recordsDao().getAllRecords()
+    }
+
 
     //Операции с кошельками
     fun addWallet(wallet: Wallet) {
@@ -64,4 +69,7 @@ class Repository(database: FinanceTrackerDatabase) {
         }
     }
 
+    fun getCategories(): LiveData<List<Category>>{
+        return mDatabase.categoriesDao().getCategories()
+    }
 }

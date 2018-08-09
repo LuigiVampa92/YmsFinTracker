@@ -8,6 +8,7 @@ import android.util.Log
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.Currencies
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.model.Category
 import com.luigivampa92.yms.fintracker.model.Currency
 import okhttp3.*
 import org.json.JSONObject
@@ -69,3 +70,17 @@ fun fetchCurrenciesFromAssets(application: Application) {
         database?.currenciesDao()?.addCurrency(Currency(0, key.substring(3), value.toDouble()))
     }
 }
+
+
+fun fetchCategoriesFromAssets(application: Application) {
+    val incomeCategories = application.applicationContext.resources.getStringArray(R.array.income_categories)
+    val expendiTureCategories = application.applicationContext.resources.getStringArray(R.array.expenditure_categories)
+    val database = FinanceTrackerDatabase.getInstance(application)
+    incomeCategories.forEach {
+        database?.categoriesDao()?.addCategory(Category(0, it, true))
+    }
+    expendiTureCategories.forEach {
+        database?.categoriesDao()?.addCategory(Category(0, it, false))
+    }
+}
+

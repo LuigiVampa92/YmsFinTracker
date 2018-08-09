@@ -13,6 +13,11 @@
         android:title="@string/text_navigation_item_templates" />
 
     <item
+        android:id="@+id/action_categories"
+        android:icon="@drawable/ic_categories"
+        android:title="@string/text_navigation_item_categories" />
+
+    <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_navigation_item_settings"
         android:title="@string/text_navigation_item_settings" />

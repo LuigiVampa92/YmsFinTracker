@@ -70,6 +70,7 @@ class FragmentBalance : Fragment(), ModalBottomSheetDialogFragment.Listener {
             R.id.action_settings -> mChangeFragmentCallback.loadFragment(FragmentSettings())
             R.id.action_info -> mChangeFragmentCallback.loadFragment(FragmentInfo())
             R.id.action_statistics -> mChangeFragmentCallback.loadFragment(FragmentStatistics())
+            R.id.action_categories -> mChangeFragmentCallback.loadFragment(FragmentCategories())
         }
     }
 

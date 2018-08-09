@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
@@ -27,7 +28,6 @@ import java.util.*
 open class ActivityAddRecord : AppCompatActivity() {
 
     lateinit var viewModel: ViewModelAddRecord
-    lateinit var mTemplate: Template
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,13 +87,12 @@ open class ActivityAddRecord : AppCompatActivity() {
 
 
         done_activity_add_record.setOnClickListener { _ ->
-            if (hasText(name_activity_add_record, category_activity_add_record,
-                            amount_activity_add_record)) {
+            if (hasText(name_activity_add_record, amount_activity_add_record)) {
 
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
                 val id = createId()
                 val name = getTextFromView(name_activity_add_record)
-                val category = getTextFromView(category_activity_add_record)
+                var category = ""
                 val income = income_activity_add_record.isChecked
                 var amount = getTextFromView(amount_activity_add_record).toDouble()
                 val currency = currency_activity_add_record.selectedItem.toString()
@@ -105,7 +104,14 @@ open class ActivityAddRecord : AppCompatActivity() {
                 if (hasText(pending_time_activity_add_record)) {
                     pendingTime = getTextFromView(pending_time_activity_add_record).toInt()
                 }
-                if (!income) amount = -amount
+
+                //Пока таблицу для категорий не добавил
+                if (!income) {
+                    amount = -amount
+                    category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
+                }else{
+                    category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
+                }
 
 
                 val record = Record(id, name, category, income, amount, currency,
@@ -129,7 +135,7 @@ open class ActivityAddRecord : AppCompatActivity() {
         val array = resources.getStringArray(R.array.currencies)
 
         name_activity_add_record.setText(template.name)
-        category_activity_add_record.setText(template.category)
+        category_activity_add_record.setSelection(template.category.toInt())
         income_activity_add_record.isChecked = template.income
         amount_activity_add_record.setText(template.amount.toString())
         currency_activity_add_record.setSelection(array.indexOf(template.currency), true)

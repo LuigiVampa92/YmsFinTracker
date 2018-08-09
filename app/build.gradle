@@ -46,7 +46,9 @@ def versions = [
         okhttp          : '3.10.0',
         asyncawait      : '1.0.0',
         anko            : '0.10.5',
-        workmanager     : '1.0.0-alpha06'
+        workmanager     : '1.0.0-alpha06',
+        chart           : '3.0.3',
+        modal_dialog    : '1.0.2'
 ]
 
 def versionsTest = [
@@ -62,7 +64,8 @@ def versionsTest = [
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.github.Commit451:ModalBottomSheetDialogFragment:1.0.2'
+    implementation "com.github.Commit451:ModalBottomSheetDialogFragment:$versions.modal_dialog"
+    implementation "com.github.PhilJay:MPAndroidChart:v$versions.chart"
 
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
