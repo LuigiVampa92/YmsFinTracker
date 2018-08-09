@@ -12,6 +12,7 @@ import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
+import com.luigivampa92.yms.fintracker.model.Category
 import com.luigivampa92.yms.fintracker.utils.getTextFromView
 import com.luigivampa92.yms.fintracker.utils.hasText
 import com.luigivampa92.yms.fintracker.model.Record
@@ -28,6 +29,7 @@ import java.util.*
 open class ActivityAddRecord : AppCompatActivity() {
 
     lateinit var viewModel: ViewModelAddRecord
+    var mCategories: MutableList<Category> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,7 @@ open class ActivityAddRecord : AppCompatActivity() {
 
         initComponents()
         initComponentsListeners()
+        initComponentsObservers()
     }
 
     private fun initComponents() {
@@ -49,9 +52,9 @@ open class ActivityAddRecord : AppCompatActivity() {
         currency_activity_add_record.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.currencies)
         )
-        category_activity_add_record.setAdapter(ArrayAdapter<String>(
+        category_activity_add_record.adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, this.resources.getStringArray(R.array.expenditure_categories)
-        ))
+        )
     }
 
     private fun initComponentsListeners() {
@@ -59,14 +62,14 @@ open class ActivityAddRecord : AppCompatActivity() {
         val categoriesOptions = arrayListOf<String>()
         income_activity_add_record.setOnCheckedChangeListener { buttonView, isChecked ->
             categoriesOptions.clear()
-            if (isChecked) {
-                categoriesOptions.addAll(this.resources.getStringArray(R.array.income_categories))
-            } else {
-                categoriesOptions.addAll(this.resources.getStringArray(R.array.expenditure_categories))
+
+            mCategories.forEach {
+                if (it.income == isChecked) categoriesOptions.add(it.name)
             }
-            category_activity_add_record.setAdapter(ArrayAdapter<String>(
+
+            category_activity_add_record.adapter = ArrayAdapter<String>(
                     this, android.R.layout.simple_spinner_dropdown_item, categoriesOptions
-            ))
+            )
         }
 
         toolbar_activity_add_record.setNavigationOnClickListener {
@@ -109,7 +112,7 @@ open class ActivityAddRecord : AppCompatActivity() {
                 if (!income) {
                     amount = -amount
                     category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
-                }else{
+                } else {
                     category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
                 }
 
@@ -122,6 +125,15 @@ open class ActivityAddRecord : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    fun initComponentsObservers() {
+        viewModel.getCategories().observe(this, android.arch.lifecycle.Observer { it ->
+            mCategories.clear()
+            it?.forEach {
+                mCategories.add(it)
+            }
+        })
     }
 
     //Переопределим его в потомке, чтобы лишний раз код не писать
