@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_activity_add_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         app:contentInsetStartWithNavigation="0dp"

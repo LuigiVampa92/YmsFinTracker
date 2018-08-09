@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v4.app.Fragment
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -76,8 +77,17 @@ class AdapterTemplates(fragment: FragmentTemplates) : RecyclerView.Adapter<Adapt
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(template: Template) {
-            itemView.item_records_list_name.text = template.name
-            itemView.item_records_list_amount.text = template.amount.toString()
+            val context = itemView.context
+            itemView.item_records_list_name.text = context.resources.getString(R.string.formatted_name, template.name)
+            if(template.amount < 0){
+                itemView.item_records_list_amount.text = context.resources.getString(R.string.formatted_spent, template.amount.toString(), template.currency)
+                itemView.item_records_list_amount.setTextColor(ResourcesCompat.getColor(context.resources, android.R.color.holo_red_dark, null))
+            }else{
+                itemView.item_records_list_amount.text = context.resources.getString(R.string.formatted_earned, template.amount.toString(), template.currency)
+                itemView.item_records_list_amount.setTextColor(ResourcesCompat.getColor(context.resources, android.R.color.holo_green_light, null))
+            }
+
+            itemView.item_records_list_category.text = template.category
         }
     }
 }

@@ -3,6 +3,7 @@ package com.luigivampa92.yms.fintracker.view.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ class AdapterWallets(fragment: FragmentWallets) : RecyclerView.Adapter<AdapterWa
 
         val sf = holder.itemView.context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         if (sf.getString(Constants.CURRENT_WALLET_ID, null) == mWalletsList[position].id) {
-            holder.itemView.layout_item_wallets_list.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_orange_light))
+            holder.itemView.layout_item_wallets_list.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.tint))
             mColoredItemPosition = holder.adapterPosition
         } else {
             holder.itemView.layout_item_wallets_list.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.white))
@@ -42,7 +43,7 @@ class AdapterWallets(fragment: FragmentWallets) : RecyclerView.Adapter<AdapterWa
         holder.bind(mWalletsList[holder.adapterPosition])
 
         holder.itemView.setOnClickListener {
-            it.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, android.R.color.holo_orange_light))
+            it.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.tint))
             sf.edit().putString(Constants.CURRENT_WALLET_ID, mWalletsList[holder.adapterPosition].id).apply()
             notifyItemChanged(holder.adapterPosition)
             notifyItemChanged(mColoredItemPosition)
@@ -91,10 +92,16 @@ class AdapterWallets(fragment: FragmentWallets) : RecyclerView.Adapter<AdapterWa
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(wallet: Wallet) {
-            itemView.name_item_wallets_list.text = wallet.name
-            itemView.balance_item_wallets_list.text = formatDecimalNumber(wallet.balance)
-            itemView.balance_secondary_item_wallets_list.text = formatDecimalNumber(CurrencyConverter.convertCurrency(
-                    "USD", wallet.balance, itemView.context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.SECONDARY_CURRENCY, "RUB")))
+            val resources = itemView.context.resources
+            itemView.name_item_wallets_list.text = resources.getString(R.string.formatted_name, wallet.name)
+            itemView.balance_item_wallets_list.text = resources.getString(R.string.formatted_balance_rub, formatDecimalNumber(wallet.balance))
+            itemView.balance_secondary_item_wallets_list.text = resources.getString(R.string.formatted_balance_usd,
+                    formatDecimalNumber(CurrencyConverter.convertCurrency(
+                            "USD", wallet.balance, itemView.context.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.SECONDARY_CURRENCY, "RUB"))))
+            if(wallet.balance < 0){
+                itemView.balance_item_wallets_list.setTextColor(ResourcesCompat.getColor(resources, android.R.color.holo_red_dark, null))
+                itemView.balance_secondary_item_wallets_list.setTextColor(ResourcesCompat.getColor(resources, android.R.color.holo_red_dark, null))
+            }
         }
 
     }
