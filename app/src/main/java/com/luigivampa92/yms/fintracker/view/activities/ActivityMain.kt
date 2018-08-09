@@ -28,48 +28,48 @@ class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
             loadFragmentWithoutBackStack(FragmentBalance())
         }
 
-        initComponents()
-        initComponentsListeners()
+        //initComponents()
+        //initComponentsListeners()
     }
 
-    private fun initComponents() {
-        toolbar.setNavigationIcon(R.drawable.ic_dehaze)
-        toolbar.title = resources.getString(R.string.finance_tracker)
-        val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.description_navigation_drawer_open, R.string.description_navigation_drawer_close)
-        drawer_layout.addDrawerListener(drawerToggle)
-        drawerToggle.syncState()
-    }
+//    private fun initComponents() {
+//        toolbar.setNavigationIcon(R.drawable.ic_dehaze)
+//        toolbar.title = resources.getString(R.string.finance_tracker)
+//        val drawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.description_navigation_drawer_open, R.string.description_navigation_drawer_close)
+//        drawer_layout.addDrawerListener(drawerToggle)
+//        drawerToggle.syncState()
+//    }
 
-    private fun initComponentsListeners() {
-
-        toolbar.setNavigationOnClickListener {
-            drawer_layout.openDrawer(GravityCompat.START)
-        }
-
-        navigation_view.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_item_balance -> {
-                    loadFragment(FragmentBalance())
-                }
-                R.id.navigation_item_settings -> {
-                    loadFragment(FragmentSettings())
-                }
-                R.id.navigation_item_info -> {
-                    loadFragment(FragmentInfo())
-                }
-                R.id.navigation_item_templates -> {
-                    loadFragment(FragmentTemplates())
-                }
-                else -> {
-                    loadFragment(FragmentWallets())
-                }
-            }
-            it.isChecked = true
-            drawer_layout.closeDrawers()
-            true
-        }
-
-    }
+//    private fun initComponentsListeners() {
+//
+//        toolbar.setNavigationOnClickListener {
+//            drawer_layout.openDrawer(GravityCompat.START)
+//        }
+//
+//        navigation_view.setNavigationItemSelectedListener {
+//            when (it.itemId) {
+//                R.id.navigation_item_balance -> {
+//                    loadFragment(FragmentBalance())
+//                }
+//                R.id.navigation_item_settings -> {
+//                    loadFragment(FragmentSettings())
+//                }
+//                R.id.navigation_item_info -> {
+//                    loadFragment(FragmentInfo())
+//                }
+//                R.id.navigation_item_templates -> {
+//                    loadFragment(FragmentTemplates())
+//                }
+//                else -> {
+//                    loadFragment(FragmentWallets())
+//                }
+//            }
+//            it.isChecked = true
+//            drawer_layout.closeDrawers()
+//            true
+//        }
+//
+//    }
 
     override fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

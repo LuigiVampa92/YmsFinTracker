@@ -82,4 +82,5 @@
     <string name="edit_wallet">Измените Кошелек</string>
     <string name="text_navigation_item_templates">Шаблоны</string>
     <string name="add_wallet_to_add_template">Чтобы использовать шаблоны Вы должны создать кошелек</string>
+    <string name="actions">Действия</string>
 </resources>

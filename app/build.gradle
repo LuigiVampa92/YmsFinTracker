@@ -62,8 +62,6 @@ def versionsTest = [
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "co.metalab.asyncawait:asyncawait:$versions.asyncawait"
-
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
     implementation "com.android.support:design:$support_version"

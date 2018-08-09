@@ -4,7 +4,7 @@ buildscript {
         targetsdk_version = 28
         minsdk_version = 21
         kotlin_version = '1.2.60'
-        support_version = '28.0.0-beta01'
+        support_version = '28.0.0-alpha3'
     }
 
     repositories {

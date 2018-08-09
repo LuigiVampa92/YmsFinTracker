@@ -57,6 +57,7 @@ class FragmentBalance : Fragment() {
         mSharedPreferences = activity!!.getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
         mAdapterRecords = AdapterRecords(this)
         recycler_fragment_balance.adapter = mAdapterRecords
+        bottom_appbar.replaceMenu(R.menu.menu_main)
     }
 
     private fun initComponentsListeners() {
