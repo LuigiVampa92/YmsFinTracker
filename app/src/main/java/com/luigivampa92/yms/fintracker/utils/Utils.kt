@@ -12,6 +12,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Double.parseDouble
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.text.Charsets.UTF_8
 
@@ -45,5 +46,10 @@ fun getTextFromView(view: TextView): String {
 
 fun formatDecimalNumber(value: Double): String {
     return DecimalFormat("0.00").format(value)
+}
+
+
+fun convertStringToDate(string: String): Date {
+    return SimpleDateFormat("dd.mm.yyyy").parse(string)
 }
 

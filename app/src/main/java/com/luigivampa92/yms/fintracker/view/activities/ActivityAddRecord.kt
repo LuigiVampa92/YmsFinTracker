@@ -95,12 +95,12 @@ open class ActivityAddRecord : AppCompatActivity() {
                 val sf = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE)
                 val id = createId()
                 val name = getTextFromView(name_activity_add_record)
-                var category = ""
+                val category = category_activity_add_record.selectedItem.toString()
                 val income = income_activity_add_record.isChecked
                 var amount = getTextFromView(amount_activity_add_record).toDouble()
                 val currency = currency_activity_add_record.selectedItem.toString()
                 val walletId = sf.getString(Constants.CURRENT_WALLET_ID, "DEFAULT")
-                val date = getTextFromView(date_activity_add_record)
+                val date = getTextFromView(date_label_activity_add_record)
                 val repeatable = repeat_activity_add_record.isChecked
 
                 var pendingTime = 0
@@ -111,9 +111,6 @@ open class ActivityAddRecord : AppCompatActivity() {
                 //Пока таблицу для категорий не добавил
                 if (!income) {
                     amount = -amount
-                    category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
-                } else {
-                    category = resources.getStringArray(R.array.expenditure_categories).indexOf(category).toString()
                 }
 
 
@@ -147,7 +144,6 @@ open class ActivityAddRecord : AppCompatActivity() {
         val array = resources.getStringArray(R.array.currencies)
 
         name_activity_add_record.setText(template.name)
-        category_activity_add_record.setSelection(template.category.toInt())
         income_activity_add_record.isChecked = template.income
         amount_activity_add_record.setText(template.amount.toString())
         currency_activity_add_record.setSelection(array.indexOf(template.currency), true)
