@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--Toolbar-->
-    <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="toolbar_elevation">3dp</dimen>
-
-    <!--Info-->
-    <dimen name="image_contact_size">50dp</dimen>
-    <dimen name="image_contact_inner_padding">8dp</dimen>
-
-    <dimen name="radio_group_toggle_inner_padding">8dp</dimen>
+    <dimen name="super_small_text_size">12sp</dimen>
+    <dimen name="small_text_size">14sp</dimen>
+    <dimen name="regular_text_size">16sp</dimen>
+    <dimen name="sub_headline_text_size">18sp</dimen>
+    <dimen name="small_headline_text_size">20sp</dimen>
+    <dimen name="headline_text_size">24sp</dimen>
 
 </resources>

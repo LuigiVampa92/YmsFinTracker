@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/action_statistics"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/text_navigation_item_statistics" />
+
+    <item
+        android:id="@+id/action_templates"
+        android:icon="@drawable/ic_templates"
+        android:title="@string/text_navigation_item_templates" />
+
+    <item
+        android:id="@+id/action_pending_transactions"
+        android:icon="@drawable/ic_time"
+        android:title="@string/text_navigation_item_pending" />
+
+    <item
+        android:id="@+id/action_categories"
+        android:icon="@drawable/ic_categories"
+        android:title="@string/text_navigation_item_categories" />
+
+    <item
+        android:id="@+id/action_info"
+        android:icon="@drawable/ic_navigation_item_info"
+        android:title="@string/text_navigation_item_info" />
+
+</menu>

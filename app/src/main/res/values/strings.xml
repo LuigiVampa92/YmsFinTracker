@@ -1,36 +1,9 @@
 <resources>
 
     <!--common-->
-    <string name="app_name">FinTracker</string>
-    <string name="text_error_no_network">No network connection</string>
-    <string name="text_error_network">Network error</string>
-    <string name="text_error_data">Error retrieving data</string>
+    <string name="app_name">Рубль Бережет</string>
 
-    <!--navigation-->
-    <string name="text_navigation_menu_title">Oops</string>
-    <string name="text_navigation_item_balance">Balance</string>
-    <string name="text_navigation_item_settings">Settings</string>
-    <string name="text_navigation_item_info">About app</string>
-
-    <!--settings-->
-    <string name="text_settings_stub">App settings stub</string>
-
-    <!--info-->
-    <string name="text_info_about_app_general">Yandex summer mobile developer school 2018 homework</string>
-    <string name="text_info_about_app_author"><![CDATA[
-        Author: Pavel Vasiliev<br><br>
-        Email: <a href=\"mailto:luigivampa92@gmail.com\">luigivampa92@gmail.com</a><br>
-        VK: <a href=\"https://vk.com/luigivampa92\">luigivampa92</a><br>
-        TG: <a href=\"https://telegram.me/luigivampa92\">@luigivampa92</a><br>
-        ]]>
-    </string>
-    <string name="text_info_about_app_contacts">Author: Pavel Vasiliev\n\nContact:</string>
     <string name="text_info_about_app_email_subject">About Yandex mobile developer school app</string>
-    <string name="text_info_about_app_email_no_client">No email client found</string>
-
-    <!--balance-->
-    <string name="text_balance_description_usd">Current balance ( $ ) :</string>
-    <string name="text_balance_description_rur">Current balance ( \u20BD ) :</string>
 
     <!--add record-->
     <string name="text_operation_type_out">Expense</string>
@@ -38,5 +11,130 @@
     <string name="text_button_save">Save</string>
     <string name="text_add_record_toolbar_title">Add new record</string>
     <string name="text_edit_hint_date">Date</string>
+    <string name="add_wallet">Добавить Кошелек</string>
+    <string name="finance_tracker">Трекер Финансов</string>
+    <string name="your_wallets">Ваши Кошельки</string>
+    <string name="name">Название</string>
+    <string name="category">Категория</string>
+    <string name="type">Тип</string>
+    <string name="expense">Трата</string>
+    <string name="income">Доход</string>
+    <string name="amount">Количество</string>
+    <string name="default_date">02.08.2018</string>
+    <string name="account">Кошелек</string>
+    <string name="add_record">Добавьте Запись</string>
+    <string name="pending_date">Списание (Месяцы)</string>
+
+
+    <string-array name="expenditure_categories">
+        <item>Еда</item>
+        <item>Одежда</item>
+        <item>Отдых</item>
+        <item>Спорт</item>
+        <item>Развлечения</item>
+        <item>Работа</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="income_categories">
+        <item>Зарплата</item>
+        <item>Долг</item>
+        <item>Взяточничество</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>Зарплата</item>
+        <item>Долг</item>
+        <item>Взяточничество</item>
+        <item>Другое</item>
+        <item>Еда</item>
+        <item>Одежда</item>
+        <item>Отдых</item>
+        <item>Спорт</item>
+        <item>Развлечения</item>
+        <item>Работа</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>RUB</item>
+    </string-array>
+
+    <string-array name="records_actions">
+        <item>Изменить</item>
+        <item>Удалить</item>
+    </string-array>
+
+    <string-array name="templates_actions">
+        <item>Удалить</item>
+    </string-array>
+    <string-array name="pending_actions">
+        <item>Остановить</item>
+    </string-array>
+
+
+    <string name="choose_records_action">Выберите Действие</string>
+
+
+    <string name="formatted_date">%1$d.%2$d.%3$d</string>
+    <string name="formatted_wallet_name">Кошелек: %1$s</string>
+    <string name="formatted_balance_usd">Текущий Баланс: %1$s USD</string>
+    <string name="formatted_balance_rub">Текущий Баланс: %1$s RUB</string>
+    <string name="formatted_date_label">Дата: %1$s</string>
+    <string name="formatted_spent">Потрачено: %1$s %2$s</string>
+    <string name="formatted_earned">Получено: %1$s %2$s</string>
+    <string name="formatted_category">Категория: %1$s</string>
+    <string name="formatted_name">Название: %1$s</string>
+
+    <string name="text_navigation_item_wallets">Кошельки</string>
+    <string name="balance">Баланс</string>
+    <string name="settings">Настройки</string>
+    <string name="info">О Приложении</string>
+    <string name="wallets">Кошельки</string>
+    <string name="create_wallet">Создать Кошелек?</string>
+    <string name="create_wallet_message">Чтобы добавлять доходы и расходы, Вам необходимо создать кошелек.</string>
+    <string name="create_wallet_positive_text">Создать Кошелек</string>
+    <string name="create_wallet_negative_text">Позже</string>
+    <string name="date">Дата</string>
+    <string name="price">Стоимость</string>
+    <string name="make_current">Сделать Основным</string>
+    <string name="primary">Основной</string>
+    <string name="pending_date_weeks">Списание (Недели)</string>
+    <string name="repeat">Повторять</string>
+    <string name="edit_record">Измените Запись</string>
+    <string name="edit_wallet">Измените Кошелек</string>
+    <string name="text_navigation_item_templates">Шаблоны</string>
+    <string name="add_wallet_to_add_template">Чтобы использовать шаблоны Вы должны создать кошелек</string>
+    <string name="actions">Действия</string>
+    <string name="add_template">Добавьте Шаблон</string>
+    <string name="templates">Шаблоны</string>
+    <string name="text_navigation_item_statistics">Статистика</string>
+    <string name="statistics">Статистика</string>
+    <string name="date_starting_from">Начиная с</string>
+    <string name="date_ending_with">Заканчивая</string>
+    <string name="text_navigation_item_categories">Категории</string>
+    <string name="create_category">Создать Категорию</string>
+    <string name="category_name">Название Категории</string>
+    <string name="category_prefill">Категория</string>
+    <string name="text_navigation_item_pending">Отложенные Транзакции</string>
+    <string name="pending_records">Отложенные Транзакции</string>
+    <string name="description">Описание Приложения</string>
+
+    <string name="about">
+        - Данное приложение было создано, чтобы Вы могли легко следить за своими доходами и расходами \n
+        \n
+        - Чтобы начать работу с приложением, Вам нужно будет создать кошелек \n
+        \n
+        - В верхней части главного экрана будет расположен текущий выбранный Вами кошелек, все транзакции будут происходить с ним \n
+        \n
+        - Чтобы изменить или удалить транзакция зажмите желаемый элемент и выберите действие \n
+        \n
+        - Чтобы сменить текущий или добавить еще один кошелек, кликните на иконку в левом нижнем углу \n
+        \n
+        - Чтобы удалять, останавливать, изменять транзакции, шаблоны, категории Вам достаточно осуществить долгое нажатие по элементу \n
+    </string>
+    <string name="readme">README.txt</string>
 
 </resources>

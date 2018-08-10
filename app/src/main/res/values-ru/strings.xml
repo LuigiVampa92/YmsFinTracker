@@ -2,7 +2,7 @@
 <resources>
 
     <!--common-->
-    <string name="app_name">FinTracker</string>
+    <string name="app_name">Рубль Бережет</string>
     <string name="text_error_no_network">Отсутствует соединение с сетью</string>
     <string name="text_error_network">Ошибка запроса</string>
     <string name="text_error_data">Ошибка получения данных</string>

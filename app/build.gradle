@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+androidExtensions {
+    experimental = true
+}
 
 android {
 
@@ -33,35 +38,60 @@ android {
 }
 
 def versions = [
-        constraintlayout : '1.1.2',
-        butterknife      : '8.8.1',
-        moxy             : '1.5.3',
+        constraintlayout: '1.1.2',
+        room            : '1.1.1',
+        coroutines      : '0.24.0',
+        lifecycle       : '1.1.1',
+        material_dialogs: '0.9.6.0',
+        okhttp          : '3.10.0',
+        asyncawait      : '1.0.0',
+        anko            : '0.10.5',
+        workmanager     : '1.0.0-alpha06',
+        chart           : '3.0.3',
+        modal_dialog    : '1.0.2'
 ]
 
 def versionsTest = [
-        espresso        : '3.0.2',
-        runner          : '1.0.2',
-        junit           : '4.12'
+        espresso   : '3.0.2',
+        runner     : '1.0.2',
+        junit      : '4.12',
+        assertk    : '0.10',
+        atsl_runner: '1.0.2',
+        mockito    : '2.7.22',
+        hamcrest   : '1.3'
 ]
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.github.Commit451:ModalBottomSheetDialogFragment:$versions.modal_dialog"
+    implementation "com.github.PhilJay:MPAndroidChart:v$versions.chart"
 
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
     implementation "com.android.support:design:$support_version"
 
-    implementation "com.jakewharton:butterknife:${versions.butterknife}"
-    kapt "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+    implementation "android.arch.lifecycle:extensions:$versions.lifecycle"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    kapt "android.arch.lifecycle:compiler:$versions.lifecycle"
 
-    implementation "com.arello-mobile:moxy:${versions.moxy}"
-    implementation "com.arello-mobile:moxy-android:${versions.moxy}"
-    implementation "com.arello-mobile:moxy-app-compat:${versions.moxy}"
-    kapt "com.arello-mobile:moxy-compiler:${versions.moxy}"
+    implementation "com.afollestad.material-dialogs:core:$versions.material_dialogs"
 
-    androidTestImplementation"com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
+    implementation "android.arch.persistence.room:runtime:$versions.room"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+    androidTestImplementation "android.arch.persistence.room:testing:$versions.room"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+
+    implementation "org.jetbrains.anko:anko-coroutines:$versions.anko"
+
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
+
+    implementation "android.arch.work:work-runtime-ktx:$versions.workmanager"
+
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${versionsTest.espresso}"
     androidTestImplementation "com.android.support.test:runner:${versionsTest.runner}"
     testImplementation "junit:junit:${versionsTest.junit}"
+    androidTestImplementation "com.android.support.test:rules:$versionsTest.atsl_runner"
+    androidTestImplementation "org.hamcrest:hamcrest-library:$versionsTest.hamcrest"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
 }
