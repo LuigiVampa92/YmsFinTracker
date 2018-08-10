@@ -17,15 +17,25 @@ import kotlinx.coroutines.experimental.launch
 
 class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
 
+    private var mIsTwoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         fetchCurrencies(application)
-        getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putString(Constants.SECONDARY_CURRENCY, "RUB").apply()
+
+        if (left_container != null) {
+            mIsTwoPane = true
+        }
+
         if (savedInstanceState == null) {
-            loadFragmentWithoutBackStack(FragmentBalance())
+            if (mIsTwoPane) {
+                loadFragmentToContainerWithoutBackStack(FragmentWallets(), R.id.left_container)
+                loadFragmentToContainerWithoutBackStack(FragmentBalance(), R.id.right_container)
+            } else {
+                loadFragmentWithoutBackStack(FragmentBalance())
+            }
         }
 
     }
@@ -42,6 +52,21 @@ class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
         supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
                 .replace(R.id.container, fragment)
+                .commit()
+    }
+
+    override fun loadFragmentToContainer(fragment: Fragment, containerId: Int) {
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
+                .replace(containerId, fragment)
+                .addToBackStack(fragment.javaClass.name)
+                .commit()
+    }
+
+    override fun loadFragmentToContainerWithoutBackStack(fragment: Fragment, containerId: Int) {
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
+                .replace(containerId, fragment)
                 .commit()
     }
 }

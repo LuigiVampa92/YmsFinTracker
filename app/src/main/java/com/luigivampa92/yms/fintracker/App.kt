@@ -24,6 +24,7 @@ class App : Application() {
                 fetchCurrenciesFromAssets(app)
             }
             sf.edit().putString(Constants.FIRST_LAUNCH, Constants.FIRST_LAUNCH).apply()
+            getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).edit().putString(Constants.SECONDARY_CURRENCY, "RUB").apply()
         }
     }
 }

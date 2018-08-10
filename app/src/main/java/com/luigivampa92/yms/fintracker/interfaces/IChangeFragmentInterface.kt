@@ -7,4 +7,8 @@ interface IChangeFragmentInterface{
     fun loadFragment(fragment: Fragment)
 
     fun loadFragmentWithoutBackStack(fragment: Fragment)
+
+    fun loadFragmentToContainer(fragment: Fragment, containerId: Int)
+
+    fun loadFragmentToContainerWithoutBackStack(fragment: Fragment, containerId: Int)
 }
