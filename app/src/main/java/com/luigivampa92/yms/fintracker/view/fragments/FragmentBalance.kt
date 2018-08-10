@@ -18,6 +18,7 @@ import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.calculations.CurrencyConverter
 import com.luigivampa92.yms.fintracker.db.database.FinanceTrackerDatabase
 import com.luigivampa92.yms.fintracker.interfaces.IChangeFragmentInterface
+import com.luigivampa92.yms.fintracker.interfaces.IFragmentCommunicator
 import com.luigivampa92.yms.fintracker.model.repositories.Repository
 import com.luigivampa92.yms.fintracker.utils.formatDecimalNumber
 import com.luigivampa92.yms.fintracker.view.activities.ActivityAddRecord
@@ -34,11 +35,13 @@ class FragmentBalance : Fragment(), ModalBottomSheetDialogFragment.Listener {
     private lateinit var mAdapterRecords: AdapterRecords
     private lateinit var mSharedPreferences: SharedPreferences
     private lateinit var mChangeFragmentCallback: IChangeFragmentInterface
+    private lateinit var mFragmentCOmmunicator: IFragmentCommunicator
     lateinit var mViewModel: ViewModelRecordsWallet
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         mChangeFragmentCallback = context as IChangeFragmentInterface
+        mFragmentCOmmunicator = context as IFragmentCommunicator
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,11 +69,41 @@ class FragmentBalance : Fragment(), ModalBottomSheetDialogFragment.Listener {
 
     override fun onModalOptionSelected(tag: String?, option: Option) {
         when(option.id){
-            R.id.action_templates -> mChangeFragmentCallback.loadFragment(FragmentTemplates())
-            R.id.action_info -> mChangeFragmentCallback.loadFragment(FragmentInfo())
-            R.id.action_statistics -> mChangeFragmentCallback.loadFragment(FragmentStatistics())
-            R.id.action_pending_transactions -> mChangeFragmentCallback.loadFragment(FragmentPendingRecords())
-            R.id.action_categories -> mChangeFragmentCallback.loadFragment(FragmentCategories())
+            R.id.action_templates -> {
+                if(!mFragmentCOmmunicator.isTablet()){
+                    mChangeFragmentCallback.loadFragment(FragmentTemplates())
+                }else{
+                    mChangeFragmentCallback.loadFragmentToContainer(FragmentTemplates(), R.id.right_container)
+                }
+            }
+            R.id.action_info -> {
+                if(!mFragmentCOmmunicator.isTablet()){
+                    mChangeFragmentCallback.loadFragment(FragmentInfo())
+                }else{
+                    mChangeFragmentCallback.loadFragmentToContainer(FragmentInfo(), R.id.right_container)
+                }
+            }
+            R.id.action_statistics -> {
+                if(!mFragmentCOmmunicator.isTablet()){
+                    mChangeFragmentCallback.loadFragment(FragmentStatistics())
+                }else{
+                    mChangeFragmentCallback.loadFragmentToContainer(FragmentStatistics(), R.id.right_container)
+                }
+            }
+            R.id.action_pending_transactions -> {
+                if(!mFragmentCOmmunicator.isTablet()){
+                    mChangeFragmentCallback.loadFragment(FragmentPendingRecords())
+                }else{
+                    mChangeFragmentCallback.loadFragmentToContainer(FragmentPendingRecords(), R.id.right_container)
+                }
+            }
+            R.id.action_categories -> {
+                if(!mFragmentCOmmunicator.isTablet()){
+                    mChangeFragmentCallback.loadFragment(FragmentCategories())
+                }else{
+                    mChangeFragmentCallback.loadFragmentToContainer(FragmentCategories(), R.id.right_container)
+                }
+            }
         }
     }
 

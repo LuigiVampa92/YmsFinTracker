@@ -9,15 +9,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import com.luigivampa92.yms.fintracker.Constants
 import com.luigivampa92.yms.fintracker.R
 import com.luigivampa92.yms.fintracker.interfaces.IChangeFragmentInterface
+import com.luigivampa92.yms.fintracker.interfaces.IFragmentCommunicator
 import com.luigivampa92.yms.fintracker.utils.fetchCurrencies
 import com.luigivampa92.yms.fintracker.utils.fetchCurrenciesFromAssets
 import com.luigivampa92.yms.fintracker.view.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.experimental.launch
 
-class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
+class ActivityMain : AppCompatActivity(), IChangeFragmentInterface, IFragmentCommunicator {
 
-    private var mIsTwoPane: Boolean = false
+
+    var isTwoPane: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +28,11 @@ class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
         fetchCurrencies(application)
 
         if (left_container != null) {
-            mIsTwoPane = true
+            isTwoPane = true
         }
 
         if (savedInstanceState == null) {
-            if (mIsTwoPane) {
+            if (isTwoPane) {
                 loadFragmentToContainerWithoutBackStack(FragmentWallets(), R.id.left_container)
                 loadFragmentToContainerWithoutBackStack(FragmentBalance(), R.id.right_container)
             } else {
@@ -68,5 +70,9 @@ class ActivityMain : AppCompatActivity(), IChangeFragmentInterface {
                 .setCustomAnimations(R.anim.fragment_open, R.anim.fragment_close, R.anim.fragment_pop_open, R.anim.fragment_pop_close)
                 .replace(containerId, fragment)
                 .commit()
+    }
+
+    override fun isTablet(): Boolean {
+        return isTwoPane
     }
 }

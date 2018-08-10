@@ -63,7 +63,7 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:reverseLayout="true"
         app:stackFromEnd="true"
-        android:layout_marginBottom="26dp"/>
+        android:layout_marginBottom="56dp"/>
 
     <android.support.design.bottomappbar.BottomAppBar
         android:id="@+id/bottom_appbar"
