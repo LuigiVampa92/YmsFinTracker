@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.test.runner.AndroidJUnit4
 import com.luigivampa92.yms.fintracker.model.Record
+import com.luigivampa92.yms.fintracker.model.Template
+import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.utils.createId
 import org.junit.Assert
 import org.junit.Test
@@ -12,25 +14,24 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
-class RecordsDaoTest: DbTest() {
+class TemplatesDaoTest : DbTest() {
 
-    val walletId = createId()
-    val record = Record("1", "Burger", "Food", false, 120.0,
-            "RUB", walletId, "06.08.2018", 0)
+    val template = Template(0L, "Template", "Food", false, 120.0, "USD",
+            0, false)
 
     @Test
-    fun shouldDeleteAllData(){
-        db.recordsDao().addRecord(record)
-        db.recordsDao().deleteAllRecords()
-        Assert.assertEquals(getValue(db.recordsDao().getAllRecordsFromWallet(walletId)).size, 0)
+    fun shouldAddData() {
+        db.templatesDao().addTemplate(template)
+        Assert.assertEquals(getValue(db.templatesDao().getAllTemplates()).first().name, template.name)
     }
 
     @Test
-    fun shouldAddData(){
-        db.recordsDao().addRecord(record)
-        Assert.assertEquals(getValue(db.recordsDao().getAllRecordsFromWallet(walletId)).first().name, record.name)
+    fun shouldDeleteData(){
+        db.templatesDao().addTemplate(template)
+        db.templatesDao().deleteTemplate(template)
+        db.templatesDao().addTemplate(template)
+        Assert.assertEquals(getValue(db.templatesDao().getAllTemplates()).first().name, template.name)
     }
-
 
     @Throws(InterruptedException::class)
     fun <T> getValue(liveData: LiveData<T>): T {

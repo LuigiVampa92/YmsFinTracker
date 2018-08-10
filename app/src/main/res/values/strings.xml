@@ -1,7 +1,7 @@
 <resources>
 
     <!--common-->
-    <string name="app_name">FinTracker</string>
+    <string name="app_name">Рубль Бережет</string>
 
     <string name="text_info_about_app_email_subject">About Yandex mobile developer school app</string>
 
@@ -120,5 +120,6 @@
     <string name="category_prefill">Категория</string>
     <string name="text_navigation_item_pending">Отложенные Транзакции</string>
     <string name="pending_records">Отложенные Транзакции</string>
+    <string name="description">Описание Приложения</string>
 
 </resources>

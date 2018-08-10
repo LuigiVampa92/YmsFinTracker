@@ -3,6 +3,7 @@ package com.luigivampa92.yms.fintracker.instrumented
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.test.runner.AndroidJUnit4
+import com.luigivampa92.yms.fintracker.model.Record
 import com.luigivampa92.yms.fintracker.model.Wallet
 import com.luigivampa92.yms.fintracker.utils.createId
 import org.junit.Assert
@@ -16,6 +17,8 @@ class WalletsDaoTest : DbTest() {
 
     val walletId = createId()
     val wallet = Wallet(walletId, "Wallet", 150.0, "USD")
+    val record = Record("1", "Burger", "Food", false, 120.0,
+            "RUB", walletId, "06.08.2018", 0)
 
     @Test
     fun shouldDeleteAllData() {
@@ -33,8 +36,8 @@ class WalletsDaoTest : DbTest() {
     @Test
     fun shouldUpdateData() {
         db.walletsDao().addWallet(wallet)
-        db.walletsDao().updateWalletBalance(walletId, 20.0)
-        Assert.assertEquals(getValue(db.walletsDao().getWallet(walletId)).balance, 20.0, 0.002)
+        db.recordsDao().addRecord(record)
+        Assert.assertEquals(getValue(db.walletsDao().getWallet(walletId)).balance, 30.0, 0.002)
     }
 
     @Throws(InterruptedException::class)

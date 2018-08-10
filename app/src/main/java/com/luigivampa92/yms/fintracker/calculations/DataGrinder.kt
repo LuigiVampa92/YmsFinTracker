@@ -26,8 +26,8 @@ object DataGrinder {
     fun filterByDates(records: List<Record>, leftDate: Date, rightDate: Date): MutableList<Record> {
         val response = mutableListOf<Record>()
         records.forEach {
-            if (convertStringToDate(it.date).compareTo(leftDate) > 0 &&
-                    convertStringToDate(it.date).compareTo(rightDate) < 0) {
+            if (convertStringToDate(it.date) > leftDate &&
+                    convertStringToDate(it.date) < rightDate) {
                 response.add(it)
             }
         }

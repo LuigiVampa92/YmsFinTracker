@@ -9,28 +9,8 @@ import org.junit.Assert.assertArrayEquals
 
 import org.junit.Test as test
 
-class CurrencyConverterUnitTest {
+class CurrencyConverterUnitTest : MainUnitTest() {
 
-    val walletId = createId()
-    val record1 = Record("", "Burger", "Food",
-            false, 126.0, "RUB", walletId, "05.08.2018",
-            0)
-    val record2 = Record(1L, "Hot-Dog", "Food",
-            false, 126.0, "RUB", walletId, "05.08.2018",
-            null)
-    val record3 = Record(2L, "Apple", "Food",
-            false, 126.0, "RUB", walletId, "05.08.2018",
-            null)
-    val record4 = Record(3L, "Salary", "Salary",
-            true, 150.0, "USD", walletId, "05.08.2018",
-            null)
-    val record5 = Record(4L, "Vzyatka", "Vzyatka",
-            true, 250.0, "USD", walletId, "05.08.2018",
-            null)
-    val records = arrayListOf(record1, record2, record3, record4, record5)
-
-    val rub = Currency(0L, "RUB", 63.0)
-    val usd = Currency(0L, "USD", 1.0)
 
     @test
     fun converterUnitTest() {
@@ -48,7 +28,6 @@ class CurrencyConverterUnitTest {
             ratiosInRoubles.add(CurrencyConverter.convertCurrency(it.currency, it.amount, "RUB"))
         }
 
-        //Перевод валют в доллары
         assertArrayEquals(ratiosInDollars.toTypedArray(), listOf(2.0, 2.0, 2.0, 150.0, 250.0).toTypedArray())
         assertArrayEquals(ratiosInRoubles.toTypedArray(), listOf(126.0, 126.0, 126.0, 150.0 * 63.0, 250.0 * 63.0).toTypedArray())
     }
